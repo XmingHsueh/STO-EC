@@ -5,13 +5,13 @@
 % Description:
 % ------------
 % This file is the script of generating the optimization mapping of an
-% interval coverage problem family in the following reference.
+% interval coverage problem in the following reference.
 %
 % ------------
 % Reference:
 % ------------
 % X. Xue, Y. Hu, C. Yang, et al. ¡°Does Experience Always Help? Revisiting
-% Evolutionary Sequential Transfer Optimization¡±, Submitted to IEEE Transactions.
+% Evolutionary Sequential Transfer Optimization¡±, Submitted to IEEE Transactions on Evolutionary Computation.
 
 clc,clear
 num_nodes = 21; % The number of sampling points along each representational dimension
