@@ -8,6 +8,7 @@ classdef SESTOP
     % source_gen--->source generation scheme: constrained generation (C) or unconstrained generation (U)
     % xi--->the parameter that governs the optimum coverage: [0,1]
     % dim--->the problem dimension of source-target instances, a positive integer
+    % mode--->the mode of problem call, problem generation (gen) or s-esto optimization (opt)
     % k---<read-only>the number of sources, a positive integer
     % optimizer---<read-only>the optimizer used for solving the source and target problems
     % popsize---<read-only>the population size, N>0
@@ -26,9 +27,10 @@ classdef SESTOP
         dim = 10;
         knowledge_base = struct;
         target_problem;
+        mode = 'opt';
     end
     properties(SetAccess = protected)
-        k = 100;
+        k = 1000;
         optimizer = 'ea';
         popsize = 20;
         FEsMax = 1000;
@@ -45,14 +47,14 @@ classdef SESTOP
         %the constructor of SESTOP
         function obj = SESTOP(varargin)
             isStr = find(cellfun(@ischar,varargin(1:end-1))&~cellfun(@isempty,varargin(2:end)));
-            for i = isStr(ismember(varargin(isStr),{'func_target','trans_sce','source_gen','xi','dim'}))
+            for i = isStr(ismember(varargin(isStr),{'func_target','trans_sce','source_gen','xi','dim','mode'}))
                 obj.(varargin{i}) = varargin{i+1};
             end
             
             % examine the availability of the specified S-ESTO problem
             dir_sesto = ['.\SESTOPs\',obj.func_target,'-',obj.trans_sce,'-',obj.source_gen,'-x',num2str(obj.xi),'-d',num2str(obj.dim),'-k',num2str(obj.k),'.mat'];
             obj.state_knowledgebase = sign(exist(dir_sesto,'file'));
-            if obj.state_knowledgebase == 1
+            if obj.state_knowledgebase == 1 && strcmp(obj.mode,'opt')
                 load(['.\SESTOPs\',obj.func_target,'-',obj.trans_sce,'-',obj.source_gen,'-x',num2str(obj.xi),'-d',num2str(obj.dim),'-k',num2str(obj.k),'.mat']);
                 obj.target_problem = target;
                 obj.source_problems = sources;
@@ -60,7 +62,7 @@ classdef SESTOP
                     obj.knowledge_base(i).solutions = knowledge(i).solutions;
                     obj.knowledge_base(i).fitnesses = knowledge(i).fitnesses;
                 end
-            else
+            elseif obj.state_knowledgebase == 0
                 obj = obj.Configuration();
             end
         end
@@ -91,14 +93,15 @@ classdef SESTOP
             end
             
             % configure the knowledge base
+            h=waitbar(0,'Starting');
             for i = 1:obj.k
                 problem = problem_family(find(strcmp(obj.problem_families,obj.source_problems(i).func)),obj.source_problems(i).opt);
                 [solutions,fitnesses] = evolutionary_search(problem,obj.popsize,obj.FEsMax,obj.optimizer);
                 obj.knowledge_base(i).solutions = solutions;
                 obj.knowledge_base(i).fitnesses = fitnesses;
-                clc;
-                fprintf('Unavailable knowledge base! Construction in progress: %.2f%%\n',i/obj.k*100);
+                waitbar(i/obj.k,h,sprintf('SESTOP generation in progress: %.2f%%',i/obj.k*100));
             end
+            close(h);
             
             % save the problem
             target = problem_family(find(strcmp(obj.problem_families,obj.func_target)),opt_target);
@@ -111,8 +114,8 @@ classdef SESTOP
             obj.source_problems = sources;
             save(['.\SESTOPs\',obj.func_target,'-',obj.trans_sce,'-',obj.source_gen,'-x',...
                 num2str(obj.xi),'-d',num2str(obj.dim),'-k',num2str(obj.k),'.mat'],'target','sources','knowledge');
-            fprintf(['The problem ''',obj.func_target,'-',obj.trans_sce,'-',obj.source_gen,'-x',...
-                num2str(obj.xi),'-d',num2str(obj.dim),'-k',num2str(obj.k),''' is successfully built and stored in SESTOPs!\n'])
+%             fprintf(['The problem ''',obj.func_target,'-',obj.trans_sce,'-',obj.source_gen,'-x',...
+%                 num2str(obj.xi),'-d',num2str(obj.dim),'-k',num2str(obj.k),''' is successfully built and stored in SESTOPs!\n'])
         end
         
     end
