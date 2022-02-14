@@ -1,0 +1,43 @@
+% Author: Xiaoming Xue
+% Email: xminghsueh@gmail.com
+%
+% ------------
+% Description:
+% ------------
+% Visualization of correlation between similarity values measured by a
+% metric and quality of selected solutions to be transferred. The
+% corresponding figure is shown as Fig. 12 in the following paper.
+%
+% ------------
+% Reference:
+% ------------
+% X. Xue, Y. Hu, C. Yang, et al. “Does Experience Always Help? Revisiting
+% Evolutionary Sequential Transfer Optimization”, Submitted to IEEE Transactions on Evolutionary Computation.
+
+clc,clear
+warning off;
+problem_families = {'Sphere','Ellipsoid','Schwefel','Quartic','Ackley','Rastrigin','Griewank','Levy'}; % the eight problem families
+transfer_scenarios = {'A','E'}; % intra-family and inter-family transfers
+source_generations = {'U','C'}; % unconstrained and constrained source generations
+xis = [0 0.1 0.3 0.7 1]; % the parameter xi that governs the optimum coverage
+ds = [5 10 20]; % the problem dimensions
+k = 1000; % the number of source instances
+gen_save = 5;
+metrics = {'N','R','C','M1','KLD','WD','OC','SA'}; % similarity metrics
+method_list = [5 1 1 2 5 2;4 1 1 2 5 2]; % algorithm-family-scenario-generation-xi-d
+num_methods = size(method_list,1);
+
+figure1 = figure('color',[1 1 1],'position',[491.6667  334.3333  708.0000  294.6667]);
+for i = 1:num_methods
+    subplot(1,num_methods,i);
+    load(['.\results-rq2\corrs\',problem_families{method_list(i,2)},'-',transfer_scenarios{method_list(i,3)},'-',...
+        source_generations{method_list(i,4)},'-x',num2str(xis(method_list(i,5))),'-d',num2str(ds(method_list(i,6))),'-k',num2str(k),...
+        '-S',num2str(method_list(i,1)),'+A0-corr-gen',num2str(gen_save),'.mat']);
+    plot(similarity_values,candidates_quality,'*','linewidth',1,'markersize',10,'color','r');
+    set(gca,'linewidth',0.5);
+    grid on;
+    corr_estimate = corr(similarity_values,candidates_quality);
+    xlabel('$s$','interpret','latex','fontsize',14)
+    ylabel('$q$','interpret','latex','fontsize',14);
+    title(['Generation: 5',', $\rho=',num2str(corr_estimate),'$'],'interpret','latex','fontsize',14)
+end

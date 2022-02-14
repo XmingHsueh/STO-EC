@@ -4,7 +4,6 @@ function [solutions,fitnesses] = sesto_optimizer(problem,popsize,FEsMax,optimize
 metrics = paras.metrics;
 adaptations = paras.adaptations;
 gen_trans = paras.gen_trans;
-n_trans = paras.n_trans;
 algorithm_id = paras.algorithm_id;
 knowledge_base = paras.knowledge_base;
 fun = problem.fnc;

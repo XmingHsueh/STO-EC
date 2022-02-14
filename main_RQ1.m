@@ -14,6 +14,7 @@
 % Evolutionary Sequential Transfer Optimization¡±, Submitted to IEEE Transactions on Evolutionary Computation.
 
 clc,clear
+warning off;
 problem_families = {'Sphere','Ellipsoid','Schwefel','Quartic','Ackley','Rastrigin','Griewank','Levy'}; % the eight problem families
 transfer_scenarios = {'A','E'}; % intra-family and inter-family transfers
 source_generations = {'U','C'}; % unconstrained and constrained source generations
@@ -27,13 +28,12 @@ runs = 30;
 opts_sesto.metrics = {'N','R','C','M1','KLD','WD','OC','SA'};
 opts_sesto.adaptations = {'M1-P','M1-R','M1-M','M2-A','SA-L','OC-L','OC-A','OC-K','OC-N'};
 opts_sesto.gen_trans  =1;
-opts_sesto.n_trans = 1;
 algorithm_list = [transpose(1:length(opts_sesto.metrics)),zeros(length(opts_sesto.metrics),1)]; % similarty-driven S-ESTOs
 h=waitbar(0,'Starting');
 runs_total = length(algorithm_list)*length(problem_families)*length(transfer_scenarios)*length(source_generations)*length(xis)*length(ds)*runs;
-count = 0*length(problem_families)*length(transfer_scenarios)*length(source_generations)*length(xis)*length(ds)*runs;
+count = 4*length(problem_families)*length(transfer_scenarios)*length(source_generations)*length(xis)*length(ds)*runs;
 
-for a = 1:length(algorithm_list)
+for a = 5:length(algorithm_list)
     for p = 1:length(problem_families)
         for t = 1:length(transfer_scenarios)
             for s = 1:length(source_generations)
@@ -62,7 +62,7 @@ for a = 1:length(algorithm_list)
                             waitbar(count/runs_total,h,sprintf('Optimization in progress: %.2f%%',count/runs_total*100));
                         end
                         % save the results
-                        save(['.\experimental studies\results\',problem_families{p},'-',transfer_scenarios{t},'-',source_generations{s},'-x',num2str(xi),...
+                        save(['.\experimental studies\results-rq1\',problem_families{p},'-',transfer_scenarios{t},'-',source_generations{s},'-x',num2str(xi),...
                             '-d',num2str(d),'-k',num2str(k),'-S',num2str(algorithm_list(a,1)),'+A',num2str(algorithm_list(a,2)),'.mat'],'results_opt');
                     end
                 end
