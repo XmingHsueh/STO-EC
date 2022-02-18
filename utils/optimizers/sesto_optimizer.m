@@ -43,13 +43,14 @@ while FEsCount < FEsMax
         elseif algorithm_id(1)== 0 && algorithm_id(2)~= 0 % adaptation-driven S-ESTOs
             adaptation = adaptations{algorithm_id(2)};
             idx_source = randi(num_sources);
-            solution_unadapted = lb+(ub-lb).*knowledge_base(idx_source).solutions{end}(randi(popsize),:);
-            solution_transfer = solution_adaptation(population_old,fitness_old,lb,ub,gen,knowledge_base(idx_source),solution_unadapted,adaptation);
+            solution_unadapted_normalized = knowledge_base(idx_source).solutions{end}(randi(popsize),:);
+            solution_transfer = solution_adaptation(population_old,fitness_old,lb,ub,gen,knowledge_base(idx_source),solution_unadapted_normalized,adaptation);
         elseif algorithm_id(1)~= 0 && algorithm_id(2)~= 0 % integration of solution selection and solution adaptation
             metric = metrics{algorithm_id(1)};
             [solution_unadapted,idx_source]= solution_selection(population_old,fitness_old,lb,ub,gen,knowledge_base,metric);
             adaptation = adaptations{algorithm_id(2)};
-            solution_transfer = solution_adaptation(population_old,fitness_old,lb,ub,gen,knowledge_base(idx_source),solution_unadapted,adaptation);
+            solution_unadapted_normalized = (solution_unadapted-lb)./(ub-lb);
+            solution_transfer = solution_adaptation(population_old,fitness_old,lb,ub,gen,knowledge_base(idx_source),solution_unadapted_normalized,adaptation);
         end
         
         if ~isempty(solution_transfer)

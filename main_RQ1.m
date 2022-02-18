@@ -31,9 +31,9 @@ opts_sesto.gen_trans  =1;
 algorithm_list = [transpose(1:length(opts_sesto.metrics)),zeros(length(opts_sesto.metrics),1)]; % similarty-driven S-ESTOs
 h=waitbar(0,'Starting');
 runs_total = length(algorithm_list)*length(problem_families)*length(transfer_scenarios)*length(source_generations)*length(xis)*length(ds)*runs;
-count = 4*length(problem_families)*length(transfer_scenarios)*length(source_generations)*length(xis)*length(ds)*runs;
+count = 0*length(problem_families)*length(transfer_scenarios)*length(source_generations)*length(xis)*length(ds)*runs;
 
-for a = 5:length(algorithm_list)
+for a = 1:length(algorithm_list)
     for p = 1:length(problem_families)
         for t = 1:length(transfer_scenarios)
             for s = 1:length(source_generations)
