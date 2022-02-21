@@ -1,24 +1,54 @@
+% Author: Xiaoming Xue
+% Email: xminghsueh@gmail.com
+%
+% ------------
+% Description:
+% ------------
+% The solution selection function in S-ESTO.
+%
+% ------------
+% Inputs:
+% ------------
+% target_population--->the target population at the current generation
+% target_fitness--->the fitness values of the current target individuals
+% lb--->the lower bound of the target problem
+% ub--->the upper bound of the target problem
+% gen--->the current generation
+% knowledge_base--->the knowledge base containing the evaluated solutions of k sources
+% method--->the solution selection method
+%
+% ------------
+% Outputs:
+% ------------
+% solution_sel--->the selected solution to be adapted or transferred
+% idx_source--->the index of the selected source instance
+% candidates_transfer--->the candidate transferrable solutions provided by k sources
+% simlarity_values--->the similarity values between k sources and the target instance
+%
+% ------------
+% Reference:
+% ------------
+% X. Xue, Y. Hu, C. Yang, et al. “Does Experience Always Help? Revisiting
+% Evolutionary Sequential Transfer Optimization”, Submitted to IEEE Transactions on
+% Evolutionary Computation.
+
 function [solution_sel,idx_source,candidates_transfer,simlarity_values] = solution_selection(target_population,target_fitness,lb,ub,gen,knowledge_base,method)
 
 num_sources = length(knowledge_base);
 [popsize,dim] = size(target_population);
 target_population_normalized = (target_population-repmat(lb,popsize,1))./(repmat(ub,popsize,1)-repmat(lb,popsize,1));
 
-% No transfer
-if strcmp(method,'N')
+if strcmp(method,'N') % no transfer
     solution_sel = [];
     idx_source= [];
     return;
 end
-
-% Random transfer
-if strcmp(method,'R')
+if strcmp(method,'R') % random transfer
     solution_sel = lb+(ub-lb).*knowledge_base(randi(num_sources)).solutions{end}(randi(popsize),:);
     idx_source= [];
     return;
 end
 
-% Transfer based on solution selection
 simlarity_values = zeros(num_sources,1);
 candidates_transfer = zeros(num_sources,dim);
 for i = 1:num_sources
@@ -28,7 +58,7 @@ for i = 1:num_sources
     source_population_normalized = source_solutions{gen};
     source_fitness = source_fitnesses{gen};
     switch(method)
-        case 'C' % transfer of intermediate solutions
+        case 'C'
             source_solutions_archived = zeros(gen_max_source,dim);
             for j = 1:gen_max_source
                 idx = find(source_fitnesses{j}==min(source_fitnesses{j}));

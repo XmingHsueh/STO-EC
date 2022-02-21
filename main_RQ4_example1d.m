@@ -4,7 +4,7 @@
 % ------------
 % Description:
 % ------------
-% This file is the entry point of demonstrating the chaotic matching. The
+% This file is the script of demonstrating the chaotic matching. The
 % corresponding figures are shown as Fig. 18 in the following paper.
 %
 % ------------
@@ -13,35 +13,41 @@
 % X. Xue, Y. Hu, C. Yang, et al. “Does Experience Always Help? Revisiting
 % Evolutionary Sequential Transfer Optimization”, Submitted to IEEE Transactions on Evolutionary Computation.
 
+%% initialize the source and target problems
 clc,clear
 rand('state',11);
 randn('state',11);
-num_plot = 200; % the number of points for plotting the landscape
-funs = @(x)(x+6).^2-10*cos(2*pi*(x+6))+10; % source problem
-lbs = -12;ubs = 12;
-funt = @(x)(x-7).^2; % target problem
-lbt = -14;ubt = 14;
+funs = @(x)(x+6).^2-10*cos(2*pi*(x+6))+10; % the source problem
+lbs = -12; % the lower bound of the source instance
+ubs = 12; % the upper bound of the source instance
+funt = @(x)(x-7).^2; % the target problem
+lbt = -14; % the lower bound of the target instance
+ubt = 14; % the upper bound of the target instance
+num_plot = 200; % the number of points used for plotting the source-target landscapes
 ts = linspace(0,0.5,num_plot); % source solutions used for plotting the landscape
 tt = linspace(0.5,1,num_plot); % target solutions used for plotting the landscape
-fs = zeros(num_plot,1);ft = zeros(num_plot,1);
-for i = 1:num_plot
+fs = zeros(num_plot,1); % fitness values of the source solutions
+ft = zeros(num_plot,1); % fitness values of the target solutions
+for i = 1:num_plot % function evaluation
     fs(i) = funs(lbs+(ubs-lbs)*ts(i));
     ft(i) = funt(lbt+(ubt-lbt)*tt(i));
 end
 
-%% Plot the source-target landscapes with the evaluated solutions
+%% plot the source-target landscapes
 figure1 = figure('color',[1 1 1],'position',[321.0000  365.6667  560.0000  420.0000]);
 plot(ts,fs,'r-','linewidth',1);hold on;
 plot(tt,ft,'b-','linewidth',1);
-num_solutions = 200; % the number of solutions to be evaluated
-train_s = lhsdesign_modified(num_solutions,0,0.5); % sample the source solutions to be evaluated
-train_t = lhsdesign_modified(num_solutions,0.5,1); % sample the target solutions to be evaluated
-fitness_s = zeros(num_solutions,1);fitness_t = zeros(num_solutions,1); % source and target fitnesses
+num_solutions = 200; % the number of solutions to be evaluated and used for learning the source-target mapping
+train_s = lhsdesign_modified(num_solutions,0,0.5); % sample the source solutions using the LHS sampling
+train_t = lhsdesign_modified(num_solutions,0.5,1); % sample the target solutions using the LHS sampling
+fitness_s = zeros(num_solutions,1); % fitness values of source solutions
+fitness_t = zeros(num_solutions,1); % fitness values of target solutions
 for i = 1:num_solutions
     fitness_s(i) = funs(lbs+(ubs-lbs)*train_s(i));
     fitness_t(i) = funt(lbt+(ubt-lbt)*train_t(i));
 end
-fitness_rank_s = zeros(num_solutions,1);fitness_rank_t = zeros(num_solutions,1); % source and target fitness ranks
+fitness_rank_s = zeros(num_solutions,1); % fitness rankss of source solutions
+fitness_rank_t = zeros(num_solutions,1); % fitness rankss of target solutions
 for i = 1:num_solutions
     fitness_rank_s(i) = length(find(fitness_s<fitness_s(i)))+1;
     fitness_rank_t(i) = length(find(fitness_t<fitness_t(i)))+1;
@@ -57,12 +63,12 @@ ylabel('$y$','fontsize',18,'interpret','latex');
 set(gca,'linewidth',1);
 title('Source and Target Instances','interpret','latex','fontsize',16);
 
-%% Plot the resultant mapping to be learned
+%% plot the resultant mapping to be learned
 figure2 = figure('color',[1 1 1],'position',[881.6667  365.0000  560.0000  420.0000]);
 [~,idxs_r] = sort(fitness_s);
 [~,idxt_r] = sort(fitness_t);
-solution_s_sort = train_s(idxs_r);
-solution_t_sort = train_t(idxt_r);
+solution_s_sort = train_s(idxs_r); % sort the source solutions according to their fitness values
+solution_t_sort = train_t(idxt_r); % sort the target solutions according to their fitness values
 [~,indxsss] = sort(solution_s_sort);
 plot(solution_s_sort(indxsss),solution_t_sort(indxsss),'k-','linewidth',1);
 xlabel('$x_s$','fontsize',18,'interpret','latex');

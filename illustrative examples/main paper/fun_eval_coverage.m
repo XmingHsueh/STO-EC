@@ -4,8 +4,8 @@
 % ------------
 % Description:
 % ------------
-% fun_eval_coverage - This function is used to evaluated the 
-% fitness of solution [x1,x2] for a coverage problem with representation [l1,l2].
+% this function is used to evaluated the fitness of solution [x1,x2] for 
+% a coverage problem with representation [l1,l2].
 
 function obj_value = fun_eval_coverage(l1,l2,x1,x2)
 l1_min = l1-x1;

@@ -4,8 +4,8 @@
 % ------------
 % Description:
 % ------------
-% The S-ESTO optimizer with similarity values and quanlity of selected
-% solutions at a specific generation.
+% The S-ESTO optimizer with the correlation information between 
+% similarity and transferability.
 %
 % ------------
 % Inputs:
@@ -21,8 +21,7 @@
 % ------------
 % solutions--->solutions for the 1st generation to the last generation
 % fitnesses---->fitness values of the solutions
-% similarity_values--->the similarity values between k sources and the target instance at a specific generation
-% candidates_quality--->the quality of k selected source solutions at a specific generation
+% ccs--->the correlation coefficients from the 1st generation to the last generation
 %
 % ------------
 % Reference:
@@ -31,14 +30,13 @@
 % Evolutionary Sequential Transfer Optimization”, Submitted to IEEE Transactions on
 % Evolutionary Computation.
 
-function [solutions,fitnesses,similarity_values,candidates_quality] = sesto_optimizer_corr(problem,popsize,FEsMax,optimizer,paras)
+function [solutions,fitnesses,ccs] = sesto_optimizer_ccc(problem,popsize,FEsMax,optimizer,paras)
 
-% Initialization
+% initialization
 metrics = paras.metrics; % the list of similarity metrics in solution selection
 gen_trans = paras.gen_trans; % the generation gap for periodically triggering the knowledghe transfer
 algorithm_id = paras.algorithm_id; % the S-ESTO algorithm, idxS+idxA
 knowledge_base = paras.knowledge_base; % the knowledge base containing the evaluated solutions of k sources
-gen_save = paras.gen_save; % the generation at which similarity and transferability information are collected
 fun = problem.fnc;
 lb = problem.lb;
 ub = problem.ub;
@@ -57,6 +55,7 @@ solutions{gen} = (population-repmat(lb,popsize,1))./(repmat(ub,popsize,1)-...
 fitnesses{gen} = fitness;
 
 num_sources = length(knowledge_base); % the number of solved source problems
+ccs = [];
 
 while FEsCount < FEsMax
 
@@ -82,9 +81,8 @@ while FEsCount < FEsMax
     for i = 1:num_sources
         candidates_quality(i) = length(find(fit_candidates_tran>fit_candidates_tran(i)));
     end
-    if gen_save == gen % terminate at generation gen_save
-        return;
-    end
+    ccs_g = corr(similarity_values,candidates_quality); % calculate the correlation coefficient at generation g
+    ccs = [ccs;ccs_g];
 
     % offspring evaluation
     for i=1:popsize

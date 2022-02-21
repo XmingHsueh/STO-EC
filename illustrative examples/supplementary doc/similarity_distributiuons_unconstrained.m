@@ -6,7 +6,7 @@
 % ------------
 % This file is the script of showing the estimated similarity distributions
 % of sources from the constrained generation, which are presented in the
-% supplementary document accompaning the following reference.
+% supplementary document accompaning the following paper.
 %
 % ------------
 % Reference:
@@ -25,7 +25,7 @@ markers = {'^','o','s'};
 for i = 1:5
     xi = xi_list(i);
     sim = zeros(1,k);
-    figurex = figure('color',[1 1 1],'position',[1.3823    0.3877    0.3720    0.3153]*1000);
+    figurex = figure('color',[1 1 1],'position',[616.3333  292.3333  372.0000  315.3333]);
     for l = 1:length(ds)
         d = ds(l);
         ot = rand(1,d);

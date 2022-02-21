@@ -1,26 +1,21 @@
-function [Child,extras] = ea_generator(Parent,lb,ub)
-popsize = size(Parent,1);
-dim = size(Parent,2);
-population = (Parent-repmat(lb,popsize,1))./(repmat(ub,popsize,1)-repmat(lb,popsize,1));
+function population_child = ea_generator(population_parent,lb,ub)
+[popsize,dim] = size(population_parent);
+population = (population_parent-repmat(lb,popsize,1))./(repmat(ub,popsize,1)-repmat(lb,popsize,1));
 mu = 15;     % index of Simulated Binary Crossover (tunable)
 mum = 15;    % index of polynomial mutation
 probswap = 0.5; % probability of variable swap
-
 indorder = randperm(popsize);
-Child = zeros(popsize,dim);
+population_child = zeros(popsize,dim);
 
-% Offspring generation
 for i=1:popsize/2
-    
-    p1 = indorder(i); % Parent 1
-    p2 = indorder(i+(popsize/2)); % Parent 2
-    
+    p1 = indorder(i); % population_parent 1
+    p2 = indorder(i+(popsize/2)); % population_parent 2
     u = rand(1,dim);
     cf = zeros(1,dim);
     cf(u<=0.5)=(2*u(u<=0.5)).^(1/(mu+1));
     cf(u>0.5)=(2*(1-u(u>0.5))).^(-1/(mu+1));
     
-    % Crossover
+    % crossover
     pp1 = population(p1,:);
     pp2 = population(p2,:);
     child1 = 0.5*((1+cf).*pp1 + (1-cf).*pp2);
@@ -32,7 +27,7 @@ for i=1:popsize/2
     child2(child2<0) = 0;
     child2(child2>1) = 1;
     
-    % Mutation
+    % mutation
     temp1 = child1;
     for j=1:dim
         if rand(1)<1/dim
@@ -73,7 +68,6 @@ for i=1:popsize/2
     child2(swap_indicator) = child1(swap_indicator);
     child1(swap_indicator) = temp;
     
-    Child(i,:) = lb+child1.*(ub-lb);
-    Child(i+popsize/2,:) = lb+child2.*(ub-lb);
+    population_child(i,:) = lb+child1.*(ub-lb);
+    population_child(i+popsize/2,:) = lb+child2.*(ub-lb);
 end
-extras = [];

@@ -1,9 +1,41 @@
+% Author: Xiaoming Xue
+% Email: xminghsueh@gmail.com
+%
+% ------------
+% Description:
+% ------------
+% The solution adaptation function in S-ESTO.
+%
+% ------------
+% Inputs:
+% ------------
+% target_population--->the target population at the current generation
+% target_fitness--->the fitness values of the current target individuals
+% lb--->the lower bound of the target problem
+% ub--->the upper bound of the target problem
+% gen--->the current generation
+% source_instance--->the source instance
+% solution_unadapted--->the source solution to be adapted
+% method--->the solution adaptation method
+%
+% ------------
+% Outputs:
+% ------------
+% solution_adapted--->the adapted solution to be transferred
+%
+% ------------
+% Reference:
+% ------------
+% X. Xue, Y. Hu, C. Yang, et al. “Does Experience Always Help? Revisiting
+% Evolutionary Sequential Transfer Optimization”, Submitted to IEEE Transactions on
+% Evolutionary Computation.
+
 function solution_adapted = solution_adaptation(target_population,target_fitness,lb,ub,gen,source_instance,solution_unadapted,method)
 
 [popsize,dim] = size(target_population);
 target_population_normalized = (target_population-repmat(lb,popsize,1))./(repmat(ub,popsize,1)-repmat(lb,popsize,1));
-source_population_normalized = source_instance.solutions{gen};
-source_fitness = source_instance.fitnesses{gen};
+source_population_normalized = source_instance.solutions{gen}; % the source population at the current generation
+source_fitness = source_instance.fitnesses{gen}; %the fitness values of the current source individuals
 
 switch(method)
     case 'M1-P'

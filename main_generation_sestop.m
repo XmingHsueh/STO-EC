@@ -7,7 +7,7 @@
 % This file is the script of generating the 480 S-ESTO problems used in the
 % following paper. Alternatively, these problems can be downloaded from the
 % following sharepoint: 
-% https://portland-my.sharepoint.com/:f:/g/personal/xxiaoming2-c_my_cityu_edu_hk/EkZxYos34ppGoUsaqPsnxgUB5XkMhoMtY1s3_7FYTkP1Sg?e=audj0S
+% https://portland-my.sharepoint.com/:f:/g/personal/xxiaoming2-c_my_cityu_edu_hk/EkZxYos34ppGoUsaqPsnxgUB5XkMhoMtY1s3_7FYTkP1Sg?e=6iYYdR
 %
 % ------------
 % Reference:
@@ -16,12 +16,12 @@
 % Evolutionary Sequential Transfer Optimization¡±, Submitted to IEEE Transactions on Evolutionary Computation.
 
 clc,clear
-problem_families = {'Sphere','Ellipsoid','Schwefel','Quartic','Ackley','Rastrigin','Griewank','Levy'}; % the eight problem families
+problem_families = {'Sphere','Ellipsoid','Schwefel','Quartic','Ackley','Rastrigin','Griewank','Levy'}; % eight problem families
 transfer_scenarios = {'A','E'}; % intra-family and inter-family transfers
-source_generations = {'U','C'}; % unconstrained and constrained source generations
-xis = [0 0.1 0.3 0.7 1]; % the parameter xi that governs the optimum coverage
-ds = [5 10 20]; % the problem dimensions
-k = 1000; % the number of source instances
+source_generations = {'C','U'}; % constrained and unconstrained source generations
+xis = [0 0.1 0.3 0.7 1]; % the parameter xi that governs optimum coverage
+ds = [5 10 20]; % problem dimensions
+k = 1000; % the number of solved source instances
 count = 0; % the number of available S-ESTO problems
 
 for p = 1:length(problem_families)

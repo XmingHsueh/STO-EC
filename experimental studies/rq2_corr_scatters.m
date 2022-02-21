@@ -4,8 +4,7 @@
 % ------------
 % Description:
 % ------------
-% Visualization of correlation between similarity values measured by a
-% metric and quality of selected solutions to be transferred. The
+% Visualization of the correlation between similarity and transferability. The
 % corresponding figure is shown as Fig. 12 in the following paper.
 %
 % ------------
@@ -16,18 +15,22 @@
 
 clc,clear
 warning off;
-problem_families = {'Sphere','Ellipsoid','Schwefel','Quartic','Ackley','Rastrigin','Griewank','Levy'}; % the eight problem families
+problem_families = {'Sphere','Ellipsoid','Schwefel','Quartic','Ackley','Rastrigin','Griewank','Levy'}; % eight problem families
 transfer_scenarios = {'A','E'}; % intra-family and inter-family transfers
-source_generations = {'U','C'}; % unconstrained and constrained source generations
+source_generations = {'U','C'}; % constrained and unconstrained source generations
 xis = [0 0.1 0.3 0.7 1]; % the parameter xi that governs the optimum coverage
-ds = [5 10 20]; % the problem dimensions
-k = 1000; % the number of source instances
-gen_save = 5;
+ds = [5 10 20]; % problem dimensions
+k = 1000; % the number of solved source instances
+gen_save = 5; % the specified generation at which the correlation data are collected
 metrics = {'N','R','C','M1','KLD','WD','OC','SA'}; % similarity metrics
 method_list = [5 1 1 2 5 2;4 1 1 2 5 2]; % algorithm-family-scenario-generation-xi-d
 num_methods = size(method_list,1);
 
-figure1 = figure('color',[1 1 1],'position',[491.6667  334.3333  708.0000  294.6667]);
+fig_width = 700;
+fig_height = 300;
+screen_size = get(0,'ScreenSize');
+figure1 = figure('color',[1 1 1],'position',[(screen_size(3)-fig_width)/2, (screen_size(4)-...
+    fig_height)/2,fig_width, fig_height]);
 for i = 1:num_methods
     subplot(1,num_methods,i);
     load(['.\results-rq2\corrs\',problem_families{method_list(i,2)},'-',transfer_scenarios{method_list(i,3)},'-',...
