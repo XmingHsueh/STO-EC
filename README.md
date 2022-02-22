@@ -21,3 +21,11 @@ In this way, 480 independent S-ESTOPs can be instantiated using the class [SESTO
 
 ## Revisiting S-ESTO Algorithms
 In this work, we revisited a variety of S-ESTO algorithms by answering five central research questions (RQs) on the generated problems, which are given as follows:
+
+* ***RQ1***: How do S-ESTO algorithms driven by solution selection perform across various problems?
+* ***RQ2***: Which property of similarity metrics used for solution selection is essential to their effectivenesses?
+* ***RQ3***: How do S-ESTO algorithms driven by solution adaptation perform across various problems?
+* ***RQ4***: Which property of solution adaptation models is essential to their effectivenesses?
+* ***RQ5***: How to properly integrate solution selection and solution adaptation?
+
+The 
