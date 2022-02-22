@@ -7,7 +7,7 @@ This repository contains all the MATLAB implementations used in the above articl
 * analysis and visualization of the obtained results
 * illustrative examples
 
-## Generation of S-ESTO problems
+## Generation of S-ESTO Problems
 A solution-based sequential transfer optimization problem (S-ESTOP) can be built by configuring six aspects: target instance, transfer scenario, source generation scheme, the parameter that governs optimum coverage, problem dimension, and the number of source instances. Their realizations in the above article are given by:
 
 * target instance: `Sphere`, `Ellipsoid`, `Schwefel`, `Quartic`, `Ackley`, `Rastrigin`, `Griewank`, and `Levy`
@@ -17,4 +17,7 @@ A solution-based sequential transfer optimization problem (S-ESTOP) can be built
 * problem dimension: `5`, `10`, and `20`
 * the number of source instances: `1000`
 
-In this way, 480 independent S-ESTOPs can be instantiated using the class [SESTOP](https://github.com/XmingHsueh/Revisiting-S-ESTOs/blob/main/utils/SESTOP.m).
+In this way, 480 independent S-ESTOPs can be instantiated using the class [SESTOP](https://github.com/XmingHsueh/Revisiting-S-ESTOs/blob/main/utils/SESTOP.m). The script of generating the 480 S-ESTOPs is [main_generation_sestop](https://github.com/XmingHsueh/Revisiting-S-ESTOs/blob/main/main_generation_sestop.m).
+
+## Revisiting S-ESTO Algorithms
+In this work, we revisited a variety of S-ESTO algorithms by answering five central research questions (RQs) on the generated problems, which are given as follows:
