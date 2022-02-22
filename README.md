@@ -34,3 +34,33 @@ Specifically, the first two RQs are about solution selection while the the third
 |:-|:-|:-|
 |***RQ1***, ***RQ2***|***RQ3***, ***RQ4***|***RQ5***|
 |[main_RQ1](https://github.com/XmingHsueh/Revisiting-S-ESTOs/blob/main/main_RQ1.m), [main_RQ2_corr](https://github.com/XmingHsueh/Revisiting-S-ESTOs/blob/main/main_RQ2_corr.m), [main_RQ2_ccc](https://github.com/XmingHsueh/Revisiting-S-ESTOs/blob/main/main_RQ2_ccc.m)|[main_RQ3](https://github.com/XmingHsueh/Revisiting-S-ESTOs/blob/main/main_RQ3.m), [main_RQ4_example1d](https://github.com/XmingHsueh/Revisiting-S-ESTOs/blob/main/main_RQ4_example1d.m), [main_RQ4_mappings](https://github.com/XmingHsueh/Revisiting-S-ESTOs/blob/main/main_RQ4_mappings.m)|[main_RQ5](https://github.com/XmingHsueh/Revisiting-S-ESTOs/blob/main/main_RQ5.m)|
+
+## Step 3: Analysis and Visualization of the Results
+For clarity, we analyzed and visualized the results of the five RQs independently. These postprocessing scripts are summarized as follows:
+
+|***RQ1***|***RQ2***|***RQ3***|***RQ4***|***RQ5***|
+|:-|:-|:-|:-|:-|
+|[rq1_convergence_curves](https://github.com/XmingHsueh/Revisiting-S-ESTOs/blob/main/experimental%20studies/rq1_convergence_curves.m), [rq1_performance_ranks_boxplots](https://github.com/XmingHsueh/Revisiting-S-ESTOs/blob/main/experimental%20studies/rq1_performance_ranks_boxplots.m), [rq1_performance_ranks_radars](https://github.com/XmingHsueh/Revisiting-S-ESTOs/blob/main/experimental%20studies/rq1_performance_ranks_radars.m), [rq1_success_rates_bars](https://github.com/XmingHsueh/Revisiting-S-ESTOs/blob/main/experimental%20studies/rq1_success_rates_bars.m)|[rq2_ccc_curves](https://github.com/XmingHsueh/Revisiting-S-ESTOs/blob/main/experimental%20studies/rq2_ccc_curves.m), [rq2_corr_scatters](https://github.com/XmingHsueh/Revisiting-S-ESTOs/blob/main/experimental%20studies/rq2_corr_scatters.m)|[rq3_convergence_curves](https://github.com/XmingHsueh/Revisiting-S-ESTOs/blob/main/experimental%20studies/rq3_convergence_curves.m), [rq3_performance_ranks_boxplots](https://github.com/XmingHsueh/Revisiting-S-ESTOs/blob/main/experimental%20studies/rq3_performance_ranks_boxplots.m), [rq3_performance_ranks_radars](https://github.com/XmingHsueh/Revisiting-S-ESTOs/blob/main/experimental%20studies/rq3_performance_ranks_radars.m), [rq3_success_rates_bars](https://github.com/XmingHsueh/Revisiting-S-ESTOs/blob/main/experimental%20studies/rq3_success_rates_bars.m)|[main_RQ4_example1d](https://github.com/XmingHsueh/Revisiting-S-ESTOs/blob/main/main_RQ4_example1d.m), [main_RQ4_mappings](https://github.com/XmingHsueh/Revisiting-S-ESTOs/blob/main/main_RQ4_mappings.m)|[rq5_convergence_curves](https://github.com/XmingHsueh/Revisiting-S-ESTOs/blob/main/experimental%20studies/rq5_convergence_curves.m)|
+
+## Step 4: Illustrative Examples
+A number of illustrative examples used in the main paper and the supplementary document are provided in this repository, which can be found in the folder of '.\illustrative examples'.
+
+## Citation
+
+If you find this repo useful for your research, please consider to cite:
+```latex
+@article{Xue2022,
+title = {Does Experience Always Help? Revisiting Evolutionary Sequential Transfer Optimization},
+author = {Xue, Xiaoming and Hu, Yao and Yang, Cuie and Feng, Liang and Chen, Guodong and Zhang, Kai and Song, Linqi and Tan, Kay Chen}
+journal = {...},
+volume = {1},
+pages = {1 - 20},
+year = {2022},
+doi = {https://...},
+url = {http://...},
+}
+```
+
+## Acknowledgments
+
+...
