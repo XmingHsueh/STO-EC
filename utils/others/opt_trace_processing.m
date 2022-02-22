@@ -22,7 +22,7 @@
 % Reference:
 % ------------
 % X. Xue, Y. Hu, C. Yang, et al. “Does Experience Always Help? Revisiting
-% Evolutionary Sequential Transfer Optimization”, Submitted to IEEE Transactions on Evolutionary Computation.
+% Evolutionary Sequential Transfer Optimization”, Submitted for Peer Review.
 
 function [FEs,Fits] = opt_trace_processing(opt_history)
 num_runs = length(opt_history);

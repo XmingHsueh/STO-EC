@@ -13,7 +13,7 @@
 % Reference:
 % ------------
 % X. Xue, Y. Hu, C. Yang, et al. ¡°Does Experience Always Help? Revisiting
-% Evolutionary Sequential Transfer Optimization¡±, Submitted to IEEE Transactions on Evolutionary Computation.
+% Evolutionary Sequential Transfer Optimization", Submitted for Peer Review.
 
 clc,clear
 problem_families = {'Sphere','Ellipsoid','Schwefel','Quartic','Ackley','Rastrigin','Griewank','Levy'}; % eight problem families

@@ -27,8 +27,7 @@
 % Reference:
 % ------------
 % X. Xue, Y. Hu, C. Yang, et al. “Does Experience Always Help? Revisiting
-% Evolutionary Sequential Transfer Optimization”, Submitted to IEEE Transactions on
-% Evolutionary Computation.
+% Evolutionary Sequential Transfer Optimization”, Submitted for Peer Review.
 
 function solution_adapted = solution_adaptation(target_population,target_fitness,lb,ub,gen,source_instance,solution_unadapted,method)
 
