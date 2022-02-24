@@ -10,7 +10,7 @@
 % ------------
 % Inputs:
 % ------------
-% problem--->the target problem to be optimized
+% problem--->the target task to be optimized
 % popsize--->the population size
 % FEsMax--->% the number of function evaluations available
 % optimizer--->the name of evolutionary optimizer
@@ -21,7 +21,7 @@
 % ------------
 % solutions--->solutions for the 1st generation to the last generation
 % fitnesses---->fitness values of the solutions
-% similarity_values--->the similarity values between k sources and the target instance at a specific generation
+% similarity_values--->the similarity values between k sources and the target task at a specific generation
 % candidates_quality--->the quality of k selected source solutions at a specific generation
 %
 % ------------
@@ -55,7 +55,7 @@ solutions{gen} = (population-repmat(lb,popsize,1))./(repmat(ub,popsize,1)-...
     repmat(lb,popsize,1)); % convert the solutions into the unified search space
 fitnesses{gen} = fitness;
 
-num_sources = length(knowledge_base); % the number of solved source problems
+num_sources = length(knowledge_base); % the number of solved source tasks
 
 while FEsCount < FEsMax
 
@@ -73,7 +73,7 @@ while FEsCount < FEsMax
         [~,~,candidates_transfer,similarity_values] = solution_selection(population_old,...
             fitness_old,lb,ub,gen,knowledge_base,metric);
     end
-    fit_candidates_tran = zeros(num_sources,1); % fitness values of selected solutions on the target instance
+    fit_candidates_tran = zeros(num_sources,1); % fitness values of selected solutions on the target task
     candidates_quality = zeros(num_sources,1); % quality of selected solutions
     for i = 1:num_sources
         fit_candidates_tran(i) = fun(lb+(ub-lb).*candidates_transfer(i,:));

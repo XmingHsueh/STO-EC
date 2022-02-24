@@ -15,9 +15,9 @@
 % Evolutionary Sequential Transfer Optimization¡±, Submitted for Peer Review.
 
 clc,clear
-ds = [5 20 50]; % Problem dimensions
-k = 10000; % The number of generated source instances
-xi_list = [0.1, 0.3, 0.5, 0.7, 1]; % The parameter xi of governing the optimum coverage
+ds = [5 20 50]; % problem dimensions
+k = 10000; % the number of generated source tasks
+xi_list = [0.1, 0.3, 0.5, 0.7, 1]; % the parameter xi of governing optimum coverage
 colors = {'r','b','k'};
 colors_rgb = [141,29,88;0,165,181;0 0 0]/255;
 markers = {'^','o','s'};

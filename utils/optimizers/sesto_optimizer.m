@@ -10,7 +10,7 @@
 % ------------
 % Inputs:
 % ------------
-% problem--->the target problem to be optimized
+% problem--->the target task to be optimized
 % popsize--->the population size
 % FEsMax--->% the number of function evaluations available
 % optimizer--->the name of evolutionary optimizer
@@ -53,7 +53,7 @@ solutions{gen} = (population-repmat(lb,popsize,1))./(repmat(ub,popsize,1)-...
     repmat(lb,popsize,1)); % convert the solutions into the unified search space
 fitnesses{gen} = fitness;
 
-num_sources = length(knowledge_base); % the number of solved source problems
+num_sources = length(knowledge_base); % the number of solved source tasks
 
 while FEsCount < FEsMax
     
@@ -74,7 +74,7 @@ while FEsCount < FEsMax
                 knowledge_base,metric);
         elseif algorithm_id(1)== 0 && algorithm_id(2)~= 0 % adaptation-driven S-ESTOs
             adaptation = adaptations{algorithm_id(2)};
-            idx_source = randi(num_sources); % randomly select one source instance
+            idx_source = randi(num_sources); % randomly select one source task
             solution_unadapted_normalized = knowledge_base(idx_source).solutions{end}...
                 (randi(popsize),:);
             solution_transfer = solution_adaptation(population_old,fitness_old,lb,ub,gen,...

@@ -5,8 +5,8 @@
 % Description:
 % ------------
 % The class of S-ESTO problems. The properties that can be arbitrarily
-% specified include: 1. the target function; 2. transfer scenario; 3.
-% source generation; 4. the parameter that governs optimum coverage; 5. the
+% specified include: 1. the target task; 2. transfer scenario; 3. source 
+% generation; 4. the parameter that governs optimum coverage; 5. the
 % problem dimension.
 %
 % ------------
@@ -18,22 +18,22 @@
 classdef SESTOP
 
     % SESTOP properties:
-    % func_target---the target function with configurable optimum
+    % func_target---the target task with configurable optimum
     % trans_sce--->transfer scenario: intra-family transfer (A) or inter-family transfer (E)
     % source_gen--->source generation scheme: constrained generation (C) or unconstrained generation (U)
     % xi--->the parameter that governs optimum coverage: xi∈[0,1]
-    % dim--->the problem dimension of source-target instances, a positive integer
+    % dim--->the problem dimension of source-target tasks, a positive integer
     % mode--->the mode of problem call, problem generation (gen) or s-esto optimization (opt)
-    % target_problem--->the instantiated target problem
-    % knowledge_base--->the knowledge base containing the evaluated solutions of k sources
-    % problem_families---<read-only>the list of available problem families
-    % k---<read-only>the number of sources, a positive integer
-    % optimizer---<read-only>the optimizer used for solving the source and target problems
+    % target_problem--->the instantiated target task
+    % knowledge_base--->the knowledge base containing the evaluated solutions of k source tasks
+    % problem_families---<read-only>the list of available task families
+    % k---<read-only>the number of source tasks, a positive integer
+    % optimizer---<read-only>the optimizer used for solving the source and target tasks
     % popsize---<read-only>the population size, N>0
     % FEsMax---<read-only>the maximum function evaluations (FEs) available
     % gen_trans---<read-only>the generation gap for periodically triggering the knowledghe transfer
     % state_knowledgebase---<read-only>the availability of the specified S-ESTO problem: 1->available; 0->unavailable
-    % source_problems---<read-only>the instantiated source problems
+    % source_problems---<read-only>the instantiated source tasks
 
     properties
         func_target = 'Sphere';
@@ -83,8 +83,8 @@ classdef SESTOP
         end
 
         function obj = Configuration(obj) % problem constructor
-            opt_target = rand(1,obj.dim); % configure the target problem
-            for  i = 1:obj.k % configure the source problems
+            opt_target = rand(1,obj.dim); % configure the target task
+            for  i = 1:obj.k % configure the source tasks
                 idx_target = find(strcmp(obj.problem_families,obj.func_target));
                 if strcmp(obj.trans_sce,'A') % intra-family transfer
                     idx_source = idx_target;

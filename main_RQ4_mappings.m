@@ -18,12 +18,12 @@
 clc,clear
 rand('state',11);
 randn('state',11);
-funs = @(x)(x+6).^2-10*cos(2*pi*(x+6))+10; % the source problem
-lbs = -12; % the lower bound of the source instance
-ubs = 12; % the upper bound of the source instance
-funt = @(x)(x-7).^2; % the target problem
-lbt = -14; % the lower bound of the target instance
-ubt = 14; % the upper bound of the target instance
+funs = @(x)(x+6).^2-10*cos(2*pi*(x+6))+10; % the source task
+lbs = -12; % the lower bound of the source task
+ubs = 12; % the upper bound of the source task
+funt = @(x)(x-7).^2; % the target task
+lbt = -14; % the lower bound of the target task
+ubt = 14; % the upper bound of the target task
 num_plot = 200; % the number of points used for plotting the source-target landscapes
 ts = linspace(0,0.5,num_plot); % source solutions used for plotting the landscape
 tt = linspace(0.5,1,num_plot); % target solutions used for plotting the landscape
@@ -33,7 +33,7 @@ for i = 1:num_plot % function evaluation
     fs(i) = funs(lbs+(ubs-lbs)*ts(i));
     ft(i) = funt(lbt+(ubt-lbt)*tt(i));
 end
-num_solutions = 200; % the number of solutions to be evaluated and used for learning the source-target mapping
+num_solutions = 200; % the number of solutions to be evaluated and used for learning the source-to-target mapping
 train_s = lhsdesign_modified(num_solutions,0,0.5); % sample the source solutions using the LHS sampling
 train_t = lhsdesign_modified(num_solutions,0.5,1); % sample the target solutions using the LHS sampling
 fitness_s = zeros(num_solutions,1); % fitness values of source solutions

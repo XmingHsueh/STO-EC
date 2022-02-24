@@ -15,12 +15,12 @@
 % Evolutionary Sequential Transfer Optimization”, Submitted for Peer Review.
 
 clc,clear
-problem_families = {'Sphere','Ellipsoid','Schwefel','Quartic','Ackley','Rastrigin','Griewank','Levy'}; % eight problem families
+problem_families = {'Sphere','Ellipsoid','Schwefel','Quartic','Ackley','Rastrigin','Griewank','Levy'}; % eight task families
 transfer_scenarios = {'A','E'}; % intra-family and inter-family transfers
 source_generation = 'C'; % the constrained source generation
 xis = [0 0.1 0.3 0.7 1]; % the parameter xi that governs optimum coverage
 d = 10; % the problem dimension
-k = 1000; % the number of solved source instances
+k = 1000; % the number of solved source tasks
 metrics = {'N','R','C','M1','KLD','WD','OC','SA'}; % similarity metrics
 
 for t = 1:length(transfer_scenarios)

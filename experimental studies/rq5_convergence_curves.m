@@ -16,12 +16,12 @@
 
 clc,clear
 warning off;
-problem_families = {'Sphere','Ellipsoid','Schwefel','Quartic','Ackley','Rastrigin','Griewank','Levy'}; % eight problem families
+problem_families = {'Sphere','Ellipsoid','Schwefel','Quartic','Ackley','Rastrigin','Griewank','Levy'}; % eight task families
 transfer_scenarios = {'A','E'}; % intra-family and inter-family transfers
 source_generations = {'C','U'}; % constrained and unconstrained source generations
 xis = [0 0.1 0.3 0.7 1]; % the parameter xi that governs optimum coverage
 ds = [5 10 20]; % problem dimensions
-k = 1000; % the number of solved source instances
+k = 1000; % the number of solved source tasks
 metrics = {'N','R','C','M1','KLD','WD','OC','SA'}; % similarity metrics
 adaptations = {'M1-P','M1-R','M1-M','M2-A','SA-L','OC-L','OC-A','OC-K','OC-N'}; % adaptation models
 integrations = [6 7;4 3;6 4]; % three integrations of solution selection and solution adaptation

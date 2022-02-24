@@ -11,19 +11,19 @@
 % ------------
 % target_population--->the target population at the current generation
 % target_fitness--->the fitness values of the current target individuals
-% lb--->the lower bound of the target problem
-% ub--->the upper bound of the target problem
+% lb--->the lower bound of the target task
+% ub--->the upper bound of the target task
 % gen--->the current generation
-% knowledge_base--->the knowledge base containing the evaluated solutions of k sources
+% knowledge_base--->the knowledge base containing the evaluated solutions of k source tasks
 % method--->the solution selection method
 %
 % ------------
 % Outputs:
 % ------------
 % solution_sel--->the selected solution to be adapted or transferred
-% idx_source--->the index of the selected source instance
-% candidates_transfer--->the candidate transferrable solutions provided by k sources
-% simlarity_values--->the similarity values between k sources and the target instance
+% idx_source--->the index of the selected source task
+% candidates_transfer--->the candidate transferrable solutions provided by k source tasks
+% simlarity_values--->the similarity values between k sources and the target task
 %
 % ------------
 % Reference:

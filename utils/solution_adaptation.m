@@ -11,10 +11,10 @@
 % ------------
 % target_population--->the target population at the current generation
 % target_fitness--->the fitness values of the current target individuals
-% lb--->the lower bound of the target problem
-% ub--->the upper bound of the target problem
+% lb--->the lower bound of the target task
+% ub--->the upper bound of the target task
 % gen--->the current generation
-% source_instance--->the source instance
+% source_task--->the source task
 % solution_unadapted--->the source solution to be adapted
 % method--->the solution adaptation method
 %
@@ -29,12 +29,12 @@
 % X. Xue, Y. Hu, C. Yang, et al. “Does Experience Always Help? Revisiting
 % Evolutionary Sequential Transfer Optimization”, Submitted for Peer Review.
 
-function solution_adapted = solution_adaptation(target_population,target_fitness,lb,ub,gen,source_instance,solution_unadapted,method)
+function solution_adapted = solution_adaptation(target_population,target_fitness,lb,ub,gen,source_task,solution_unadapted,method)
 
 [popsize,dim] = size(target_population);
 target_population_normalized = (target_population-repmat(lb,popsize,1))./(repmat(ub,popsize,1)-repmat(lb,popsize,1));
-source_population_normalized = source_instance.solutions{gen}; % the source population at the current generation
-source_fitness = source_instance.fitnesses{gen}; %the fitness values of the current source individuals
+source_population_normalized = source_task.solutions{gen}; % the source population at the current generation
+source_fitness = source_task.fitnesses{gen}; %the fitness values of the current source individuals
 
 switch(method)
     case 'M1-P'

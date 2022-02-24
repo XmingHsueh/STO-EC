@@ -15,12 +15,12 @@
 
 clc,clear
 warning off;
-problem_families = {'Sphere','Ellipsoid','Schwefel','Quartic','Ackley','Rastrigin','Griewank','Levy'}; % eight problem families
+problem_families = {'Sphere','Ellipsoid','Schwefel','Quartic','Ackley','Rastrigin','Griewank','Levy'}; % eight task families
 transfer_scenarios = {'A','E'}; % intra-family and inter-family transfers
 source_generation = 'C'; % the constrained source generation
 xi = 1; % the parameter xi that governs the optimum coverage
 d = 10; % the problem dimension
-k = 1000; % the number of solved source instances
+k = 1000; % the number of solved source tasks
 metrics = {'C','M1','KLD','WD','OC','SA'}; % similarity metrics
 problem_plot = [5 1]; % the problem from which the results to be visualized are collected, family-scenario 
 
