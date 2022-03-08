@@ -29,10 +29,9 @@ for i = 1:length(xi_list)
     figurex = figure('color',[1 1 1],'position',[616.3333  292.3333  372.0000  315.3333]);
     for l = 1:length(ds)
         d = ds(l);
-        ot = rand(1,d);
-        for j = 1:k % constrained source generation
-            os = (1-xi_realizations(j))*ot+xi_realizations(j)*rand(1,d);
-            sim(j) = 1-norm(ot-os,1)/d;
+        [ot,os] = opt_config(xi,k,d,'C'); % constrained source generation
+        for j = 1:k
+            sim(j) = 1-norm(ot-os(j,:),1)/d;
         end
         [f,xt] = ksdensity(sim,'NumPoints',20);
         plot(xt,f,'linewidth',1,'color',colors_rgb(l,:),'marker',markers{l},'markerfacecolor',colors_rgb(l,:));hold on;

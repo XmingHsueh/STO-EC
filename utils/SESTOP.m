@@ -83,8 +83,8 @@ classdef SESTOP
         end
 
         function obj = Configuration(obj) % problem constructor
-            opt_target = rand(1,obj.dim); % configure the target task
-            for  i = 1:obj.k % configure the source tasks
+            [opt_target,opt_source] = opt_config(obj.xi,obj.k,obj.dim,obj.source_gen);
+            for i = 1:obj.k % configure the source tasks
                 idx_target = find(strcmp(obj.problem_families,obj.func_target));
                 if strcmp(obj.trans_sce,'A') % intra-family transfer
                     idx_source = idx_target;
@@ -96,12 +96,7 @@ classdef SESTOP
                     end
                     obj.source_problems(i).func = obj.problem_families{idx_source};
                 end
-                if strcmp(obj.source_gen,'U') % unconstrained source generation
-                    obj.source_problems(i).opt = (1-obj.xi)*opt_target+obj.xi*rand(1,obj.dim);
-                else % constrained source generation
-                    xi_c = i/obj.k*obj.xi;
-                    obj.source_problems(i).opt = (1-xi_c)*opt_target+xi_c*rand(1,obj.dim);
-                end
+                obj.source_problems(i).opt = opt_source(i,:);
             end
             h=waitbar(0,'Starting');
             for i = 1:obj.k % configure the knowledge base
