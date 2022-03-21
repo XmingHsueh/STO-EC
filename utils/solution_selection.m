@@ -23,13 +23,13 @@
 % solution_sel--->the selected solution to be adapted or transferred
 % idx_source--->the index of the selected source task
 % candidates_transfer--->the candidate transferrable solutions provided by k source tasks
-% simlarity_values--->the similarity values between k sources and the target task
+% simlarity_values--->the similarity values between k source tasks and the target task
 %
 % ------------
 % Reference:
 % ------------
-% X. Xue, Y. Hu, C. Yang, et al. “Does Experience Always Help? Revisiting
-% Evolutionary Sequential Transfer Optimization”, Submitted for Peer Review.
+% X. Xue, Y. Hu, C. Yang, et al. “How to Utilize Optimization Experience? Revisiting
+% Evolutionary Sequential Transfer Optimization", Submitted for Peer Review.
 
 function [solution_sel,idx_source,candidates_transfer,simlarity_values] = solution_selection(target_population,target_fitness,lb,ub,gen,knowledge_base,method)
 

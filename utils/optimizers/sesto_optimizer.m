@@ -25,15 +25,15 @@
 % ------------
 % Reference:
 % ------------
-% X. Xue, Y. Hu, C. Yang, et al. “Does Experience Always Help? Revisiting
-% Evolutionary Sequential Transfer Optimization”, Submitted for Peer Review.
+% X. Xue, Y. Hu, C. Yang, et al. “How to Utilize Optimization Experience? Revisiting
+% Evolutionary Sequential Transfer Optimization", Submitted for Peer Review.
 
 function [solutions,fitnesses] = sesto_optimizer(problem,popsize,FEsMax,optimizer,paras)
 
 % Initialization
 metrics = paras.metrics; % the list of similarity metrics in solution selection
 adaptations = paras.adaptations; % the list of adaptation models in solution adaptation
-gen_trans = paras.gen_trans; % the generation gap for periodically triggering the knowledghe transfer
+gen_trans = paras.gen_trans; % the generation gap of periodically triggering the knowledghe transfer
 algorithm_id = paras.algorithm_id; % the S-ESTO algorithm, idxS+idxA
 knowledge_base = paras.knowledge_base; % the knowledge base containing the evaluated solutions of k sources
 fun = problem.fnc;

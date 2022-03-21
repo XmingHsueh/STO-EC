@@ -10,14 +10,14 @@
 % ------------
 % Reference:
 % ------------
-% X. Xue, Y. Hu, C. Yang, et al. “Does Experience Always Help? Revisiting
-% Evolutionary Sequential Transfer Optimization”, Submitted for Peer Review.
+% X. Xue, Y. Hu, C. Yang, et al. “How to Utilize Optimization Experience? Revisiting
+% Evolutionary Sequential Transfer Optimization", Submitted for Peer Review.
 
 clc,clear
 warning off;
 problem_families = {'Sphere','Ellipsoid','Schwefel','Quartic','Ackley','Rastrigin','Griewank','Levy'}; % eight task families
 transfer_scenarios = {'A','E'}; % intra-family and inter-family transfers
-source_generation = 'C'; % the constrained source generation
+generation_scheme = 'C'; % the constrained generation
 xi = 1; % the parameter xi that governs the optimum coverage
 d = 10; % the problem dimension
 k = 1000; % the number of solved source tasks
@@ -36,7 +36,7 @@ Gens = 1:50;
 un_std = 0.5;
 for i = 1:length(metrics)
     load(['.\results-rq2\cccs\',problem_families{problem_plot(1)},'-',...
-        transfer_scenarios{problem_plot(2)},'-',source_generation,'-x',num2str(xi),'-d',...
+        transfer_scenarios{problem_plot(2)},'-',generation_scheme,'-x',num2str(xi),'-d',...
         num2str(d),'-k',num2str(k),'-S',num2str(i),'+A0-coe.mat']);
     ccc_total = [];
     for j = 1:length(results_ccc)

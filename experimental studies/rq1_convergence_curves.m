@@ -5,20 +5,20 @@
 % Description:
 % ------------
 % Visualization of the convergence curves obtained by two baseline solvers 
-% and six similarity-driven S-ESTOs. The corresponding figure is shown in Fig. 11
+% and six selection-based S-ESTOs. The corresponding figure is shown in Fig. 11
 % in the following paper.
 %
 % ------------
 % Reference:
 % ------------
-% X. Xue, Y. Hu, C. Yang, et al. “Does Experience Always Help? Revisiting
-% Evolutionary Sequential Transfer Optimization”, Submitted for Peer Review.
+% X. Xue, Y. Hu, C. Yang, et al. “How to Utilize Optimization Experience? Revisiting
+% Evolutionary Sequential Transfer Optimization", Submitted for Peer Review.
 
 clc,clear
 warning off;
 problem_families = {'Sphere','Ellipsoid','Schwefel','Quartic','Ackley','Rastrigin','Griewank','Levy'}; % eight task families
 transfer_scenarios = {'A','E'}; % intra-family and inter-family transfers
-source_generations = {'C','U'}; % constrained and unconstrained source generations
+generation_schemes = {'C','U'}; % constrained and unconstrained generations
 xis = [0 0.1 0.3 0.7 1]; % the parameter xi that governs optimum coverage
 ds = [5 10 20]; % problem dimensions
 k = 1000; % the number of solved source tasks
@@ -42,7 +42,7 @@ c_list = [0 0 0;255 0 0;0 255 0;0 0 255;255 255 0;0 255 255;255 0 255;125 0 255;
 m_list = ['o','+','*','x','s','d','^','v'];
 for m = 1:length(metrics)
     load(['results-rq1\',problem_families{idx_family},'-',transfer_scenarios{idx_scenario},'-',...
-        source_generations{idx_source_generation},'-x',num2str(xis(idx_xi)),'-d',...
+        generation_schemes{idx_source_generation},'-x',num2str(xis(idx_xi)),'-d',...
         num2str(ds(idx_d)),'-k',num2str(k),'-S',num2str(m),'+A0.mat']);
     [FEs,fits] = opt_trace_processing(results_opt);
     idx_retrive = ceil(linspace(1,length(FEs),num_points_plot));
@@ -58,5 +58,5 @@ set(gca,'linewidth',0.5);
 grid on;
 xlabel('FEs','interpret','latex','fontsize',12)
 ylabel('log$\left(y\right)$','interpret','latex','fontsize',12);
-title(['$\mathcal{G}=',source_generations{idx_source_generation},'$, $\xi=',...
+title(['$\mathcal{G}=',generation_schemes{idx_source_generation},'$, $\xi=',...
     num2str(xis(idx_xi)),'$'],'interpret','latex','fontsize',14)

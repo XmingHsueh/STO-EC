@@ -10,8 +10,8 @@
 % ------------
 % Reference:
 % ------------
-% X. Xue, Y. Hu, C. Yang, et al. ¡°Does Experience Always Help? Revisiting
-% Evolutionary Sequential Transfer Optimization¡±, Submitted for Peer Review.
+% X. Xue, Y. Hu, C. Yang, et al. ¡°How to Utilize Optimization Experience? Revisiting
+% Evolutionary Sequential Transfer Optimization", Submitted for Peer Review.
 
 clc,clear
 num_nodes = 21; % the number of sampling points along each feature dimension

@@ -5,7 +5,7 @@
 % Description:
 % ------------
 % This file is the entry point of experimentally comparing various
-% adaptation models in solution selection of S-ESTO algorithms.
+% adaptation models in solution adaptation of S-ESTO algorithms.
 % Alternatively, the results of this script can be downloaded from the
 % following sharepoint:
 % https://portland-my.sharepoint.com/:f:/g/personal/xxiaoming2-c_my_cityu_edu_hk/Ets516JdJjdKjYg7KbqFF8wB6dlij2DGjTExD8OprIBksA?e=QMbps1
@@ -13,14 +13,14 @@
 % ------------
 % Reference:
 % ------------
-% X. Xue, Y. Hu, C. Yang, et al. “Does Experience Always Help? Revisiting
-% Evolutionary Sequential Transfer Optimization”, Submitted for Peer Review.
+% X. Xue, Y. Hu, C. Yang, et al. “How to Utilize Optimization Experience? Revisiting
+% Evolutionary Sequential Transfer Optimization", Submitted for Peer Review.
 
 clc,clear
 warning off;
 problem_families = {'Sphere','Ellipsoid','Schwefel','Quartic','Ackley','Rastrigin','Griewank','Levy'}; % eight task families
 transfer_scenarios = {'A','E'}; % intra-family and inter-family transfers
-source_generations = {'C','U'}; % constrained and unconstrained source generations
+generation_schemes = {'C','U'}; % constrained and unconstrained generations
 xis = [0 0.1 0.3 0.7 1]; % the parameter xi that governs optimum coverage
 ds = [5 10 20]; % problem dimensions
 k = 1000; % the number of solved source tasks
@@ -30,32 +30,32 @@ FEsMax = 1000; % the number of function evaluations available
 runs = 30; % the number of independent runs
 opts_sesto.metrics = {'N','R','C','M1','KLD','WD','OC','SA'}; % similarity metrics
 opts_sesto.adaptations = {'M1-P','M1-R','M1-M','M2-A','SA-L','OC-L','OC-A','OC-K','OC-N'}; % adaptation models
-opts_sesto.gen_trans  =1; % the generation gap for periodically triggering the knowledghe transfer
-algorithm_list = [zeros(length(opts_sesto.adaptations),1),transpose(1:length(opts_sesto.adaptations))]; % adaptation-driven S-ESTOs
+opts_sesto.gen_trans  =1; % the generation gap of periodically triggering the knowledghe transfer
+algorithm_list = [zeros(length(opts_sesto.adaptations),1),transpose(1:length(opts_sesto.adaptations))]; % adaptation-based S-ESTOs
 % [algorithm naming rule: idxS-idxA, while 0 denotes random selection or no adaptation]
-% examples: [4 0] denotes a similarity-driven S-ESTO equipped with the fourth metric S-M1
-% [0 4] denotes an adaptation-driven S-ESTO equipped with the fourth adaptation A-M2-A
-% [6 7] denotes an integration-driven S-ESTO equipped with S-WD and A-OC-A
+% examples: [4 0] denotes a selection-based S-ESTO equipped with the fourth metric S-M1
+% [0 4] denotes an adaptation-based S-ESTO equipped with the fourth adaptation A-M2-A
+% [6 7] denotes an integration-based S-ESTO equipped with S-WD and A-OC-A
 h=waitbar(0,'Starting'); % process monitor
 runs_total = size(algorithm_list,1)*length(problem_families)*length(transfer_scenarios)*...
-    length(source_generations)*length(xis)*length(ds)*runs;
-count = 0*length(problem_families)*length(transfer_scenarios)*length(source_generations)...
+    length(generation_schemes)*length(xis)*length(ds)*runs;
+count = 0*length(problem_families)*length(transfer_scenarios)*length(generation_schemes)...
     *length(xis)*length(ds)*runs;
 
 for a = 1:size(algorithm_list,1)
     for p = 1:length(problem_families)
         for t = 1:length(transfer_scenarios)
-            for s = 1:length(source_generations)
+            for s = 1:length(generation_schemes)
                 for xi = xis
                     for d = ds
                         results_opt = struct;
                         for r = 1:runs
-                            % import the sesto problem to be optimized
-                            sestop_tbo = SESTOP('func_target',problem_families{p},'trans_sce',...
-                                transfer_scenarios{t},'source_gen',source_generations{s},'xi',xi,'dim',d,...
+                            % import the black-box STO problem to be solved
+                            stop_tbo = STOP('func_target',problem_families{p},'trans_sce',...
+                                transfer_scenarios{t},'gen_scheme',generation_schemes{s},'xi',xi,'dim',d,...
                                 'mode','opt');
-                            target_task = sestop_tbo.target_problem;
-                            knowledge_base = sestop_tbo.knowledge_base;
+                            target_task = stop_tbo.target_problem;
+                            knowledge_base = stop_tbo.knowledge_base;
                             problem.fnc = target_task.fnc;
                             problem.lb = target_task.lb;
                             problem.ub = target_task.ub;
@@ -71,14 +71,14 @@ for a = 1:size(algorithm_list,1)
                             
                             fprintf(['Algorithm: ','S',num2str(algorithm_list(a,1)),'+A',...
                                 num2str(algorithm_list(a,2)),', the problem: ',problem_families{p},'-',...
-                                transfer_scenarios{t},'-',source_generations{s},'-x',num2str(xi),'-d',...
+                                transfer_scenarios{t},'-',generation_schemes{s},'-x',num2str(xi),'-d',...
                                 num2str(d),'-k',', runs: ',num2str(r),'\n']);
                             waitbar(count/runs_total,h,sprintf('Optimization in progress: %.2f%%',...
                                 count/runs_total*100));
                         end
                         % save the results
                         save(['.\experimental studies\results-rq3\',problem_families{p},'-',...
-                            transfer_scenarios{t},'-',source_generations{s},'-x',num2str(xi),'-d',...
+                            transfer_scenarios{t},'-',generation_schemes{s},'-x',num2str(xi),'-d',...
                             num2str(d),'-k',num2str(k),'-S',num2str(algorithm_list(a,1)),'+A',...
                             num2str(algorithm_list(a,2)),'.mat'],'results_opt');
                     end

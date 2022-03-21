@@ -4,23 +4,23 @@
 % ------------
 % Description:
 % ------------
-% The class of S-ESTO problems. The properties that can be arbitrarily
-% specified include: 1. the target task; 2. transfer scenario; 3. source 
-% generation; 4. the parameter that governs optimum coverage; 5. the
+% The class of black-box STO problems. The properties that can be arbitrarily
+% specified include: 1. the target task; 2. transfer scenario; 3.
+% generation scheme; 4. the parameter that governs optimum coverage; 5. the
 % problem dimension.
 %
 % ------------
 % Reference:
 % ------------
-% X. Xue, Y. Hu, C. Yang, et al. “Does Experience Always Help? Revisiting
-% Evolutionary Sequential Transfer Optimization”, Submitted for Peer Review.
+% X. Xue, Y. Hu, C. Yang, et al. “How to Utilize Optimization Experience? Revisiting
+% Evolutionary Sequential Transfer Optimization", Submitted for Peer Review.
 
-classdef SESTOP
+classdef STOP
 
-    % SESTOP properties:
+    % STOP properties:
     % func_target---the target task with configurable optimum
     % trans_sce--->transfer scenario: intra-family transfer (A) or inter-family transfer (E)
-    % source_gen--->source generation scheme: constrained generation (C) or unconstrained generation (U)
+    % gen_scheme--->generation scheme: constrained generation (C) or unconstrained generation (U)
     % xi--->the parameter that governs optimum coverage: xi∈[0,1]
     % dim--->the problem dimension of source-target tasks, a positive integer
     % mode--->the mode of problem call, problem generation (gen) or s-esto optimization (opt)
@@ -38,7 +38,7 @@ classdef SESTOP
     properties
         func_target = 'Sphere';
         trans_sce = 'A';
-        source_gen = 'C';
+        gen_scheme = 'C';
         xi = 1;
         dim = 10;
         mode = 'opt';
@@ -59,17 +59,17 @@ classdef SESTOP
 
     methods
 
-        function obj = SESTOP(varargin) % initialization
+        function obj = STOP(varargin) % initialization
             isStr = find(cellfun(@ischar,varargin(1:end-1))&~cellfun(@isempty,varargin(2:end)));
-            for i = isStr(ismember(varargin(isStr),{'func_target','trans_sce','source_gen','xi','dim','mode'}))
+            for i = isStr(ismember(varargin(isStr),{'func_target','trans_sce','gen_scheme','xi','dim','mode'}))
                 obj.(varargin{i}) = varargin{i+1};
             end
-            % examine the availability of the specified S-ESTO problem
-            dir_sesto = ['.\SESTOPs\',obj.func_target,'-',obj.trans_sce,'-',obj.source_gen,'-x',...
+            % examine the availability of the specified STO problem
+            dir_sesto = ['.\STOPs\',obj.func_target,'-',obj.trans_sce,'-',obj.gen_scheme,'-x',...
                 num2str(obj.xi),'-d',num2str(obj.dim),'-k',num2str(obj.k),'.mat'];
             obj.state_knowledgebase = sign(exist(dir_sesto,'file'));
             if obj.state_knowledgebase == 1 && strcmp(obj.mode,'opt') % will not load the data in the generation mode
-                load(['.\SESTOPs\',obj.func_target,'-',obj.trans_sce,'-',obj.source_gen,'-x',...
+                load(['.\STOPs\',obj.func_target,'-',obj.trans_sce,'-',obj.gen_scheme,'-x',...
                     num2str(obj.xi),'-d',num2str(obj.dim),'-k',num2str(obj.k),'.mat']);
                 obj.target_problem = target;
                 obj.source_problems = sources;
@@ -83,7 +83,7 @@ classdef SESTOP
         end
 
         function obj = Configuration(obj) % problem constructor
-            [opt_target,opt_source] = opt_config(obj.xi,obj.k,obj.dim,obj.source_gen);
+            [opt_target,opt_source] = opt_config(obj.xi,obj.k,obj.dim,obj.gen_scheme);
             for i = 1:obj.k % configure the source tasks
                 idx_target = find(strcmp(obj.problem_families,obj.func_target));
                 if strcmp(obj.trans_sce,'A') % intra-family transfer
@@ -106,7 +106,7 @@ classdef SESTOP
                     obj.FEsMax,obj.optimizer);
                 obj.knowledge_base(i).solutions = solutions;
                 obj.knowledge_base(i).fitnesses = fitnesses;
-                waitbar(i/obj.k,h,sprintf('SESTOP generation in progress: %.2f%%',i/obj.k*100));
+                waitbar(i/obj.k,h,sprintf('STOP generation in progress: %.2f%%',i/obj.k*100));
             end
             close(h);
             % save the problem
@@ -119,7 +119,7 @@ classdef SESTOP
                 knowledge(i).fitnesses = obj.knowledge_base(i).fitnesses;
             end
             obj.source_problems = sources;
-            save(['.\SESTOPs\',obj.func_target,'-',obj.trans_sce,'-',obj.source_gen,'-x',...
+            save(['.\STOPs\',obj.func_target,'-',obj.trans_sce,'-',obj.gen_scheme,'-x',...
                 num2str(obj.xi),'-d',num2str(obj.dim),'-k',num2str(obj.k),'.mat'],...
                 'target','sources','knowledge');
         end

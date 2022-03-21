@@ -11,8 +11,8 @@
 % ------------
 % Reference:
 % ------------
-% X. Xue, Y. Hu, C. Yang, et al. ¡°Does Experience Always Help? Revisiting
-% Evolutionary Sequential Transfer Optimization¡±, Submitted for Peer Review.
+% X. Xue, Y. Hu, C. Yang, et al. ¡°How to Utilize Optimization Experience? Revisiting
+% Evolutionary Sequential Transfer Optimization", Submitted for Peer Review.
 
 clc,clear
 ds = [5 20 50]; % problem dimensions
@@ -28,7 +28,7 @@ for i = 1:5
     figurex = figure('color',[1 1 1],'position',[616.3333  292.3333  372.0000  315.3333]);
     for l = 1:length(ds)
         d = ds(l);
-        [ot,os] = opt_config(xi,k,d,'U'); % unconstrained source generation
+        [ot,os] = opt_config(xi,k,d,'U'); % unconstrained generation
         for j = 1:k
             sim(j) = 1-norm(ot-os(j,:),1)/d;
         end

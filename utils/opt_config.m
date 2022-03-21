@@ -12,7 +12,7 @@
 % xi--->the parameter of controlling optimum coverage
 % num_tasks--->the number of source tasks
 % d--->the problem dimension
-% scheme--->the generation scheme of source optima
+% scheme--->the generation scheme of optima
 %
 % ------------
 % Outputs:
@@ -25,8 +25,8 @@
 % ------------
 % Reference:
 % ------------
-% X. Xue, Y. Hu, C. Yang, et al. “Does Experience Always Help? Revisiting
-% Evolutionary Sequential Transfer Optimization”, Submitted for Peer Review.
+% X. Xue, Y. Hu, C. Yang, et al. “How to Utilize Optimization Experience? Revisiting
+% Evolutionary Sequential Transfer Optimization", Submitted for Peer Review.
 
 function [target_opt,source_opt,lb_image,ub_image] = opt_config(xi,num_tasks,d,scheme)
 source_opt = zeros(num_tasks,d);
@@ -38,12 +38,12 @@ for i = 1:d % a randomly generated box-constrained image of the optimization map
     ub_image(i) = lb_image(i)+xi;
 end
 
-if strcmp(scheme,'U') % the unconstrained sampling
+if strcmp(scheme,'U') % the unconstrained generation
     target_opt = lb_image+(ub_image-lb_image).*rand(1,d);
     for i = 1:num_tasks
         source_opt(i,:) = lb_image+(ub_image-lb_image).*rand(1,d);
     end
-else % the constrained sampling
+else % the constrained generation
     target_opt = lb_image+(ub_image-lb_image).*rand(1,d);
     tao = linspace(0,1,num_tasks);
     for i = 1:num_tasks
