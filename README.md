@@ -17,7 +17,7 @@ A black-box sequential transfer optimization problem (STOP) can be built by conf
 * problem dimension: `5`, `10`, and `20`
 * the number of source tasks: `1000`
 
-In this way, 480 independent problems can be instantiated using the class [STOP](https://github.com/XmingHsueh/Revisiting-S-ESTOs/blob/main/utils/SESTOP.m). The script of generating the 480 problems is [main_generation_stop](https://github.com/XmingHsueh/Revisiting-S-ESTOs/blob/main/main_generation_sestop.m).
+In this way, 480 independent problems can be instantiated using the class [STOP](https://github.com/XmingHsueh/Revisiting-S-ESTOs/blob/main/utils/STOP.m). The script of generating the 480 problems is [main_generation_stop](https://github.com/XmingHsueh/Revisiting-S-ESTOs/blob/main/main_generation_stop.m).
 
 ## Step 2: Revisiting S-ESTO Algorithms
 In this work, we revisited a variety of S-ESTO algorithms by answering five central research questions (RQs) on the generated problems, which are given as follows:
@@ -50,7 +50,7 @@ A number of illustrative examples used in the main paper and the supplementary d
 If you find this repo useful for your research, please consider to cite:
 ```latex
 @article{Xue2022,
-title = {Does Experience Always Help? Revisiting Evolutionary Sequential Transfer Optimization},
+title = {How to Utilize Optimization Experience? Revisiting Evolutionary Sequential Transfer Optimization},
 author = {Xue, Xiaoming and Hu, Yao and Yang, Cuie and Feng, Liang and Chen, Guodong and Zhang, Kai and Song, Linqi and Tan, Kay Chen}
 journal = {...},
 volume = {1},
