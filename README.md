@@ -1,4 +1,4 @@
-# How to Utilize Optimization Experience? Revisiting Evolutionary Sequential Transfer Optimization
+# How to Exploit Experience? Revisiting Evolutionary Sequential Transfer Optimization: Part B
 
 This repository contains all the MATLAB implementations used in the above article, which consists of the following four main steps:
 
