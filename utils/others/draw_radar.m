@@ -1,5 +1,4 @@
 function draw_radar(data,lim,prefer_range,labels,colors,marks)
-% figure('color',[1 1 1]);
 fig_width = 450;
 fig_height = 400;
 screen_size = get(0,'ScreenSize');

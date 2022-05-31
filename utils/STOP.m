@@ -4,55 +4,56 @@
 % ------------
 % Description:
 % ------------
-% The class of black-box STO problems. The properties that can be arbitrarily
-% specified include: 1. the target task; 2. transfer scenario; 3.
-% generation scheme; 4. the parameter that governs optimum coverage; 5. the
-% problem dimension.
+% The class of black-box sequential transfer optimization problems (STOPs).
+% The properties that can be arbitrarily specified include: 1. the target task; 
+% 2. transfer scenario; 3. the parameter that determines optimum coverage;
+% 4. similarity distribution; 5. problem dimension; 6. the number of source tasks.
 %
 % ------------
 % Reference:
 % ------------
-% X. Xue, Y. Hu, C. Yang, et al. “How to Utilize Optimization Experience? Revisiting
-% Evolutionary Sequential Transfer Optimization", Submitted for Peer Review.
+% X. Xue, Y. Hu, C. Yang, et al. “How to Exploit Experience? Revisiting Evolutionary
+% Sequential Transfer Optimization: Part A", Submitted for Peer Review.
 
 classdef STOP
 
     % STOP properties:
-    % func_target---the target task with configurable optimum
-    % trans_sce--->transfer scenario: intra-family transfer (A) or inter-family transfer (E)
-    % gen_scheme--->generation scheme: constrained generation (C) or unconstrained generation (U)
+    % func_target--->target task with configurable optimum
+    % trans_sce--->transfer scenario: intra-family transfer (a) or inter-family transfer (e)
+    % sim_distribution--->similarity distribution: determined by the distribution of tau (c, u, i, d)
     % xi--->the parameter that governs optimum coverage: xi∈[0,1]
     % dim--->the problem dimension of source-target tasks, a positive integer
+    % k--->the number of source tasks, a positive integer
     % mode--->the mode of problem call, problem generation (gen) or s-esto optimization (opt)
     % target_problem--->the instantiated target task
     % knowledge_base--->the knowledge base containing the evaluated solutions of k source tasks
-    % problem_families---<read-only>the list of available task families
-    % k---<read-only>the number of source tasks, a positive integer
+    % folder_stops--->the folder used for storing the STOPs
+    % problem_families---<read-only>the list of candidate task families
     % optimizer---<read-only>the optimizer used for solving the source and target tasks
     % popsize---<read-only>the population size, N>0
     % FEsMax---<read-only>the maximum function evaluations (FEs) available
-    % gen_trans---<read-only>the generation gap for periodically triggering the knowledghe transfer
     % state_knowledgebase---<read-only>the availability of the specified S-ESTO problem: 1->available; 0->unavailable
     % source_problems---<read-only>the instantiated source tasks
 
     properties
         func_target = 'Sphere';
-        trans_sce = 'A';
-        gen_scheme = 'C';
+        trans_sce = 'a';
+        sim_distribution = 'c';
         xi = 1;
-        dim = 10;
+        dim = 20;
+        k = 1000;
         mode = 'opt';
         target_problem;
         knowledge_base = struct;
+        folder_stops = 'problems';
     end
 
     properties(SetAccess = protected)
-        problem_families = {'Sphere','Ellipsoid','Schwefel','Quartic','Ackley','Rastrigin','Griewank','Levy'};
-        k = 1000;
+        problem_families = {'Sphere','Ellipsoid','Schwefel','Quartic','Ackley','Rastrigin',...
+            'Griewank','Levy'};
         optimizer = 'ea';
-        popsize = 20;
-        FEsMax = 1000;
-        gen_trans  =1;
+        popsize = 50;
+        FEsMax = 2500;
         state_knowledgebase;
         source_problems;
     end
@@ -61,16 +62,17 @@ classdef STOP
 
         function obj = STOP(varargin) % initialization
             isStr = find(cellfun(@ischar,varargin(1:end-1))&~cellfun(@isempty,varargin(2:end)));
-            for i = isStr(ismember(varargin(isStr),{'func_target','trans_sce','gen_scheme','xi','dim','mode'}))
+            for i = isStr(ismember(varargin(isStr),{'func_target','trans_sce','xi','sim_distribution',...
+                    'dim','mode','folder_stops'}))
                 obj.(varargin{i}) = varargin{i+1};
             end
             % examine the availability of the specified STO problem
-            dir_sesto = ['.\STOPs\',obj.func_target,'-',obj.trans_sce,'-',obj.gen_scheme,'-x',...
-                num2str(obj.xi),'-d',num2str(obj.dim),'-k',num2str(obj.k),'.mat'];
+            dir_sesto = [obj.folder_stops,'\',obj.func_target,'-T',obj.trans_sce,'-xi',num2str(obj.xi),'-S',...
+                obj.sim_distribution,'-d',num2str(obj.dim),'-k',num2str(obj.k),'.mat'];
             obj.state_knowledgebase = sign(exist(dir_sesto,'file'));
             if obj.state_knowledgebase == 1 && strcmp(obj.mode,'opt') % will not load the data in the generation mode
-                load(['.\STOPs\',obj.func_target,'-',obj.trans_sce,'-',obj.gen_scheme,'-x',...
-                    num2str(obj.xi),'-d',num2str(obj.dim),'-k',num2str(obj.k),'.mat']);
+                load([obj.folder_stops,'\',obj.func_target,'-T',obj.trans_sce,'-xi',num2str(obj.xi),'-S',...
+                obj.sim_distribution,'-d',num2str(obj.dim),'-k',num2str(obj.k),'.mat']);
                 obj.target_problem = target;
                 obj.source_problems = sources;
                 for i = 1:obj.k
@@ -83,10 +85,10 @@ classdef STOP
         end
 
         function obj = Configuration(obj) % problem constructor
-            [opt_target,opt_source] = opt_config(obj.xi,obj.k,obj.dim,obj.gen_scheme);
+            [opt_target,opt_source] = opt_config(obj.xi,obj.k,obj.dim,obj.sim_distribution);
             for i = 1:obj.k % configure the source tasks
                 idx_target = find(strcmp(obj.problem_families,obj.func_target));
-                if strcmp(obj.trans_sce,'A') % intra-family transfer
+                if strcmp(obj.trans_sce,'a') % intra-family transfer
                     idx_source = idx_target;
                     obj.source_problems(i).func = obj.problem_families{idx_source};
                 else % inter-family transfer
@@ -119,8 +121,8 @@ classdef STOP
                 knowledge(i).fitnesses = obj.knowledge_base(i).fitnesses;
             end
             obj.source_problems = sources;
-            save(['.\STOPs\',obj.func_target,'-',obj.trans_sce,'-',obj.gen_scheme,'-x',...
-                num2str(obj.xi),'-d',num2str(obj.dim),'-k',num2str(obj.k),'.mat'],...
+            save([obj.folder_stops,'\',obj.func_target,'-T',obj.trans_sce,'-xi',num2str(obj.xi),'-S',...
+                obj.sim_distribution,'-d',num2str(obj.dim),'-k',num2str(obj.k),'.mat'],...
                 'target','sources','knowledge');
         end
 

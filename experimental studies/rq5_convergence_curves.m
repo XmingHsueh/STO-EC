@@ -5,34 +5,41 @@
 % Description:
 % ------------
 % Visualization of the convergence curves obtained by two baseline solvers and
-% three integration-based S-ESTOs. The corresponding figure is shown in Fig. 21
-% in the following paper.
+% the integration-based S-ESTOs.
 %
 % ------------
 % Reference:
 % ------------
-% X. Xue, Y. Hu, C. Yang, et al. “How to Utilize Optimization Experience? Revisiting
-% Evolutionary Sequential Transfer Optimization", Submitted for Peer Review.
+% X. Xue, Y. Hu, C. Yang, et al. “How to Exploit Experience? Revisiting Evolutionary
+% Sequential Transfer Optimization: Part B", Submitted for Peer Review.
 
 clc,clear
 warning off;
-problem_families = {'Sphere','Ellipsoid','Schwefel','Quartic','Ackley','Rastrigin','Griewank','Levy'}; % eight task families
-transfer_scenarios = {'A','E'}; % intra-family and inter-family transfers
-generation_schemes = {'C','U'}; % constrained and unconstrained generations
-xis = [0 0.1 0.3 0.7 1]; % the parameter xi that governs optimum coverage
-ds = [5 10 20]; % problem dimensions
-k = 1000; % the number of solved source tasks
-metrics = {'N','R','C','M1','KLD','WD','OC','SA'}; % similarity metrics
-adaptations = {'M1-P','M1-R','M1-M','M2-A','SA-L','OC-L','OC-A','OC-K','OC-N'}; % adaptation models
-integrations = [6 7;4 3;6 4]; % three integrations of solution selection and solution adaptation
+task_families = {'Sphere','Ellipsoid','Schwefel','Quartic','Ackley','Rastrigin','Griewank','Levy'}; % eight task families
+transfer_scenarios = {'a','e'}; % intra-family and inter-family transfers
+xis = [0 0.7 1]; % the parameter xi that determines optimum coverage
+similarity_distributions = {'c','u','i','d'}; % four representative similarity distributions
+k = 1000; % the number of previously-solved source tasks
+specifications = [1 1 1 1 50 k; % STOP 1
+    2 2 1 2	25 k; % STOP 2
+    3 1 1 3	30 k; % STOP 3
+    4 2 1 4	50 k; % STOP 4
+    5 1 2 1	50 k; % STOP 5
+    6 2 2 2	30 k; % STOP 6
+    7 1 2 3	25 k; % STOP 7
+    8 2 2 4	30 k; % STOP 8
+    1 1 3 1	25 k; % STOP 9
+    6 2 3 2	50 k; % STOP 10
+    5 1 3 3	25 k; % STOP 11
+    2 2 3 4	30 k]; % STOP 12
+num_problems = size(specifications,1); % the number of individual benchmark problems
+baselines = {'N','R'};
+metrics = {'N','R','C','M1','WD','OC','ROC','KLD','SA'};
+adaptations = {'M1-Ap','M1-Ar','M1-Am','M1-M','M2-A','OC-L','OC-A','OC-K','OC-N',...
+    'ROC-L','SA-L'}; % similarity metrics
+integrations = [5 7;4 3;5 5];
 
-% the problem from which the results to be visualized are collected
-idx_family = 5;
-idx_scenario = 1;
-idx_source_generation = 2;
-idx_xi = 5;
-idx_d = 3;
-
+idx_problem = 12; % the problem from which the results to be visualized are collected
 fig_width = 350;
 fig_height = 300;
 screen_size = get(0,'ScreenSize');
@@ -41,19 +48,16 @@ figure1 = figure('color',[1 1 1],'position',[(screen_size(3)-fig_width)/2, (scre
 num_points_plot = 15;
 std_level = 0.5;
 c_list = [0 0 0;255 0 0;0 255 0;0 0 255;255 255 0;0 255 255;255 0 255;125 0 255;255 125 0;...
-    255 0 125;0 125 255]/255;
-m_list = ['o','+','*','x','s','d','^','v','>','<','p'];
-for m = 1:size(integrations,1)+2
-    if m<=2
-        load(['results-rq1\',problem_families{idx_family},'-',transfer_scenarios{idx_scenario},'-',...
-            generation_schemes{idx_source_generation},'-x',num2str(xis(idx_xi)),'-d',...
-            num2str(ds(idx_d)),'-k',num2str(k),'-S',num2str(m),'+A0.mat']);
-    else
-        load(['results-rq5\',problem_families{idx_family},'-',transfer_scenarios{idx_scenario},'-',...
-            generation_schemes{idx_source_generation},'-x',num2str(xis(idx_xi)),'-d',...
-            num2str(ds(idx_d)),'-k',num2str(k),'-S',num2str(integrations(m-2,1)),'+A',...
-            num2str(integrations(m-2,2)),'.mat']);
-    end
+    0 125 255;125 255 0;255 0 125;0 255 125]/255;
+m_list = ['o','+','*','x','s','d','^','v','p','>','<','h','|'];
+for m = 1:length(baselines)
+    load(['results-rq1\',task_families{specifications(idx_problem,1)},...
+        '-T',transfer_scenarios{specifications(idx_problem,2)},...
+        '-xi',num2str(xis(specifications(idx_problem,3))),...
+        '-S',similarity_distributions{specifications(idx_problem,4)},...
+        '-d',num2str(specifications(idx_problem,5)),...
+        '-k',num2str(specifications(idx_problem,6)),...
+        '-S-',baselines{m},'+A-N.mat']);
     [FEs,fits] = opt_trace_processing(results_opt);
     idx_retrive = ceil(linspace(1,length(FEs),num_points_plot));
     y = log(mean(fits,2));
@@ -63,9 +67,27 @@ for m = 1:size(integrations,1)+2
     fill([FEs;FEs(end:-1:1)],[std_upper;std_lower(end:-1:1)],c_list(m,:),'facealpha',0.3,...
         'edgecolor',c_list(m,:),'edgecolor','none');
 end
+for m = 1:size(integrations,1)
+    load(['results-rq5\',task_families{specifications(idx_problem,1)},...
+        '-T',transfer_scenarios{specifications(idx_problem,2)},...
+        '-xi',num2str(xis(specifications(idx_problem,3))),...
+        '-S',similarity_distributions{specifications(idx_problem,4)},...
+        '-d',num2str(specifications(idx_problem,5)),...
+        '-k',num2str(specifications(idx_problem,6)),...
+        '-S-',metrics{integrations(m,1)},'+A-',adaptations{integrations(m,2)},'.mat']);
+    [FEs,fits] = opt_trace_processing(results_opt);
+    idx_retrive = ceil(linspace(1,length(FEs),num_points_plot));
+    y = log(mean(fits,2));
+    plot(FEs(idx_retrive),y(idx_retrive),'linewidth',1,'color',c_list(m+length(baselines),:),...
+        'marker',m_list(m+length(baselines)));hold on;
+    std_upper = log(mean(fits,2)+std_level*std(fits,1,2));
+    std_lower = log(mean(fits,2)-std_level*std(fits,1,2));
+    fill([FEs;FEs(end:-1:1)],[std_upper;std_lower(end:-1:1)],c_list(m+length(baselines),:),...
+        'facealpha',0.3,'edgecolor',c_list(m+length(baselines),:),'edgecolor','none');
+end
 set(gca,'linewidth',0.5);
 grid on;
 xlabel('FEs','interpret','latex','fontsize',12)
 ylabel('log$\left(y\right)$','interpret','latex','fontsize',12);
-title(['$\mathcal{G}=',generation_schemes{idx_source_generation},'$, $\xi=',...
-    num2str(xis(idx_xi)),'$'],'interpret','latex','fontsize',14)
+title(['STOP',num2str(idx_problem),': $\mathcal{S}=S_',similarity_distributions{specifications(idx_problem,4)},'$, $\xi=',...
+    num2str(xis(specifications(idx_problem,3))),'$'],'interpret','latex','fontsize',14);

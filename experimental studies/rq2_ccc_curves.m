@@ -4,53 +4,70 @@
 % ------------
 % Description:
 % ------------
-% Visualization of the comprehensive correlation coefficients obtained by six
-% similarity metrics. The corresponding figures are shown in Fig. 13 in the following paper.
+% Visualization of the comprehensive correlation coefficients obtained by
+% the similarity metrics.
 %
 % ------------
 % Reference:
 % ------------
-% X. Xue, Y. Hu, C. Yang, et al. “How to Utilize Optimization Experience? Revisiting
-% Evolutionary Sequential Transfer Optimization", Submitted for Peer Review.
+% X. Xue, Y. Hu, C. Yang, et al. “How to Exploit Experience? Revisiting Evolutionary
+% Sequential Transfer Optimization: Part B", Submitted for Peer Review.
 
 clc,clear
 warning off;
-problem_families = {'Sphere','Ellipsoid','Schwefel','Quartic','Ackley','Rastrigin','Griewank','Levy'}; % eight task families
-transfer_scenarios = {'A','E'}; % intra-family and inter-family transfers
-generation_scheme = 'C'; % the constrained generation
-xi = 1; % the parameter xi that governs the optimum coverage
-d = 10; % the problem dimension
-k = 1000; % the number of solved source tasks
-metrics = {'C','M1','KLD','WD','OC','SA'}; % similarity metrics
-problem_plot = [5 1]; % the problem from which the results to be visualized are collected, family-scenario 
+task_families = {'Sphere','Ellipsoid','Schwefel','Quartic','Ackley','Rastrigin','Griewank','Levy'}; % eight task families
+transfer_scenarios = {'a','e'}; % intra-family and inter-family transfers
+xis = [0 0.7 1]; % the parameter xi that determines optimum coverage
+similarity_distributions = {'c','u','i','d'}; % four representative similarity distributions
+k = 1000; % the number of previously-solved source tasks
+specifications = [1 1 1 1 50 k; % STOP 1
+    2 2 1 2	25 k; % STOP 2
+    3 1 1 3	30 k; % STOP 3
+    4 2 1 4	50 k; % STOP 4
+    5 1 2 1	50 k; % STOP 5
+    6 2 2 2	30 k; % STOP 6
+    7 1 2 3	25 k; % STOP 7
+    8 2 2 4	30 k; % STOP 8
+    1 1 3 1	25 k; % STOP 9
+    6 2 3 2	50 k; % STOP 10
+    5 1 3 3	25 k; % STOP 11
+    2 2 3 4	30 k]; % STOP 12
+metrics = {'C','M1','KLD','WD','OC','ROC','SA'}; % similarity metrics
 
+idx_problem = 11; % the problem from which the results to be visualized are collected
 fig_width = 350;
 fig_height = 300;
 screen_size = get(0,'ScreenSize');
 figure1 = figure('color',[1 1 1],'position',[(screen_size(3)-fig_width)/2, (screen_size(4)-...
     fig_height)/2,fig_width, fig_height]);
-color_list = [0 255 0;0 0 255;255 255 0;0 255 255;255 0 255;125 0 255]/255;
-marker_list = ['*','x','s','d','^','v'];
-idx_retrive = ceil(linspace(1,50,15));
-Gens = 1:50;
-un_std = 0.5;
-for i = 1:length(metrics)
-    load(['.\results-rq2\cccs\',problem_families{problem_plot(1)},'-',...
-        transfer_scenarios{problem_plot(2)},'-',generation_scheme,'-x',num2str(xi),'-d',...
-        num2str(d),'-k',num2str(k),'-S',num2str(i),'+A0-coe.mat']);
+num_points_plot = 15;
+c_list = [0 255 0;0 0 255;255 255 0;0 255 255;255 0 255;125 0 255;255 125 0]/255;
+m_list = ['*','x','s','d','^','v','p'];
+gen_max = 50;
+idx_retrive = ceil(linspace(1,gen_max,num_points_plot));
+Gens = 1:gen_max;
+std_level = 0.5;
+for m = 1:length(metrics)
+    load(['results-rq2\cccs\',task_families{specifications(idx_problem,1)},...
+        '-T',transfer_scenarios{specifications(idx_problem,2)},...
+        '-xi',num2str(xis(specifications(idx_problem,3))),...
+        '-S',similarity_distributions{specifications(idx_problem,4)},...
+        '-d',num2str(specifications(idx_problem,5)),...
+        '-k',num2str(specifications(idx_problem,6)),...
+        '-S-',metrics{m},'+A-N-ccc.mat']);
     ccc_total = [];
-    for j = 1:length(results_ccc)
-        ccc_total = [ccc_total,[0;results_ccc(j).ccc]];
+    for j = 1:length(results_corr_history)
+        ccc_total = [ccc_total,[0;results_corr_history(j).corrs]];
     end
     ccc_mean = mean(ccc_total,2);
-    plot(Gens(idx_retrive),ccc_mean(idx_retrive),'linewidth',1,'color',color_list(i,:),'marker',marker_list(i));hold on;
-    pp1=ccc_mean+un_std*std(ccc_total,1,2);
-    pp2=ccc_mean-un_std*std(ccc_total,1,2);
-    fill([Gens';Gens(end:-1:1)'],[pp1;pp2(end:-1:1)],color_list(i,:),'facealpha',0.3,'edgecolor',color_list(i,:),'edgecolor','none');
+    plot(Gens(idx_retrive),ccc_mean(idx_retrive),'linewidth',1.5,'color',c_list(m,:),'marker',m_list(m));hold on;
+    std_upper=ccc_mean+std_level*std(ccc_total,1,2);
+    std_lower=ccc_mean-std_level*std(ccc_total,1,2);
+    fill([Gens';Gens(end:-1:1)'],[std_upper;std_lower(end:-1:1)],c_list(m,:),'facealpha',0.3,'edgecolor',c_list(m,:),'edgecolor','none');
 end
-axis([0 50 0 1]);
+% axis([0 50 0 1]);
 set(gca,'linewidth',0.5);
 grid on;
 xlabel('Generations','interpret','latex','fontsize',12)
 ylabel('$\rho\left(t\right)$','interpret','latex','fontsize',12);
-title('Coefficient curves','interpret','latex','fontsize',14);
+title(['STOP',num2str(idx_problem)],'interpret','latex','fontsize',14);

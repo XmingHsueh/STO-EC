@@ -4,14 +4,13 @@
 % ------------
 % Description:
 % ------------
-% This file is the script of demonstrating the chaotic matching. The
-% corresponding figures are shown as Fig. 18 in the following paper.
+% This file is the script of demonstrating the chaotic matching.
 %
 % ------------
 % Reference:
 % ------------
-% X. Xue, Y. Hu, C. Yang, et al. “How to Utilize Optimization Experience? Revisiting
-% Evolutionary Sequential Transfer Optimization", Submitted for Peer Review.
+% X. Xue, Y. Hu, C. Yang, et al. “How to Exploit Experience? Revisiting Evolutionary
+% Sequential Transfer Optimization: Part B", Submitted for Peer Review.
 
 %% initialize the source and target problems
 clc,clear
