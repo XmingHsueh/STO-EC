@@ -1,4 +1,4 @@
-# How to Exploit Experience? Revisiting Evolutionary Sequential Transfer Optimization: Part B
+# How to Exploit Optimization Experience? Revisiting Evolutionary Sequential Transfer Optimization: Part B - Empirical Studies
 
 This repository contains ...
 
