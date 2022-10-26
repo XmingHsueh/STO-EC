@@ -17,7 +17,7 @@ In solution selection, seven similarity metrics are investigated in this study, 
 |Similarity Metric|Description|Abbreviation|
 |:-|:-|:-|
 |Distance-based metric|The hamming distance [1]|S-C|
-|Distance-based metric|The Euclidean distance|S-M1|
+|Distance-based metric|The Euclidean distance [2-4]|S-M1|
 |Distance-based metric|The Kullback-Leibler divergence|S-KLD|
 |Distance-based metric|The Wasserstein distance|S-WD|
 |Correlation-based metric|The ordinal correlation|S-OC|
@@ -50,9 +50,9 @@ Three S+A integrations are investigated in this study, which are provided as fol
 ## References
 [1] **Learning with case-injected genetic algorithms.** *S. J. Louis and J. McDonnell.* *TEVC* 2004. [paper](https://ieeexplore.ieee.org/abstract/document/1324694)
 
+[2] **Generalized multitasking for evolutionary optimization of expensive problems.** *J. Ding, C. Yang, Y. Jin, and T. Chai.* *TEVC* 2019. [paper](https://ieeexplore.ieee.org/abstract/document/8231172)
 
 
-[2] **Learning with case-injected genetic algorithms.** TEVC 2004. [paper](https://ieeexplore.ieee.org/abstract/document/1324694)
 
 ## Citation
 
