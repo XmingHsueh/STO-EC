@@ -21,8 +21,8 @@ In solution selection, seven similarity metrics are investigated in this study, 
 |Distance-based metric|The Kullback-Leibler divergence [5, 6]|S-KLD|
 |Distance-based metric|The Wasserstein distance [7, 8]|S-WD|
 |Correlation-based metric|The ordinal correlation [9-14]|S-OC|
-|Correlation-based metric|The relaxed ordinal correlation|S-ROC|
-|Correlation-based metric|The subspace alignment|S-SA|
+|Correlation-based metric|The relaxed ordinal correlation [15, 16]|S-ROC|
+|Correlation-based metric|The subspace alignment [17, 18]|S-SA|
 
 ## Solution Adaptation
 In solution adaptation, eleven adaptation models are investigated in this study, which are given by,
@@ -76,6 +76,13 @@ Three S+A integrations are investigated in this study, which are provided as fol
 
 [14] **Evolutionary multitasking via explicit autoencoding.** *L. Feng, L. Zhou, J. Zhong, A. Gupta, Y.-S. Ong, K.-C. Tan, and A. K. Qin.* *TCYB* 2018. [paper](https://ieeexplore.ieee.org/abstract/document/8401802)
 
+[15] **Evolutionary sequential transfer optimization for objective-heterogeneous problems.** *X. Xue, C. Yang, Y. Hu, K. Zhang, Y.-M. Cheung, L. Song, and K. C. Tan.* *TEVC* 2021. [paper](https://ieeexplore.ieee.org/abstract/document/9644585)
+
+[16] **Learning task relationships in evolutionary multitasking for multiobjective continuous optimization.** *Z. Chen, Y. Zhou, X. He, and J. Zhang.* *TCYB* 2022. [paper](https://ieeexplore.ieee.org/abstract/document/9262898)
+
+[17] **Regularized evolutionary multitask optimization: Learning to intertask transfer in aligned subspace.** *Z. Tang, M. Gong, Y. Wu, W. Liu, and Y. Xie.* *TEVC* 2021. [paper](https://ieeexplore.ieee.org/abstract/document/9195010)
+
+[18] **Evolutionary multitasking for multiobjective optimization with subspace alignment and adaptive differential evolution.** *Z. Liang, H. Dong, C. Liu, W. Liang, and Z. Zhu.* *TCYB* 2022. [paper](https://ieeexplore.ieee.org/abstract/document/9123962)
 
 ## Citation
 
