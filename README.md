@@ -20,7 +20,7 @@ In solution selection, seven similarity metrics are investigated in this study, 
 |Distance-based metric|The Euclidean distance [2-4]|S-M1|
 |Distance-based metric|The Kullback-Leibler divergence [5, 6]|S-KLD|
 |Distance-based metric|The Wasserstein distance [7, 8]|S-WD|
-|Correlation-based metric|The ordinal correlation|S-OC|
+|Correlation-based metric|The ordinal correlation [9-14]|S-OC|
 |Correlation-based metric|The relaxed ordinal correlation|S-ROC|
 |Correlation-based metric|The subspace alignment|S-SA|
 
@@ -63,6 +63,19 @@ Three S+A integrations are investigated in this study, which are provided as fol
 [7] **Multisource selective transfer framework in multiobjective optimization problems.** *J. Zhang, W. Zhou, X. Chen, W. Yao, and L. Cao.* *TEVC* 2020. [paper](https://ieeexplore.ieee.org/abstract/document/8752421)
 
 [8] **Affine transformation-enhanced multifactorial optimization for heterogeneous problems.** *X. Xue, K. Zhang, K. C. Tan, L. Feng, J. Wang, G. Chen, X. Zhao, L. Zhang, and J. Yao.* *TCYB* 2022. [paper](https://ieeexplore.ieee.org/abstract/document/9295394)
+
+[9] **Autoencoding evolutionary search with learning across heterogeneous problems.** *L. Feng, Y. Ong, S. Jiang, and A. Gupta.* *TEVC* 2017. [paper](https://ieeexplore.ieee.org/abstract/document/7879282)
+
+[10] **Learnable evolutionary search across heterogeneous problems via kernelized autoencoding.** *L. Zhou, L. Feng, A. Gupta, and Y.-S. Ong.* *TEVC* 2021. [paper](https://ieeexplore.ieee.org/abstract/document/9344841)
+
+[11] **Solution representation learning in multi-objective transfer evolutionary optimization.** *R. Lim, L. Zhou, A. Gupta, Y.-S. Ong, and A. N. Zhang.* *IEEE Access* 2021. [paper](https://ieeexplore.ieee.org/abstract/document/9377001)
+
+[12] **Non-linear domain adaptation in transfer evolutionary optimization.** *R. Lim, A. Gupta, Y.-S. Ong, L. Feng, and A. N. Zhang.* *Cognitive Computation* 2021. [paper](https://link.springer.com/article/10.1007/s12559-020-09777-7)
+
+[13] **Linearized domain adaptation in evolutionary multitasking.** *K. K. Bali, A. Gupta, L. Feng, Y. S. Ong, and T. P. Siew.* *CEC* 2017. [paper](https://ieeexplore.ieee.org/abstract/document/7969454)
+
+[14] **Evolutionary multitasking via explicit autoencoding.** *L. Feng, L. Zhou, J. Zhong, A. Gupta, Y.-S. Ong, K.-C. Tan, and A. K. Qin.* *TCYB* 2018. [paper](https://ieeexplore.ieee.org/abstract/document/8401802)
+
 
 ## Citation
 
