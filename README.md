@@ -18,8 +18,8 @@ In solution selection, seven similarity metrics are investigated in this study, 
 |:-|:-|:-|
 |Distance-based metric|The hamming distance [1]|S-C|
 |Distance-based metric|The Euclidean distance [2-4]|S-M1|
-|Distance-based metric|The Kullback-Leibler divergence|S-KLD|
-|Distance-based metric|The Wasserstein distance|S-WD|
+|Distance-based metric|The Kullback-Leibler divergence [5, 6]|S-KLD|
+|Distance-based metric|The Wasserstein distance [7, 8]|S-WD|
 |Correlation-based metric|The ordinal correlation|S-OC|
 |Correlation-based metric|The relaxed ordinal correlation|S-ROC|
 |Correlation-based metric|The subspace alignment|S-SA|
@@ -53,6 +53,16 @@ Three S+A integrations are investigated in this study, which are provided as fol
 [2] **Generalized multitasking for evolutionary optimization of expensive problems.** *J. Ding, C. Yang, Y. Jin, and T. Chai.* *TEVC* 2019. [paper](https://ieeexplore.ieee.org/abstract/document/8231172)
 
 [3] **Multifactorial evolutionary algorithm enhanced with cross-task search direction.** *J. Yin, A. Zhu, Z. Zhu, Y. Yu, and X. Ma.* *CEC* 2019. [paper](https://ieeexplore.ieee.org/abstract/document/8789959)
+
+[4] **A hybrid of genetic transform and hyper-rectangle search strategies for evolutionary multi-tasking.** *Z. Liang, J. Zhang, L. Feng, and Z. Zhu.* *ESWA* 2019. [paper](https://www.sciencedirect.com/science/article/pii/S0957417419304944)
+
+[5] **An adaptive archive-based evolutionary framework for many-task optimization.** *Y. Chen, J. Zhong, L. Feng, and J. Zhang.* *TETCI* 2020. [paper](https://ieeexplore.ieee.org/abstract/document/8727933)
+
+[6] **Surrogate-assisted evolutionary framework with adaptive knowledge transfer for multi-task optimization.** *S. Huang, J. Zhong, and W.-J. Yu.* *TETC* 2021. [paper](https://ieeexplore.ieee.org/abstract/document/8863918)
+
+[7] **Multisource selective transfer framework in multiobjective optimization problems.** *J. Zhang, W. Zhou, X. Chen, W. Yao, and L. Cao.* *TETC* 2020. [paper](https://ieeexplore.ieee.org/abstract/document/8752421)
+
+[8] **Affine transformation-enhanced multifactorial optimization for heterogeneous problems.** *X. Xue, K. Zhang, K. C. Tan, L. Feng, J. Wang, G. Chen, X. Zhao, L. Zhang, and J. Yao.* *TCYB* 2022. [paper](https://ieeexplore.ieee.org/abstract/document/9295394)
 
 ## Citation
 
