@@ -10,6 +10,8 @@ This repository provides the MATLAB implementations of empirically investigating
 |Solution Adaptation|RQ4: What contributes to the effectiveness of solution adaptation models in S-ESTO?|
 |Integration of Selection and Adaptation|RQ5:  How to integrate solution selection and solution adaptation for S-ESTO?|
 
+The first two RQs aim to investigate similarity metrics in selection-based approaches while the third and fourth RQs focus on adaptation models in adaptation-based approaches. To curb the negative transfer, solution selection and solution adaptation can be integrated. The last RQ focuses on investigating this integration.
+
 
 
 ## Citation
