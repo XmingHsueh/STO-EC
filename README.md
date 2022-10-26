@@ -24,6 +24,21 @@ In solution selection, seven similarity metrics are investigated in this study, 
 |Correlation-based metric|The relaxed ordinal correlation|S-ROC|
 |Correlation-based metric|The subspace alignment|S-SA|
 
+## Solution Adaptation
+In solution adaptation, eleven adaptation models are investigated in this study, which are given by,
+|Adaptation Objective|Description|Abbreviation|
+|:-|:-|:-|
+|The first moment|Translation transformation based on the estimated means of elite solutions|A-M1-Tp|
+|The first moment|Translation transformation based on the randomly selected elite individuals|A-M1-Tr|
+|The first moment|Translation transformation based on the population means|A-M1-Tm|
+|The first moment|Multiplication transformation using the estimated means of selected solutions|A-M1-M|
+|The first two moments|Affine transformation|A-M2-A|
+|The ordinal correlation|Linear transformation|A-OC-L|
+|The ordinal correlation|Affine transformation|A-OC-A|
+|The ordinal correlation|Kernealization|A-OC-K|
+|The ordinal correlation|Linear transformations connected by a latent space|A-ROC-L|
+|The subspace alignment|Linear transformations connected by the subspaces|A-SA-L|
+
 ## Citation
 
 If you find this repo useful for your research, please consider to cite:
