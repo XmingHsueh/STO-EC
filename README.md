@@ -49,8 +49,7 @@ Three S+A integrations are investigated in this study, which are provided as fol
 
 ## References
 [1] **Learning with case-injected genetic algorithms.** TEVC 2004. [paper](https://ieeexplore.ieee.org/abstract/document/1324694)
-
-    *S. J. Louis, J. McDonnell.* 
+*S. J. Louis, J. McDonnell.* 
 
 [2] **Learning with case-injected genetic algorithms.** TEVC 2004. [paper](https://ieeexplore.ieee.org/abstract/document/1324694)
 
