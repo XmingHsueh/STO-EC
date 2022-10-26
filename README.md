@@ -39,7 +39,7 @@ In solution adaptation, eleven adaptation models are investigated in this study,
 |The ordinal correlation|Linear transformations connected by a latent space|A-ROC-L|
 |The subspace alignment|Linear transformations connected by the subspaces|A-SA-L|
 
-##Integration of Solution Selection and Solution Adaptation
+## Integration of Solution Selection and Solution Adaptation
 Three S+A integrations are investigated in this study, which are provided as follows:
 |Integration|Similarity Metric|Adaptation Objective|
 |:-|:-|:-|
