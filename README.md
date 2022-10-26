@@ -12,7 +12,17 @@ This repository provides the MATLAB implementations of empirically investigating
 
 The first two RQs aim to investigate similarity metrics in selection-based approaches while the third and fourth RQs focus on adaptation models in adaptation-based approaches. To curb the negative transfer, solution selection and solution adaptation can be integrated. The last RQ focuses on investigating this integration.
 
-
+## Solution Selection
+In solution selection, seven similarity metrics are investigated in this study, which are given by,
+|Similarity Metric|Description|Abbreviation|
+|:-|:-|:-|
+|Distance-based metric|The hamming distance|S-C|
+|Distance-based metric|The Euclidean distance|S-M1|
+|Distance-based metric|The Kullback-Leibler divergence|S-KLD|
+|Distance-based metric|The Wasserstein distance|S-WD|
+|Correlation-based metric|The ordinal correlation|S-OC|
+|Correlation-based metric|The relaxed ordinal correlation|S-ROC|
+|Correlation-based metric|The subspace alignment|S-SA|
 
 ## Citation
 
