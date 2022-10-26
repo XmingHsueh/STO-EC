@@ -16,7 +16,7 @@ The first two RQs aim to investigate similarity metrics in selection-based appro
 In solution selection, seven similarity metrics are investigated in this study, which are given by,
 |Similarity Metric|Description|Abbreviation|
 |:-|:-|:-|
-|Distance-based metric|The hamming distance|S-C|
+|Distance-based metric|The hamming distance [1]|S-C|
 |Distance-based metric|The Euclidean distance|S-M1|
 |Distance-based metric|The Kullback-Leibler divergence|S-KLD|
 |Distance-based metric|The Wasserstein distance|S-WD|
@@ -46,6 +46,13 @@ Three S+A integrations are investigated in this study, which are provided as fol
 |S-WD+A-OC-A|S-WD|A-OC-A|
 |S-M1+A-M1-Tm|S-M1|A-M1-Tm|
 |S-WD+A-M2-A|S-WD|A-M2-A|
+
+## References
+[1] **Learning with case-injected genetic algorithms.** TEVC 2004. [paper](https://ieeexplore.ieee.org/abstract/document/1324694)
+
+    *S. J. Louis, J. McDonnell.* 
+
+[2] **Learning with case-injected genetic algorithms.** TEVC 2004. [paper](https://ieeexplore.ieee.org/abstract/document/1324694)
 
 ## Citation
 
