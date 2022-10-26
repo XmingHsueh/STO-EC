@@ -28,22 +28,23 @@ In solution selection, seven similarity metrics are investigated in this study, 
 In solution adaptation, eleven adaptation models are investigated in this study, which are given by,
 |Adaptation Objective|Description|Abbreviation|
 |:-|:-|:-|
-|The first moment|Translation transformation based on the estimated means of elite solutions|A-M1-Tp|
-|The first moment|Translation transformation based on the randomly selected elite individuals|A-M1-Tr|
+|The first moment|Translation transformation based on the estimated means of elite solutions [2]|A-M1-Tp|
+|The first moment|Translation transformation based on the randomly selected elite individuals [3]|A-M1-Tr|
 |The first moment|Translation transformation based on the population means|A-M1-Tm|
-|The first moment|Multiplication transformation using the estimated means of selected solutions|A-M1-M|
-|The first two moments|Affine transformation|A-M2-A|
-|The ordinal correlation|Linear transformation|A-OC-L|
-|The ordinal correlation|Affine transformation|A-OC-A|
-|The ordinal correlation|Kernealization|A-OC-K|
-|The ordinal correlation|Linear transformations connected by a latent space|A-ROC-L|
-|The subspace alignment|Linear transformations connected by the subspaces|A-SA-L|
+|The first moment|Multiplication transformation using the estimated means of selected solutions [4]|A-M1-M|
+|The first two moments|Affine transformation [8]|A-M2-A|
+|The ordinal correlation|Linear transformation [13]|A-OC-L|
+|The ordinal correlation|Affine transformation [9]|A-OC-A|
+|The ordinal correlation|Kernealization [10]|A-OC-K|
+|The ordinal correlation|Neural network model [11, 12]|A-OC-N|
+|The ordinal correlation|Linear transformations connected by a latent space [15, 16]|A-ROC-L|
+|The subspace alignment|Linear transformations connected by the subspaces [17, 18]|A-SA-L|
 
 ## Integration of Solution Selection and Solution Adaptation
 Three S+A integrations are investigated in this study, which are provided as follows:
 |Integration|Similarity Metric|Adaptation Objective|
 |:-|:-|:-|
-|S-WD+A-OC-A|S-WD|A-OC-A|
+|S-WD+A-OC-A [7]|S-WD|A-OC-A|
 |S-M1+A-M1-Tm|S-M1|A-M1-Tm|
 |S-WD+A-M2-A|S-WD|A-M2-A|
 
