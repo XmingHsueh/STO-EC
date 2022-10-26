@@ -52,7 +52,7 @@ Three S+A integrations are investigated in this study, which are provided as fol
 
 [2] **Generalized multitasking for evolutionary optimization of expensive problems.** *J. Ding, C. Yang, Y. Jin, and T. Chai.* *TEVC* 2019. [paper](https://ieeexplore.ieee.org/abstract/document/8231172)
 
-
+[3] **Multifactorial evolutionary algorithm enhanced with cross-task search direction.** *J. Yin, A. Zhu, Z. Zhu, Y. Yu, and X. Ma.* *CEC* 2019. [paper](https://ieeexplore.ieee.org/abstract/document/8789959)
 
 ## Citation
 
