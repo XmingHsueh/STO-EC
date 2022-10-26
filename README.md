@@ -48,7 +48,7 @@ Three S+A integrations are investigated in this study, which are provided as fol
 |S-WD+A-M2-A|S-WD|A-M2-A|
 
 ## References
-[1] **Learning with case-injected genetic algorithms.** TEVC 2004. [paper](https://ieeexplore.ieee.org/abstract/document/1324694)
+[1] **Learning with case-injected genetic algorithms.** *TEVC* 2004. [paper](https://ieeexplore.ieee.org/abstract/document/1324694)
 
 *S. J. Louis, J. McDonnell.* 
 
