@@ -26,8 +26,8 @@
 % ------------
 % Reference:
 % ------------
-% X. Xue, Y. Hu, C. Yang, et al. â€œHow to Exploit Experience? Revisiting Evolutionary
-% Sequential Transfer Optimization: Part B", Submitted for Peer Review.
+% X. Xue, C. Yang, L. Feng, et al. ¡°How to Exploit Optimization Experience? Revisiting Evolutionary 
+% Sequential Transfer Optimization: Part B - Empirical Studies", Submitted for Peer Review.
 
 function solution_adapted = solution_adaptation(target_population,target_fitness,...
     lb,ub,gen,source_task,solution_unadapted,method)
@@ -39,7 +39,7 @@ source_population_normalized = source_task.solutions{gen}; % the source populati
 source_fitness = source_task.fitnesses{gen}; %the fitness values of the current source individuals
 
 switch(method)
-    case 'M1-Ap'
+    case 'M1-Tp'
         percentage = 0.4;
         num_estimate = ceil(percentage*popsize);
         [~,idxs] = sort(source_fitness);
@@ -47,14 +47,14 @@ switch(method)
         [~,idxt] = sort(target_fitness);
         moment1_target = mean(target_population_normalized(idxt(1:num_estimate),:));
         solution_adapted_normalized = solution_unadapted+(moment1_target-moment1_source);
-    case 'M1-Ar'
+    case 'M1-Tr'
         num_front = 5;
         [~,idxs] = sort(source_fitness);
         moment1_source = source_population_normalized(idxs(randi(num_front)),:);
         [~,idxt] = sort(target_fitness);
         moment1_target = target_population_normalized(idxt(randi(num_front)),:);
         solution_adapted_normalized = solution_unadapted+(moment1_target-moment1_source);
-    case 'M1-Am'
+    case 'M1-Tm'
         moment1_source = mean(source_population_normalized);
         moment1_target = mean(target_population_normalized);
         solution_adapted_normalized = solution_unadapted+(moment1_target-moment1_source);

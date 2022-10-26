@@ -21,8 +21,8 @@
 % ------------
 % Reference:
 % ------------
-% X. Xue, Y. Hu, C. Yang, et al. â€œHow to Exploit Experience? Revisiting Evolutionary
-% Sequential Transfer Optimization: Part B", Submitted for Peer Review.
+% X. Xue, C. Yang, L. Feng, et al. ¡°How to Exploit Optimization Experience? Revisiting Evolutionary 
+% Sequential Transfer Optimization: Part B - Empirical Studies", Submitted for Peer Review.
 
 function [FEs,Fits] = opt_trace_processing(opt_history)
 num_runs = length(opt_history);

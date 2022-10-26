@@ -5,7 +5,7 @@
 % Description:
 % ------------
 % The S-ESTO optimizer that consists of the plain evolutionary optimizer and
-% the S-ESTO transfer module.
+% the solution transfer module.
 %
 % ------------
 % Inputs:
@@ -25,8 +25,8 @@
 % ------------
 % Reference:
 % ------------
-% X. Xue, Y. Hu, C. Yang, et al. â€œHow to Exploit Experience? Revisiting Evolutionary
-% Sequential Transfer Optimization: Part B", Submitted for Peer Review.
+% X. Xue, C. Yang, L. Feng, et al. ¡°How to Exploit Optimization Experience? Revisiting Evolutionary 
+% Sequential Transfer Optimization: Part B - Empirical Studies", Submitted for Peer Review.
 
 function [solutions,fitnesses] = sesto_optimizer(problem,popsize,FEsMax,optimizer,paras)
 

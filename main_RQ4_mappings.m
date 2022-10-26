@@ -5,14 +5,13 @@
 % Description:
 % ------------
 % This file is the script of graphically comparing the mapping behaviors of
-% five adaptation models.
-% in the following paper.
+% eight adaptation models in the following paper.
 %
 % ------------
 % Reference:
 % ------------
-% X. Xue, Y. Hu, C. Yang, et al. â€œHow to Exploit Experience? Revisiting Evolutionary
-% Sequential Transfer Optimization: Part B", Submitted for Peer Review.
+% X. Xue, C. Yang, L. Feng, et al. ¡°How to Exploit Optimization Experience? Revisiting Evolutionary 
+% Sequential Transfer Optimization: Part B - Empirical Studies", Submitted for Peer Review.
 
 %% initialize the source and target problems
 clc,clear
@@ -78,7 +77,7 @@ box off;
 fill([0 x_lim x_lim 0 0],[0 0 0.75 0.75 0],'k','facealpha',0.1,'edgecolor','none')
 text(x_lim+x_delta,0+y_delta,'$x_s$','interpret','latex','fontsize',18);
 text(x_lim+x_delta,0.5+y_delta,'$x_t$','interpret','latex','fontsize',18);
-text(0.03,0.5+0.1,'A-M1-Am','interpret','latex','fontsize',16);
+text(0.03,0.5+0.1,'A-M1-Tm','interpret','latex','fontsize',12);
 
 % A-M1-Ar
 num_front = 10;
@@ -99,7 +98,7 @@ box off;
 fill([0 x_lim x_lim 0 0],[1 1 1.75 1.75 1],'r','facealpha',0.1,'edgecolor','none')
 text(x_lim+x_delta,1+y_delta,'$x_s$','interpret','latex','fontsize',18);
 text(x_lim+x_delta,1.5+y_delta,'$x_t$','interpret','latex','fontsize',18);
-text(0.03,1.5+0.1,'A-M1-Ar','interpret','latex','fontsize',16);
+text(0.03,1.5+0.1,'A-M1-Tr','interpret','latex','fontsize',12);
 
 % A-M1-M
 n = 2;
@@ -123,7 +122,7 @@ box off;
 fill([0 x_lim x_lim 0 0],[2 2 2.75 2.75 2],'b','facealpha',0.1,'edgecolor','none')
 text(x_lim+x_delta,2+y_delta,'$x_s$','interpret','latex','fontsize',18);
 text(x_lim+x_delta,2.5+y_delta,'$x_t$','interpret','latex','fontsize',18);
-text(0.03,2.5+0.1,'A-M1-M','interpret','latex','fontsize',16);
+text(0.03,2.5+0.1,'A-M1-M','interpret','latex','fontsize',12);
 
 % A-OC-L
 train_s_sort = train_s(idxs_r);
@@ -142,7 +141,7 @@ end
 fill([0 x_lim x_lim 0 0],[3 3 3.75 3.75 3],'g','facealpha',0.1,'edgecolor','none')
 text(x_lim+x_delta,3+y_delta,'$x_s$','interpret','latex','fontsize',18);
 text(x_lim+x_delta,3.5+y_delta,'$x_t$','interpret','latex','fontsize',18);
-text(0.03,3.5+0.1,'A-OC-L','interpret','latex','fontsize',16);
+text(0.03,3.5+0.1,'A-OC-L','interpret','latex','fontsize',12);
 
 % A-OC-A
 Ma = [train_s_sort ones(num_solutions,1)]\train_t_sort;
@@ -159,7 +158,7 @@ end
 fill([0 x_lim x_lim 0 0],[4 4 4.75 4.75 4],[0 125 255]/255,'facealpha',0.1,'edgecolor','none')
 text(x_lim+x_delta,4+y_delta,'$x_s$','interpret','latex','fontsize',18);
 text(x_lim+x_delta,4.5+y_delta,'$x_t$','interpret','latex','fontsize',18);
-text(0.03,4.5+0.1,'A-OC-A','interpret','latex','fontsize',16);
+text(0.03,4.5+0.1,'A-OC-A','interpret','latex','fontsize',12);
 
 % A-OC-K
 source_kernel = kernel_cal(train_s_sort,train_s_sort);
@@ -178,7 +177,7 @@ end
 fill([0 x_lim x_lim 0 0],[5 5 5.75 5.75 5],[125 0 255]/255,'facealpha',0.1,'edgecolor','none')
 text(x_lim+x_delta,5+y_delta,'$x_s$','interpret','latex','fontsize',18);
 text(x_lim+x_delta,5.5+y_delta,'$x_t$','interpret','latex','fontsize',18);
-text(0.03,5.5+0.1,'A-OC-K','interpret','latex','fontsize',16);
+text(0.03,5.5+0.1,'A-OC-K','interpret','latex','fontsize',12);
 
 % A-OC-N
 f_activate=@(x)1./(1+exp(-x));
@@ -205,7 +204,7 @@ end
 fill([0 x_lim x_lim 0 0],[6 6 6.75 6.75 6],[255 125 0]/255,'facealpha',0.1,'edgecolor','none')
 text(x_lim+x_delta,6+y_delta,'$x_s$','interpret','latex','fontsize',18);
 text(x_lim+x_delta,6.5+y_delta,'$x_t$','interpret','latex','fontsize',18);
-text(0.03,6.5+0.1,'A-OC-N','interpret','latex','fontsize',16);
+text(0.03,6.5+0.1,'A-OC-N','interpret','latex','fontsize',12);
 
 % A-ROC-L
 num_ranklabels = 3;
@@ -263,7 +262,7 @@ end
 fill([0 x_lim x_lim 0 0],[7 7 7.75 7.75 7],[255 0 125]/255,'facealpha',0.1,'edgecolor','none')
 text(x_lim+x_delta,7+y_delta,'$x_s$','interpret','latex','fontsize',18);
 text(x_lim+x_delta,7.5+y_delta,'$x_t$','interpret','latex','fontsize',18);
-text(0.03,7.5+0.1,'A-ROC-L','interpret','latex','fontsize',16);
+text(0.03,7.5+0.1,'A-ROC-L','interpret','latex','fontsize',12);
 
 set(gca,'yticklabel',{'','','','','','','','','','',''},'ytick',[],'fontsize',12);
 ax1 = gca;

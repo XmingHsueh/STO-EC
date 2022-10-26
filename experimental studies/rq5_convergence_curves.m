@@ -10,28 +10,28 @@
 % ------------
 % Reference:
 % ------------
-% X. Xue, Y. Hu, C. Yang, et al. â€œHow to Exploit Experience? Revisiting Evolutionary
-% Sequential Transfer Optimization: Part B", Submitted for Peer Review.
+% X. Xue, C. Yang, L. Feng, et al. ¡°How to Exploit Optimization Experience? Revisiting Evolutionary 
+% Sequential Transfer Optimization: Part B - Empirical Studies", Submitted for Peer Review.
 
 clc,clear
 warning off;
 task_families = {'Sphere','Ellipsoid','Schwefel','Quartic','Ackley','Rastrigin','Griewank','Levy'}; % eight task families
 transfer_scenarios = {'a','e'}; % intra-family and inter-family transfers
-xis = [0 0.7 1]; % the parameter xi that determines optimum coverage
+xis = [0 0.7 1]; % the parameter xi that controls optimum coverage
 similarity_distributions = {'c','u','i','d'}; % four representative similarity distributions
 k = 1000; % the number of previously-solved source tasks
 specifications = [1 1 1 1 50 k; % STOP 1
     2 2 1 2	25 k; % STOP 2
     3 1 1 3	30 k; % STOP 3
     4 2 1 4	50 k; % STOP 4
-    5 1 2 1	50 k; % STOP 5
-    6 2 2 2	30 k; % STOP 6
+    5 1 3 3	25 k; % STOP 5
+    6 2 3 2	50 k; % STOP 6
     7 1 2 3	25 k; % STOP 7
     8 2 2 4	30 k; % STOP 8
     1 1 3 1	25 k; % STOP 9
-    6 2 3 2	50 k; % STOP 10
-    5 1 3 3	25 k; % STOP 11
-    2 2 3 4	30 k]; % STOP 12
+    6 2 2 1	30 k; % STOP 10
+    5 1 2 1	50 k; % STOP 11
+    2 2 3 1	50 k]; % STOP 12
 num_problems = size(specifications,1); % the number of individual benchmark problems
 baselines = {'N','R'};
 metrics = {'N','R','C','M1','WD','OC','ROC','KLD','SA'};
@@ -39,7 +39,7 @@ adaptations = {'M1-Ap','M1-Ar','M1-Am','M1-M','M2-A','OC-L','OC-A','OC-K','OC-N'
     'ROC-L','SA-L'}; % similarity metrics
 integrations = [5 7;4 3;5 5];
 
-idx_problem = 12; % the problem from which the results to be visualized are collected
+idx_problem = 6; % the problem from which the results to be visualized are collected
 fig_width = 350;
 fig_height = 300;
 screen_size = get(0,'ScreenSize');
@@ -89,5 +89,4 @@ set(gca,'linewidth',0.5);
 grid on;
 xlabel('FEs','interpret','latex','fontsize',12)
 ylabel('log$\left(y\right)$','interpret','latex','fontsize',12);
-title(['STOP',num2str(idx_problem),': $\mathcal{S}=S_',similarity_distributions{specifications(idx_problem,4)},'$, $\xi=',...
-    num2str(xis(specifications(idx_problem,3))),'$'],'interpret','latex','fontsize',14);
+title(['SD: STOP ',num2str(idx_problem),],'interpret','latex','fontsize',14);

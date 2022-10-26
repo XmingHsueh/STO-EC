@@ -4,37 +4,37 @@
 % ------------
 % Description:
 % ------------
-% Visualization of the correlation between similarity and transferability.
+% Visualization of the correlation between similarity and transferability values.
 %
 % ------------
 % Reference:
 % ------------
-% X. Xue, Y. Hu, C. Yang, et al. â€œHow to Exploit Experience? Revisiting Evolutionary
-% Sequential Transfer Optimization: Part B", Submitted for Peer Review.
+% X. Xue, C. Yang, L. Feng, et al. ¡°How to Exploit Optimization Experience? Revisiting Evolutionary 
+% Sequential Transfer Optimization: Part B - Empirical Studies", Submitted for Peer Review.
 
 clc,clear
 warning off;
 task_families = {'Sphere','Ellipsoid','Schwefel','Quartic','Ackley','Rastrigin','Griewank','Levy'}; % eight task families
 transfer_scenarios = {'a','e'}; % intra-family and inter-family transfers
-xis = [0 0.7 1]; % the parameter xi that determines optimum coverage
+xis = [0 0.7 1]; % the parameter xi that controls optimum coverage
 similarity_distributions = {'c','u','i','d'}; % four representative similarity distributions
 k = 1000; % the number of previously-solved source tasks
 specifications = [1 1 1 1 50 k; % STOP 1
     2 2 1 2	25 k; % STOP 2
     3 1 1 3	30 k; % STOP 3
     4 2 1 4	50 k; % STOP 4
-    5 1 2 1	50 k; % STOP 5
-    6 2 2 2	30 k; % STOP 6
+    5 1 3 3	25 k; % STOP 5
+    6 2 3 2	50 k; % STOP 6
     7 1 2 3	25 k; % STOP 7
     8 2 2 4	30 k; % STOP 8
     1 1 3 1	25 k; % STOP 9
-    6 2 3 2	50 k; % STOP 10
-    5 1 3 3	25 k; % STOP 11
-    2 2 3 4	30 k]; % STOP 12
+    6 2 2 1	50 k; % STOP 10
+    5 1 2 1	25 k; % STOP 11
+    2 2 3 1	30 k]; % STOP 12
 metrics = {'C','M1','KLD','WD','OC','ROC','SA'}; % similarity metrics
-methods = [3];
+methods = [2];
 
-idx_problem = 11; % the problem from which the results to be visualized are collected
+idx_problem = 7; % the problem from which the results to be visualized are collected
 fig_width = 350;
 fig_height = 300;
 screen_size = get(0,'ScreenSize');
@@ -52,7 +52,7 @@ for m = 1:length(methods)
     set(gca,'linewidth',0.5);
     grid on;
     corr_estimate = corr(similarity_values,candidates_quality);
-    xlabel('$s$','interpret','latex','fontsize',14)
-    ylabel('$q$','interpret','latex','fontsize',14);
+    xlabel('Similarity','interpret','latex','fontsize',14)
+    ylabel('Transferability','interpret','latex','fontsize',14);
     title(['Generation: 5',', $\rho=',num2str(corr_estimate),'$'],'interpret','latex','fontsize',14)
 end

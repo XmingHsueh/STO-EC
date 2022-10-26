@@ -5,36 +5,36 @@
 % Description:
 % ------------
 % Visualization of the comprehensive correlation coefficients obtained by
-% the similarity metrics.
+% seven similarity metrics in the following paper.
 %
 % ------------
 % Reference:
 % ------------
-% X. Xue, Y. Hu, C. Yang, et al. â€œHow to Exploit Experience? Revisiting Evolutionary
-% Sequential Transfer Optimization: Part B", Submitted for Peer Review.
+% X. Xue, C. Yang, L. Feng, et al. ¡°How to Exploit Optimization Experience? Revisiting Evolutionary 
+% Sequential Transfer Optimization: Part B - Empirical Studies", Submitted for Peer Review.
 
 clc,clear
 warning off;
 task_families = {'Sphere','Ellipsoid','Schwefel','Quartic','Ackley','Rastrigin','Griewank','Levy'}; % eight task families
 transfer_scenarios = {'a','e'}; % intra-family and inter-family transfers
-xis = [0 0.7 1]; % the parameter xi that determines optimum coverage
+xis = [0 0.7 1]; % the parameter xi that controls optimum coverage
 similarity_distributions = {'c','u','i','d'}; % four representative similarity distributions
 k = 1000; % the number of previously-solved source tasks
 specifications = [1 1 1 1 50 k; % STOP 1
     2 2 1 2	25 k; % STOP 2
     3 1 1 3	30 k; % STOP 3
     4 2 1 4	50 k; % STOP 4
-    5 1 2 1	50 k; % STOP 5
-    6 2 2 2	30 k; % STOP 6
+    5 1 3 3	25 k; % STOP 5
+    6 2 3 2	50 k; % STOP 6
     7 1 2 3	25 k; % STOP 7
     8 2 2 4	30 k; % STOP 8
     1 1 3 1	25 k; % STOP 9
-    6 2 3 2	50 k; % STOP 10
-    5 1 3 3	25 k; % STOP 11
-    2 2 3 4	30 k]; % STOP 12
+    6 2 2 1	50 k; % STOP 10
+    5 1 2 1	25 k; % STOP 11
+    2 2 3 1	30 k]; % STOP 12
 metrics = {'C','M1','KLD','WD','OC','ROC','SA'}; % similarity metrics
 
-idx_problem = 11; % the problem from which the results to be visualized are collected
+idx_problem = 7; % the problem from which the results to be visualized are collected
 fig_width = 350;
 fig_height = 300;
 screen_size = get(0,'ScreenSize');
@@ -65,9 +65,8 @@ for m = 1:length(metrics)
     std_lower=ccc_mean-std_level*std(ccc_total,1,2);
     fill([Gens';Gens(end:-1:1)'],[std_upper;std_lower(end:-1:1)],c_list(m,:),'facealpha',0.3,'edgecolor',c_list(m,:),'edgecolor','none');
 end
-% axis([0 50 0 1]);
 set(gca,'linewidth',0.5);
 grid on;
 xlabel('Generations','interpret','latex','fontsize',12)
 ylabel('$\rho\left(t\right)$','interpret','latex','fontsize',12);
-title(['STOP',num2str(idx_problem)],'interpret','latex','fontsize',14);
+title(['SD: STOP ',num2str(idx_problem)],'interpret','latex','fontsize',14);

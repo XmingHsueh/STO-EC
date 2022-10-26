@@ -25,10 +25,10 @@
 % ------------
 % Reference:
 % ------------
-% X. Xue, Y. Hu, C. Yang, et al. â€œHow to Exploit Experience? Revisiting Evolutionary
-% Sequential Transfer Optimization: Part B", Submitted for Peer Review.
+% X. Xue, C. Yang, L. Feng, et al. ¡°How to Exploit Optimization Experience? Revisiting Evolutionary 
+% Sequential Transfer Optimization: Part B - Empirical Studies", Submitted for Peer Review.
 
-function [solutions,fitnesses,similarity_values,candidates_quality] = optimizer_corr(problem,popsize,FEsMax,optimizer,paras)
+function [solutions,fitnesses,similarity_values,transferability_values] = optimizer_corr(problem,popsize,FEsMax,optimizer,paras)
 
 % initialization
 fun = problem.fnc;
@@ -71,12 +71,10 @@ while FEsCount < FEsMax
             fitness_parent,lb,ub,gen,knowledge_base,metric);
     end
     fit_candidates_tran = zeros(num_sources,1); % fitness values of selected solutions on the target task
-    candidates_quality = zeros(num_sources,1); % quality of selected solutions
+    transferability_values = zeros(num_sources,1); % quality of selected solutions
     for i = 1:num_sources
         fit_candidates_tran(i) = fun(lb+(ub-lb).*candidates_transfer(i,:));
-    end
-    for i = 1:num_sources
-        candidates_quality(i) = length(find(fit_candidates_tran>fit_candidates_tran(i)));
+        transferability_values(i) = (min(fitness)-fit_candidates_tran(i))/min(fitness);  % calculate the transferability
     end
     if gen_save == gen % terminate at generation gen_save
         return;
