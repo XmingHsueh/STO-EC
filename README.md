@@ -2,7 +2,7 @@
 
 This repository provides the MATLAB implementations of empirically investigating a wide variety of knowledge transfer techniques in the context of S-ESTO via five research questions (RQs). Particularly, different knowledge transfer techniques associated with the five RQs are organized according to transfer strategies in S-ESTO, including solution selection, solution adaptation, and the integration of them. The five RQs are provided as follows:
 
-|Component|Research Questions|
+|Strategy|Research Questions|
 |:-|:-|
 |Solution Selection|RQ1: How do existing similarity metrics perform in solution selection for S-ESTO?|
 |Solution Selection|RQ2: Which factor is essential to the effectiveness of similarity metrics in S-ESTO?|
@@ -90,7 +90,7 @@ Three S+A integrations are investigated in this study, which are provided as fol
 If you find this repo useful for your research, please consider to cite:
 ```latex
 @article{Xue2022,
-title = {How to Exploit Optimization Experience? Revisiting Evolutionary Sequential Transfer Optimization: Part B - Empirical Studies},
+title = {How to Exploit Optimization Experience? Revisiting Evolutionary Sequential Transfer Optimization: Part B - Algorithm Analysis},
 author = {Xue, Xiaoming and Yang, Cuie and Feng, Liang and Zhang, Kai and Song, Linqi and Tan, Kay Chen}
 journal = {...},
 volume = {...},
