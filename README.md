@@ -28,11 +28,11 @@ In solution selection, seven similarity metrics are investigated in this study, 
 In solution adaptation, eleven adaptation models are investigated in this study, which are given by,
 |Adaptation Objective|Description|Abbreviation|
 |:-|:-|:-|
-|The first moment|Translation transformation based on the estimated means of elite solutions [2]|A-M1-Tp|
-|The first moment|Translation transformation based on the randomly selected elite individuals [3]|A-M1-Tr|
-|The first moment|Translation transformation based on the population means|A-M1-Tm|
-|The first moment|Multiplication transformation using the estimated means of selected solutions [4]|A-M1-M|
-|The first two moments|Affine transformation [8]|A-M2-A|
+|First moment|Translation transformation based on the estimated means of elite solutions [2]|A-M1-Tp|
+|First moment|Translation transformation based on the randomly selected elite individuals [3]|A-M1-Tr|
+|First moment|Translation transformation based on the population means|A-M1-Tm|
+|First moment|Multiplication transformation using the estimated means of selected solutions [4]|A-M1-M|
+|First two moments|Affine transformation [8]|A-M2-A|
 |The ordinal correlation|Linear transformation [13]|A-OC-L|
 |The ordinal correlation|Affine transformation [9]|A-OC-A|
 |The ordinal correlation|Kernealization [10]|A-OC-K|
