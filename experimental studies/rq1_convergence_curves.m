@@ -11,7 +11,7 @@
 % Reference:
 % ------------
 % X. Xue, C. Yang, L. Feng, et al. ¡°How to Exploit Optimization Experience? Revisiting Evolutionary 
-% Sequential Transfer Optimization: Part B - Empirical Studies", Submitted for Peer Review.
+% Sequential Transfer Optimization: Part B - Algorithm Analysis", Submitted for Peer Review.
 
 clc,clear
 warning off;
@@ -35,7 +35,7 @@ specifications = [1 1 1 1 50 k; % STOP 1
 num_problems = size(specifications,1); % the number of individual benchmark problems
 metrics = {'N','R','C','M1','KLD','WD','OC','ROC','SA'}; % similarity metrics
 
-idx_problem = 1; % the problem from which the results to be visualized are collected
+idx_problem = 7; % the problem from which the results to be visualized are collected
 fig_width = 350;
 fig_height = 300;
 screen_size = get(0,'ScreenSize');
@@ -66,4 +66,4 @@ set(gca,'linewidth',0.5);
 grid on;
 xlabel('FEs','interpret','latex','fontsize',12)
 ylabel('log$\left(y\right)$','interpret','latex','fontsize',12);
-title(['FS: STOP ',num2str(idx_problem),],'interpret','latex','fontsize',14);
+title(['MS: STOP ',num2str(idx_problem),],'interpret','latex','fontsize',14);

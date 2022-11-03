@@ -10,12 +10,12 @@
 % Reference:
 % ------------
 % X. Xue, C. Yang, L. Feng, et al. ¡°How to Exploit Optimization Experience? Revisiting Evolutionary 
-% Sequential Transfer Optimization: Part B - Empirical Studies", Submitted for Peer Review.
+% Sequential Transfer Optimization: Part B - Algorithm Analysis", Submitted for Peer Review.
 
 %% initialize the source and target problems
 clc,clear
-rand('state',11);
-randn('state',11);
+% rand('state',11);
+% randn('state',11);
 funs = @(x)(x+6).^2-10*cos(2*pi*(x+6))+10; % the source task
 lbs = -12; % the lower bound of the source task
 ubs = 12; % the upper bound of the source task
@@ -33,10 +33,14 @@ for i = 1:num_plot % function evaluation
 end
 
 %% plot the source-target landscapes
-figure1 = figure('color',[1 1 1],'position',[321.0000  365.6667  560.0000  420.0000]);
+fig_width = 350;
+fig_height = 300;
+screen_size = get(0,'ScreenSize');
+figure1 = figure('color',[1 1 1],'position',[(screen_size(3)-fig_width)/2, (screen_size(4)-...
+    fig_height)/2,fig_width, fig_height]);
 plot(ts,fs,'r-','linewidth',1);hold on;
 plot(tt,ft,'b-','linewidth',1);
-num_solutions = 200; % the number of solutions to be evaluated and used for learning the source-to-target mapping
+num_solutions = 100; % the number of solutions to be evaluated and used for learning the source-to-target mapping
 train_s = lhsdesign_modified(num_solutions,0,0.5); % sample the source solutions using the LHS sampling
 train_t = lhsdesign_modified(num_solutions,0.5,1); % sample the target solutions using the LHS sampling
 fitness_s = zeros(num_solutions,1); % fitness values of source solutions
@@ -57,20 +61,26 @@ for i = 1:num_solutions % match the source and target solutions with the same fi
     plot(train_t(idxt),fitness_t(idxt),'bo','markerfacecolor','b','markersize',4+i/num_solutions*4);
     plot([train_s(idxs) train_t(idxt)],[fitness_s(idxs) fitness_t(idxt)],'k-.');
 end
-xlabel('$x$','fontsize',18,'interpret','latex');
-ylabel('$y$','fontsize',18,'interpret','latex');
+xlabel('$x$','fontsize',12,'interpret','latex');
+ylabel('$y$','fontsize',12,'interpret','latex');
 set(gca,'linewidth',1);
-title('Source and Target Instances','interpret','latex','fontsize',16);
+title('Source and Target Tasks','interpret','latex','fontsize',12);
+hl = legend('source landscape','target landscape','source solutions','target solutions');
+set(hl,'NumColumn',2,'edgecolor','none','interpret','latex','fontsize',8.5,'location','best','box','off');
 
 %% plot the resultant mapping to be learned
-figure2 = figure('color',[1 1 1],'position',[881.6667  365.0000  560.0000  420.0000]);
+fig_width = 350;
+fig_height = 300;
+screen_size = get(0,'ScreenSize');
+figure2 = figure('color',[1 1 1],'position',[(screen_size(3)-fig_width)/2, (screen_size(4)-...
+    fig_height)/2,fig_width, fig_height]);
 [~,idxs_r] = sort(fitness_s);
 [~,idxt_r] = sort(fitness_t);
 solution_s_sort = train_s(idxs_r); % sort the source solutions according to their fitness values
 solution_t_sort = train_t(idxt_r); % sort the target solutions according to their fitness values
 [~,indxsss] = sort(solution_s_sort);
 plot(solution_s_sort(indxsss),solution_t_sort(indxsss),'k-','linewidth',1);
-xlabel('$x_s$','fontsize',18,'interpret','latex');
-ylabel('$x_t$','fontsize',18,'interpret','latex');
+xlabel('$x_s$','fontsize',12,'interpret','latex');
+ylabel('$x_t$','fontsize',12,'interpret','latex');
 set(gca,'linewidth',1);
-title('Source-Target Mapping to be Learned','interpret','latex','fontsize',16);
+title('Source-to-Target Mapping to be Learned','interpret','latex','fontsize',12);

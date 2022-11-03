@@ -26,7 +26,7 @@
 % Reference:
 % ------------
 % X. Xue, C. Yang, L. Feng, et al. ¡°How to Exploit Optimization Experience? Revisiting Evolutionary 
-% Sequential Transfer Optimization: Part B - Empirical Studies", Submitted for Peer Review.
+% Sequential Transfer Optimization: Part B - Algorithm Analysis", Submitted for Peer Review.
 
 function [solutions,fitnesses,similarity_values,transferability_values] = optimizer_corr(problem,popsize,FEsMax,optimizer,paras)
 
