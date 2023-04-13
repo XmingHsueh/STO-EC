@@ -1,4 +1,4 @@
-# How to Exploit Optimization Experience? Revisiting Evolutionary Sequential Transfer Optimization: Part B - Algorithm Analysis
+# Does Optimized Solutions Always Help? A Comprehensive Investigation of Transfer Evolutionary Algorithms
 
 This repository provides the MATLAB implementations of empirically investigating a wide variety of knowledge transfer techniques in the context of S-ESTO via five research questions (RQs). Particularly, different knowledge transfer techniques associated with the five RQs are organized according to transfer strategies in S-ESTO, including solution selection, solution adaptation, and the integration of them. The five RQs are provided as follows:
 
