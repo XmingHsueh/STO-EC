@@ -1,52 +1,10 @@
 # Does Optimized Solution Always Help? A Comprehensive Investigation of Transfer Evolutionary Algorithms
 
-This repository provides the MATLAB implementations of empirically investigating a wide variety of knowledge transfer techniques in the context of S-ESTO via five research questions (RQs). Particularly, different knowledge transfer techniques associated with the five RQs are organized according to transfer strategies in S-ESTO, including solution selection, solution adaptation, and the integration of them. The five RQs are provided as follows:
+This repository provides the MATLAB implementations of a comprehensive empirical investigation of transfer evolutionary algorithms. Particularly, knowledge transfer techniques surr:
 
-|Strategy|Research Questions|
-|:-|:-|
-|Solution Selection|RQ1: How do existing similarity metrics perform in solution selection for S-ESTO?|
-|Solution Selection|RQ2: Which factor is essential to the effectiveness of similarity metrics in S-ESTO?|
-|Solution Adaptation|RQ3: How do existing adaptation techniques perform in solution adaptation for S-ESTO?|
-|Solution Adaptation|RQ4: What contributes to the effectiveness of solution adaptation models in S-ESTO?|
-|Integration of Selection and Adaptation|RQ5:  How to integrate solution selection and solution adaptation for S-ESTO?|
-
-The first two RQs aim to investigate similarity metrics in selection-based approaches while the third and fourth RQs focus on adaptation models in adaptation-based approaches. To curb the negative transfer, solution selection and solution adaptation can be integrated. The last RQ focuses on investigating this integration.
-
-## Solution Selection
-In solution selection, seven similarity metrics are investigated in this study, which are given by,
-|Similarity Metric|Description|Abbreviation|
-|:-|:-|:-|
-|Distance-based metric|The hamming distance [1]|S-C|
-|Distance-based metric|The Euclidean distance [2-4]|S-M1|
-|Distance-based metric|The Kullback-Leibler divergence [5, 6]|S-KLD|
-|Distance-based metric|The Wasserstein distance [7, 8]|S-WD|
-|Correlation-based metric|The ordinal correlation [9-14]|S-OC|
-|Correlation-based metric|The relaxed ordinal correlation [15, 16]|S-ROC|
-|Correlation-based metric|The subspace alignment [17, 18]|S-SA|
-
-## Solution Adaptation
-In solution adaptation, eleven adaptation models are investigated in this study, which are given by,
-|Adaptation Objective|Description|Abbreviation|
-|:-|:-|:-|
-|First moment|Translation transformation based on the estimated means of elite solutions [2]|A-M1-Tp|
-|First moment|Translation transformation based on the randomly selected elite individuals [3]|A-M1-Tr|
-|First moment|Translation transformation based on the population means|A-M1-Tm|
-|First moment|Multiplication transformation using the estimated means of selected solutions [4]|A-M1-M|
-|First two moments|Affine transformation [8]|A-M2-A|
-|The ordinal correlation|Linear transformation [13]|A-OC-L|
-|The ordinal correlation|Affine transformation [9]|A-OC-A|
-|The ordinal correlation|Kernealization [10]|A-OC-K|
-|The ordinal correlation|Neural network model [11, 12]|A-OC-N|
-|The ordinal correlation|Linear transformations connected by a latent space [15, 16]|A-ROC-L|
-|The subspace alignment|Linear transformations connected by the subspaces [17, 18]|A-SA-L|
-
-## Integration of Solution Selection and Solution Adaptation
-Three S+A integrations are investigated in this study, which are provided as follows:
-|Integration|Similarity Metric|Adaptation Objective|
-|:-|:-|:-|
-|S-WD+A-OC-A [7]|S-WD|A-OC-A|
-|S-M1+A-M1-Tm|S-M1|A-M1-Tm|
-|S-WD+A-M2-A|S-WD|A-M2-A|
+|Central Issue|Categorization|Description|Abbreviation|
+|:-|:-|:-|:-|
+|What to Transfer|Distance|The hamming distance between intermediate solutions|H|
 
 ## References
 [1] **Learning with case-injected genetic algorithms.** *S. J. Louis and J. McDonnell.* *TEVC* 2004. [paper](https://ieeexplore.ieee.org/abstract/document/1324694)
@@ -89,13 +47,13 @@ Three S+A integrations are investigated in this study, which are provided as fol
 
 If you find this repo useful for your research, please consider to cite:
 ```latex
-@article{Xue2022,
-title = {How to Exploit Optimization Experience? Revisiting Evolutionary Sequential Transfer Optimization: Part B - Algorithm Analysis},
+@article{Xue2023,
+title = {Does Optimized Solution Always Help? A Comprehensive Investigation of Transfer Evolutionary Algorithms},
 author = {Xue, Xiaoming and Yang, Cuie and Feng, Liang and Zhang, Kai and Song, Linqi and Tan, Kay Chen}
 journal = {...},
 volume = {...},
 pages = {...},
-year = {2022},
+year = {2023},
 doi = {https://...},
 url = {http://...},
 }
