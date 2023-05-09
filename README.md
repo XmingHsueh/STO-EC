@@ -5,6 +5,7 @@ This repository provides the MATLAB implementations of a comprehensive empirical
 |Central Issue|Description|Abbreviation|
 |:-|:-|:-|
 |What to Transfer|The hamming distance between intermediate solutions [1]<br>The Euclidean distance between the population means [2-4]<br>The KLD distance [5,6]<br>The WD distance [7,8]<br>The ordinal correlation [9-11]<br>The relaxed ordinal correlation [12,13]<br>The subspace alignment [14,15]|H<br>M1<br>KLD<br>WD<br>OC<br>ROC<br>SA|
+|When to Transfer| The fixed generation interval for knowledge transfer [16-19]|F-G_t|
 
 
 ## References
@@ -38,13 +39,14 @@ This repository provides the MATLAB implementations of a comprehensive empirical
 
 [15] **Evolutionary multitasking for multiobjective optimization with subspace alignment and adaptive differential evolution.** *Z. Liang, H. Dong, C. Liu, W. Liang, and Z. Zhu.* *TCYB* 2022. [paper](https://ieeexplore.ieee.org/abstract/document/9123962)
 
+[16] **Autoencoding evolutionary search with learning across heterogeneous problems.** *L. Feng, Y. Ong, S. Jiang, and A. Gupta.* *TEVC* 2017. [paper](https://ieeexplore.ieee.org/abstract/document/7879282)
 
+[17] **Non-linear domain adaptation in transfer evolutionary optimization.** *R. Lim, A. Gupta, Y.-S. Ong, L. Feng, and A. N. Zhang.* *Cognitive Computation* 2021. [paper](https://link.springer.com/article/10.1007/s12559-020-09777-7)
 
+[18] **Multitasking multiobjective optimization based on transfer component analysis.** *Z. Hu, Y. Li, H. Sun, and X. Ma.* *Information Sciences* 2022. [paper](https://www.sciencedirect.com/science/article/pii/S0020025522004571)
 
-[X] **Autoencoding evolutionary search with learning across heterogeneous problems.** *L. Feng, Y. Ong, S. Jiang, and A. Gupta.* *TEVC* 2017. [paper](https://ieeexplore.ieee.org/abstract/document/7879282)
+[19] **Multitasking optimization via an adaptive solver multitasking evolutionary framework.** *Y. Li, W. Gong, and S. Li.* *Information Sciences* 2023. [paper](https://www.sciencedirect.com/science/article/pii/S0020025522012191)
 
-
-[X] **Non-linear domain adaptation in transfer evolutionary optimization.** *R. Lim, A. Gupta, Y.-S. Ong, L. Feng, and A. N. Zhang.* *Cognitive Computation* 2021. [paper](https://link.springer.com/article/10.1007/s12559-020-09777-7)
 
 [X] **Linearized domain adaptation in evolutionary multitasking.** *K. K. Bali, A. Gupta, L. Feng, Y. S. Ong, and T. P. Siew.* *CEC* 2017. [paper](https://ieeexplore.ieee.org/abstract/document/7969454)
 
