@@ -2,10 +2,9 @@
 
 This repository provides the MATLAB implementations of a comprehensive empirical investigation of transfer evolutionary algorithms. Particularly, a wide variety of techniques surrounding the three central issues in knowledge transfer, i.e., what to transfer, when to transfer, and how to transfer, are separately studied in this work, which are summarized as follows:
 
-|Central Issue|Categorization|Description|Abbreviation|
-|:-|:-|:-|:-|
-|What to Transfer|Distance|The hamming distance between intermediate solutions [1]<br>The Euclidean distance between the population means [2-4]|H<br>M1|
-||Correlation|The ordinal correlation [5]<br>The Euclidean distance between the population means [6-8]|OC<br>ROC|
+|Central Issue|Description|Abbreviation|
+|:-|:-|:-|
+|What to Transfer|The hamming distance between intermediate solutions [1]<br>The Euclidean distance between the population means [2-4]<br>The KLD distance [5,6]|H<br>M1<br>KLD|
 
 
 ## References
