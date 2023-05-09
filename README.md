@@ -4,7 +4,8 @@ This repository provides the MATLAB implementations of a comprehensive empirical
 
 |Central Issue|Categorization|Description|Abbreviation|
 |:-|:-|:-|:-|
-|What to Transfer|Distance|The hamming distance between intermediate solutions [1]<br>The Euclidean distance [35, 43, 44] between the population means|H<br>M1|
+|What to Transfer|Distance|The hamming distance between intermediate solutions [1]<br>The Euclidean distance between the population means [2-4]|H<br>M1|
+||Correlation|The ordinal correlation [5]<br>The Euclidean distance between the population means [6-8]|OC<br>ROC|
 
 
 ## References
