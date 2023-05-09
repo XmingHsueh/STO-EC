@@ -4,7 +4,8 @@ This repository provides the MATLAB implementations of a comprehensive empirical
 
 |Central Issue|Categorization|Description|Abbreviation|
 |:-|:-|:-|:-|
-|What to Transfer|Distance|The hamming distance between intermediate solutions|H|
+|What to Transfer|Distance|The hamming distance between intermediate solutions [1]<br>The Euclidean distance [35, 43, 44] between the population means|H<br>M1|
+
 
 ## References
 [1] **Learning with case-injected genetic algorithms.** *S. J. Louis and J. McDonnell.* *TEVC* 2004. [paper](https://ieeexplore.ieee.org/abstract/document/1324694)
