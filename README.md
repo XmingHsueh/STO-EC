@@ -4,7 +4,7 @@ This repository provides the MATLAB implementations of a comprehensive empirical
 
 |Central Issue|Description|Abbreviation|
 |:-|:-|:-|
-|What to Transfer|The hamming distance between intermediate solutions [1]<br>The Euclidean distance between the population means [2-4]<br>The KLD distance [5,6]|H<br>M1<br>KLD|
+|What to Transfer|The hamming distance between intermediate solutions [1]<br>The Euclidean distance between the population means [2-4]<br>The KLD distance [5,6]<br>The WD distance [7,8]<br>The ordinal correlation [9-11]<br>The relaxed ordinal correlation [12,13]<br>The subspace alignment [14,15]|H<br>M1<br>KLD<br>WD<br>OC<br>ROC<br>SA|
 
 
 ## References
@@ -24,25 +24,34 @@ This repository provides the MATLAB implementations of a comprehensive empirical
 
 [8] **Affine transformation-enhanced multifactorial optimization for heterogeneous problems.** *X. Xue, K. Zhang, K. C. Tan, L. Feng, J. Wang, G. Chen, X. Zhao, L. Zhang, and J. Yao.* *TCYB* 2022. [paper](https://ieeexplore.ieee.org/abstract/document/9295394)
 
-[9] **Autoencoding evolutionary search with learning across heterogeneous problems.** *L. Feng, Y. Ong, S. Jiang, and A. Gupta.* *TEVC* 2017. [paper](https://ieeexplore.ieee.org/abstract/document/7879282)
+[9] **Evolutionary multitasking via explicit autoencoding.** *L. Feng, L. Zhou, J. Zhong, A. Gupta, Y.-S. Ong, K.-C. Tan, and A. K. Qin.* *TCYB* 2018. [paper](https://ieeexplore.ieee.org/abstract/document/8401802)
 
-[10] **Learnable evolutionary search across heterogeneous problems via kernelized autoencoding.** *L. Zhou, L. Feng, A. Gupta, and Y.-S. Ong.* *TEVC* 2021. [paper](https://ieeexplore.ieee.org/abstract/document/9344841)
+[10] **Solution representation learning in multi-objective transfer evolutionary optimization.** *R. Lim, L. Zhou, A. Gupta, Y.-S. Ong, and A. N. Zhang.* *IEEE Access* 2021. [paper](https://ieeexplore.ieee.org/abstract/document/9377001)
 
-[11] **Solution representation learning in multi-objective transfer evolutionary optimization.** *R. Lim, L. Zhou, A. Gupta, Y.-S. Ong, and A. N. Zhang.* *IEEE Access* 2021. [paper](https://ieeexplore.ieee.org/abstract/document/9377001)
+[11] **Learnable evolutionary search across heterogeneous problems via kernelized autoencoding.** *L. Zhou, L. Feng, A. Gupta, and Y.-S. Ong.* *TEVC* 2021. [paper](https://ieeexplore.ieee.org/abstract/document/9344841)
 
-[12] **Non-linear domain adaptation in transfer evolutionary optimization.** *R. Lim, A. Gupta, Y.-S. Ong, L. Feng, and A. N. Zhang.* *Cognitive Computation* 2021. [paper](https://link.springer.com/article/10.1007/s12559-020-09777-7)
+[12] **Evolutionary sequential transfer optimization for objective-heterogeneous problems.** *X. Xue, C. Yang, Y. Hu, K. Zhang, Y.-M. Cheung, L. Song, and K. C. Tan.* *TEVC* 2022. [paper](https://ieeexplore.ieee.org/abstract/document/9644585)
 
-[13] **Linearized domain adaptation in evolutionary multitasking.** *K. K. Bali, A. Gupta, L. Feng, Y. S. Ong, and T. P. Siew.* *CEC* 2017. [paper](https://ieeexplore.ieee.org/abstract/document/7969454)
+[13] **Learning task relationships in evolutionary multitasking for multiobjective continuous optimization.** *Z. Chen, Y. Zhou, X. He, and J. Zhang.* *TCYB* 2022. [paper](https://ieeexplore.ieee.org/abstract/document/9262898)
 
-[14] **Evolutionary multitasking via explicit autoencoding.** *L. Feng, L. Zhou, J. Zhong, A. Gupta, Y.-S. Ong, K.-C. Tan, and A. K. Qin.* *TCYB* 2018. [paper](https://ieeexplore.ieee.org/abstract/document/8401802)
+[14] **Regularized evolutionary multitask optimization: Learning to intertask transfer in aligned subspace.** *Z. Tang, M. Gong, Y. Wu, W. Liu, and Y. Xie.* *TEVC* 2021. [paper](https://ieeexplore.ieee.org/abstract/document/9195010)
 
-[15] **Evolutionary sequential transfer optimization for objective-heterogeneous problems.** *X. Xue, C. Yang, Y. Hu, K. Zhang, Y.-M. Cheung, L. Song, and K. C. Tan.* *TEVC* 2021. [paper](https://ieeexplore.ieee.org/abstract/document/9644585)
+[15] **Evolutionary multitasking for multiobjective optimization with subspace alignment and adaptive differential evolution.** *Z. Liang, H. Dong, C. Liu, W. Liang, and Z. Zhu.* *TCYB* 2022. [paper](https://ieeexplore.ieee.org/abstract/document/9123962)
 
-[16] **Learning task relationships in evolutionary multitasking for multiobjective continuous optimization.** *Z. Chen, Y. Zhou, X. He, and J. Zhang.* *TCYB* 2022. [paper](https://ieeexplore.ieee.org/abstract/document/9262898)
 
-[17] **Regularized evolutionary multitask optimization: Learning to intertask transfer in aligned subspace.** *Z. Tang, M. Gong, Y. Wu, W. Liu, and Y. Xie.* *TEVC* 2021. [paper](https://ieeexplore.ieee.org/abstract/document/9195010)
 
-[18] **Evolutionary multitasking for multiobjective optimization with subspace alignment and adaptive differential evolution.** *Z. Liang, H. Dong, C. Liu, W. Liang, and Z. Zhu.* *TCYB* 2022. [paper](https://ieeexplore.ieee.org/abstract/document/9123962)
+
+[X] **Autoencoding evolutionary search with learning across heterogeneous problems.** *L. Feng, Y. Ong, S. Jiang, and A. Gupta.* *TEVC* 2017. [paper](https://ieeexplore.ieee.org/abstract/document/7879282)
+
+
+[X] **Non-linear domain adaptation in transfer evolutionary optimization.** *R. Lim, A. Gupta, Y.-S. Ong, L. Feng, and A. N. Zhang.* *Cognitive Computation* 2021. [paper](https://link.springer.com/article/10.1007/s12559-020-09777-7)
+
+[X] **Linearized domain adaptation in evolutionary multitasking.** *K. K. Bali, A. Gupta, L. Feng, Y. S. Ong, and T. P. Siew.* *CEC* 2017. [paper](https://ieeexplore.ieee.org/abstract/document/7969454)
+
+
+
+
+
 
 ## Citation
 
