@@ -125,7 +125,7 @@ while FEsCount < FEsMax
         '_selector(population_parent,obj_parent,population_child,obj_child);'];
     eval(selection_command)
     
-    % update the records
+    % update the record
     solutions{gen} = (population-repmat(lb,popsize,1))./(repmat(ub,popsize,1)-...
         repmat(lb,popsize,1));
     objs{gen} = obj_pop;
