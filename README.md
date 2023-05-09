@@ -5,7 +5,7 @@ This repository provides the MATLAB implementations of a comprehensive empirical
 |Central Issue|Description|Abbreviation|
 |:-|:-|:-|
 |What to Transfer|The hamming distance between intermediate solutions [1]<br>The Euclidean distance between the population means [2-4]<br>The KLD distance [5,6]<br>The WD distance [7,8]<br>The ordinal correlation [9-11]<br>The relaxed ordinal correlation [12,13]<br>The subspace alignment [14,15]|H<br>M1<br>KLD<br>WD<br>OC<br>ROC<br>SA|
-|When to Transfer| The fixed generation interval for knowledge transfer [16-19]|F-G_t|
+|When to Transfer| The fixed generation interval for knowledge transfer [16-19]<br>The estimated transfer intensity based on the mixture model [20]<br>The estimated transfer intensity based on the population distributions [21]<br>The estimated transfer intensity based on the representation models [22]|F-G_t<br>D-M<br>D-P<br>D-G|
 
 
 ## References
@@ -47,8 +47,12 @@ This repository provides the MATLAB implementations of a comprehensive empirical
 
 [19] **Multitasking optimization via an adaptive solver multitasking evolutionary framework.** *Y. Li, W. Gong, and S. Li.* *Information Sciences* 2023. [paper](https://www.sciencedirect.com/science/article/pii/S0020025522012191)
 
+[20] **Multifactorial Evolutionary Algorithm With Online Transfer Parameter Estimation: MFEA-II.** *K. K. Bali, Y. S. Ong, A. Gupta, and P. S. Tan.* *TEVC* 2019. [paper](https://ieeexplore.ieee.org/abstract/document/8672822)
 
-[X] **Linearized domain adaptation in evolutionary multitasking.** *K. K. Bali, A. Gupta, L. Feng, Y. S. Ong, and T. P. Siew.* *CEC* 2017. [paper](https://ieeexplore.ieee.org/abstract/document/7969454)
+[21] **Evolutionary multi-task optimization with hybrid knowledge transfer strategy.** *Y. Cai, D. Peng, P. Liu, and J. Guo.* *Information Sciences* 2021. [paper](https://www.sciencedirect.com/science/article/pii/S002002552100952X)
+
+[22] **Self-adaptive multifactorial evolutionary algorithm for multitasking production optimization.** *J. Yao, Y. Nie, Z. Zhao, X. Xue, K. Zhang, C. Yao, L. Zhang, J. Wang, and Y. Yang.* *JPSE* 2021. [paper](https://www.sciencedirect.com/science/article/pii/S0920410521005611)
+
 
 
 
