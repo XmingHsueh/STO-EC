@@ -68,8 +68,8 @@ ubt = 14; % the upper bound of the target task
 num_plot = 200; % the number of points used for plotting the source-target landscapes
 ts = linspace(0,0.5,num_plot); % source solutions used for plotting the landscape
 tt = linspace(0.5,1,num_plot); % target solutions used for plotting the landscape
-fs = zeros(num_plot,1); % fitness values of the source solutions
-ft = zeros(num_plot,1); % fitness values of the target solutions
+fs = zeros(num_plot,1); % objective values of the source solutions
+ft = zeros(num_plot,1); % objective values of the target solutions
 for i = 1:num_plot % function evaluation
     fs(i) = funs(lbs+(ubs-lbs)*ts(i));
     ft(i) = funt(lbt+(ubt-lbt)*tt(i));
@@ -77,20 +77,20 @@ end
 num_solutions = 200; % the number of solutions to be evaluated and used for learning the source-to-target mapping
 train_s = lhsdesign_modified(num_solutions,0,0.5); % sample the source solutions using the LHS sampling
 train_t = lhsdesign_modified(num_solutions,0.5,1); % sample the target solutions using the LHS sampling
-fitness_s = zeros(num_solutions,1); % fitness values of source solutions
-fitness_t = zeros(num_solutions,1); % fitness values of target solutions
+obj_s = zeros(num_solutions,1); % objective values of source solutions
+obj_t = zeros(num_solutions,1); % objective values of target solutions
 for i = 1:num_solutions
-    fitness_s(i) = funs(lbs+(ubs-lbs)*train_s(i));
-    fitness_t(i) = funt(lbt+(ubt-lbt)*train_t(i));
+    obj_s(i) = funs(lbs+(ubs-lbs)*train_s(i));
+    obj_t(i) = funt(lbt+(ubt-lbt)*train_t(i));
 end
-fitness_rank_s = zeros(num_solutions,1); % fitness rankss of source solutions
-fitness_rank_t = zeros(num_solutions,1); % fitness rankss of target solutions
+obj_rank_s = zeros(num_solutions,1); % obj ranks of source solutions
+obj_rank_t = zeros(num_solutions,1); % obj ranks of target solutions
 for i = 1:num_solutions
-    fitness_rank_s(i) = length(find(fitness_s<fitness_s(i)))+1;
-    fitness_rank_t(i) = length(find(fitness_t<fitness_t(i)))+1;
+    obj_rank_s(i) = length(find(obj_s<obj_s(i)))+1;
+    obj_rank_t(i) = length(find(obj_t<obj_t(i)))+1;
 end
-[~,idxs_r] = sort(fitness_s);
-[~,idxt_r] = sort(fitness_t);
+[~,idxs_r] = sort(obj_s);
+[~,idxt_r] = sort(obj_t);
 
 num_mapping = 15; % the number of source solutions to be adapted
 tm = linspace(0,0.5,num_mapping);
@@ -99,8 +99,8 @@ m_size = 7;
 
 %M1-Te
 prop = 0.4;
-[~,idxs] = sort(fitness_s);
-[~,idxt] = sort(fitness_t);
+[~,idxs] = sort(obj_s);
+[~,idxt] = sort(obj_t);
 r_m1te = tm+(mean(train_t(idxs(1:prop*num_mapping)))-mean(train_s(idxt(1:prop*num_mapping))));
 for i = 1:length(r_m1te)
     if i == round(num_mapping/2)
@@ -111,8 +111,8 @@ for i = 1:length(r_m1te)
 end
 
 %M1-Tr
-[~,idxs] = sort(fitness_s);
-[~,idxt] = sort(fitness_t);
+[~,idxs] = sort(obj_s);
+[~,idxt] = sort(obj_t);
 r_m1tr = tm+(train_t(idxs(randi(3)))-train_s(idxt(randi(3))));
 for i = 1:length(r_m1tr)
     if i == round(num_mapping/2)
@@ -137,8 +137,8 @@ n = 2;
 ns = randi(n);
 nt = randi(n);
 epsilon = 1e-6;
-[~,idxs] = sort(fitness_s);
-[~,idxt] = sort(fitness_t);
+[~,idxs] = sort(obj_s);
+[~,idxt] = sort(obj_t);
 r_m1m = tm*(mean(train_t(idxt(1:nt),:))/mean(train_s(idxt(1:nt),:)));
 for i = 1:length(r_m1m)
     if r_m1m(i)>r_max-0.1
@@ -238,8 +238,8 @@ end
 num_ranklabels = 3;
 X_s = train_s;
 X_t = train_t;
-y_s = fit_relax(fitness_s,num_ranklabels);
-y_t = fit_relax(fitness_t,num_ranklabels);
+y_s = fit_relax(obj_s,num_ranklabels);
+y_t = fit_relax(obj_t,num_ranklabels);
 [X_sn,means,stds] = zscore(X_s);
 [X_tn,meant,stdt] = zscore(X_t);
 X_sa = X_sn';
