@@ -1,38 +1,5 @@
-% Author: Xiaoming Xue
-% Email: xminghsueh@gmail.com
-%
-% ------------
-% Description:
-% ------------
-% The solution selection function in S-ESTO.
-%
-% ------------
-% Inputs:
-% ------------
-% target_population--->the target population at the current generation
-% target_fitness--->the fitness values of the current individuals
-% lb--->the lower bound of the target task
-% ub--->the upper bound of the target task
-% gen--->the current generation
-% knowledge_base--->the knowledge base containing the evaluated solutions of k source tasks
-% method--->the solution selection method
-%
-% ------------
-% Outputs:
-% ------------
-% solution_sel--->the selected solution to be adapted or transferred
-% idx_source--->the index of the selected source task
-% candidates_transfer--->the candidate transferrable solutions provided by k source tasks
-% simlarity_values--->the similarity values between k source tasks and the target task
-%
-% ------------
-% Reference:
-% ------------
-% X. Xue, C. Yang, L. Feng, et al. ¡°How to Exploit Optimization Experience? Revisiting Evolutionary 
-% Sequential Transfer Optimization: Part B - Algorithm Analysis", Submitted for Peer Review.
-
 function [solution_sel,idx_source,candidates_transfer,simlarity_values] = ...
-    solution_selection(target_population,target_fitness,lb,ub,gen,knowledge_base,method)
+    transferability_measurement(target_population,target_obj,lb,ub,gen,knowledge_base,method)
 
 num_sources = length(knowledge_base);
 [popsize,dim] = size(target_population);
@@ -45,7 +12,7 @@ if strcmp(method,'N') % no transfer
     return;
 end
 
-if strcmp(method,'R') % random transfer
+if strcmp(method,'Ra')
     solution_sel = lb+(ub-lb).*knowledge_base(randi(num_sources)).solutions{end}(randi(popsize),:);
     idx_source= [];
     return;
@@ -55,18 +22,18 @@ simlarity_values = zeros(num_sources,1);
 candidates_transfer = zeros(num_sources,dim);
 for i = 1:num_sources
     source_solutions = knowledge_base(i).solutions;
-    source_fitnesses = knowledge_base(i).fitnesses;
+    source_objs = knowledge_base(i).objs;
     gen_max_source = length(source_solutions);
     source_population_normalized = source_solutions{gen};
-    source_fitness = source_fitnesses{gen};
+    source_obj = source_objs{gen};
     switch(method)
-        case 'C'
+        case 'H'
             source_solutions_archived = zeros(gen_max_source,dim);
             for j = 1:gen_max_source
-                idx = find(source_fitnesses{j}==min(source_fitnesses{j}));
+                idx = find(source_objs{j}==min(source_objs{j}));
                 source_solutions_archived(j,:) = source_solutions{j}(idx(randi(length(idx))),:);
             end
-            idx = find(target_fitness==min(target_fitness));
+            idx = find(target_obj==min(target_obj));
             target_best_normalized = target_population_normalized(idx(randi(length(idx))),:);
             distances = sum(abs(source_solutions_archived-repmat(target_best_normalized,...
                 gen_max_source,1)),2);
@@ -87,15 +54,15 @@ for i = 1:num_sources
                 norm(source_std-target_std));
             candidates_transfer(i,:) = source_solutions{end}(randi(popsize),:);
         case 'OC'
-            [~, idxs] = sort(source_fitness);
-            [~, idxt] = sort(target_fitness);
+            [~, idxs] = sort(source_obj);
+            [~, idxt] = sort(target_obj);
             simlarity_values(i) = 1/sum(sum(abs(source_population_normalized(idxs,:)-...
                 target_population_normalized(idxt,:))));
             candidates_transfer(i,:) = source_solutions{end}(randi(popsize),:);
         case 'ROC'
             num_clusters = 3;
-            [~, idxs] = sort(source_fitness);
-            [~, idxt] = sort(target_fitness);
+            [~, idxs] = sort(source_obj);
+            [~, idxt] = sort(target_obj);
             c_interval = floor(popsize/num_clusters);
             sim = 0;
             for p = 1:popsize

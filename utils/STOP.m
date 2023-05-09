@@ -4,7 +4,7 @@
 % ------------
 % Description:
 % ------------
-% The class of black-box sequential transfer optimization problems (STOPs).
+% A generator of sequential transfer optimization problems (STOPs).
 % Modifiable properties include: 1. the target task;  2. transfer scenario; 
 % 3. optimum coverage; 4. similarity distribution; 5. problem dimension;
 % 6. the number of source tasks.
@@ -12,8 +12,7 @@
 % ------------
 % Reference:
 % ------------
-% X. Xue, C. Yang, L. Feng, et al. ¡°How to Exploit Optimization Experience? Revisiting Evolutionary 
-% Sequential Transfer Optimization: Part A - Benchmark Problems", Submitted for Peer Review.
+% X. Xue, C. Yang, L. Feng, et al. "A Scalable Test Problem Generator for Sequential Transfer Optimization", arXiv preprint, 2023.
 
 classdef STOP
 
@@ -24,7 +23,7 @@ classdef STOP
     % xi--->the parameter that controls optimum coverage of a box-constrained image, ranging from 0 to 1
     % dim--->the problem dimension of source and target tasks, a positive integer
     % k--->the number of source tasks, a positive integer
-    % mode--->the mode of problem call, problem generation (gen) or s-esto optimization (opt)
+    % mode--->the mode of problem call, problem generation (gen) or transfer optimization (opt)
     % target_problem--->the instantiated target task
     % source_problems---<read-only>the instantiated source tasks
     % knowledge_base--->the knowledge base containing the evaluated solutions of the k source tasks
@@ -53,7 +52,7 @@ classdef STOP
             'Griewank','Levy'};
         optimizer = 'ea';
         popsize = 50;
-        FEsMax = 2500;
+        FEsMax = 5000;
         state_knowledgebase;
         source_problems;
     end
@@ -63,7 +62,7 @@ classdef STOP
         function obj = STOP(varargin) % initialization
             isStr = find(cellfun(@ischar,varargin(1:end-1))&~cellfun(@isempty,varargin(2:end)));
             for i = isStr(ismember(varargin(isStr),{'func_target','trans_sce','xi','sim_distribution',...
-                    'dim','mode','folder_stops'}))
+                    'dim','k','mode','folder_stops'}))
                 obj.(varargin{i}) = varargin{i+1};
             end
             % examine the availability of the specified STOP
@@ -77,14 +76,14 @@ classdef STOP
                 obj.source_problems = sources;
                 for i = 1:obj.k
                     obj.knowledge_base(i).solutions = knowledge(i).solutions;
-                    obj.knowledge_base(i).fitnesses = knowledge(i).fitnesses;
+                    obj.knowledge_base(i).objs = knowledge(i).objs;
                 end
             elseif obj.state_knowledgebase == 0
-                obj = obj.Configuration(); % generate the STOP since it does not exist
+                obj = obj.Configuration(); % generate the STOP if it does not exist
             end
         end
 
-        function obj = Configuration(obj) % problem constructor
+        function obj = Configuration(obj) % problem generator
             [opt_target,opt_source] = opt_config(obj.xi,obj.k,obj.dim,obj.sim_distribution);
             for i = 1:obj.k % configure the source tasks
                 idx_target = find(strcmp(obj.problem_families,obj.func_target));
@@ -104,10 +103,10 @@ classdef STOP
             for i = 1:obj.k % configure the knowledge base
                 problem = problem_family(find(strcmp(obj.problem_families,...
                     obj.source_problems(i).func)),obj.source_problems(i).opt);
-                [solutions,fitnesses] = evolutionary_search(problem,obj.popsize,...
+                [solutions,objs] = evolutionary_search(problem,obj.popsize,...
                     obj.FEsMax,obj.optimizer);
                 obj.knowledge_base(i).solutions = solutions;
-                obj.knowledge_base(i).fitnesses = fitnesses;
+                obj.knowledge_base(i).objs = objs;
                 waitbar(i/obj.k,h,sprintf('STOP generation in progress: %.2f%%',i/obj.k*100));
             end
             close(h);
@@ -118,7 +117,7 @@ classdef STOP
                 sources(i) = problem_family(find(strcmp(obj.problem_families,...
                     obj.source_problems(i).func)),obj.source_problems(i).opt);
                 knowledge(i).solutions = obj.knowledge_base(i).solutions;
-                knowledge(i).fitnesses = obj.knowledge_base(i).fitnesses;
+                knowledge(i).objs = obj.knowledge_base(i).objs;
             end
             obj.source_problems = sources;
             save([obj.folder_stops,'\',obj.func_target,'-T',obj.trans_sce,'-xi',num2str(obj.xi),'-p',...

@@ -1,57 +1,36 @@
-% Author: Xiaoming Xue
-% Email: xminghsueh@gmail.com
-%
-% ------------
-% Description:
-% ------------
-% The solution adaptation function in S-ESTO.
-%
-% ------------
-% Inputs:
-% ------------
-% target_population--->the target population at the current generation
-% target_fitness--->the fitness values of the current individuals
-% lb--->the lower bound of the target task
-% ub--->the upper bound of the target task
-% gen--->the current generation
-% source_task--->the source task
-% solution_unadapted--->the source solution to be adapted
-% method--->the solution adaptation method
-%
-% ------------
-% Outputs:
-% ------------
-% solution_adapted--->the adapted solution to be transferred
-%
-% ------------
-% Reference:
-% ------------
-% X. Xue, C. Yang, L. Feng, et al. ¡°How to Exploit Optimization Experience? Revisiting Evolutionary 
-% Sequential Transfer Optimization: Part B - Algorithm Analysis", Submitted for Peer Review.
-
-function solution_adapted = solution_adaptation(target_population,target_fitness,...
+function solution_adapted = transferability_improvement(target_population,target_obj,...
     lb,ub,gen,source_task,solution_unadapted,method)
 
 [popsize,dim] = size(target_population);
 target_population_normalized = (target_population-repmat(lb,popsize,1))./...
     (repmat(ub,popsize,1)-repmat(lb,popsize,1));
 source_population_normalized = source_task.solutions{gen}; % the source population at the current generation
-source_fitness = source_task.fitnesses{gen}; %the fitness values of the current source individuals
+source_obj = source_task.objs{gen}; %the objective values of the current source individuals
+
+if strcmp(method,'N') % no transfer
+    solution_adapted = [];
+    return;
+end
+
+if strcmp(method,'Rh') % no adaptation
+    solution_adapted = lb+(ub-lb).*solution_unadapted;
+    return;
+end
 
 switch(method)
-    case 'M1-Tp'
+    case 'M1-Te'
         percentage = 0.4;
         num_estimate = ceil(percentage*popsize);
-        [~,idxs] = sort(source_fitness);
+        [~,idxs] = sort(source_obj);
         moment1_source = mean(source_population_normalized(idxs(1:num_estimate),:));
-        [~,idxt] = sort(target_fitness);
+        [~,idxt] = sort(target_obj);
         moment1_target = mean(target_population_normalized(idxt(1:num_estimate),:));
         solution_adapted_normalized = solution_unadapted+(moment1_target-moment1_source);
     case 'M1-Tr'
         num_front = 5;
-        [~,idxs] = sort(source_fitness);
+        [~,idxs] = sort(source_obj);
         moment1_source = source_population_normalized(idxs(randi(num_front)),:);
-        [~,idxt] = sort(target_fitness);
+        [~,idxt] = sort(target_obj);
         moment1_target = target_population_normalized(idxt(randi(num_front)),:);
         solution_adapted_normalized = solution_unadapted+(moment1_target-moment1_source);
     case 'M1-Tm'
@@ -63,9 +42,9 @@ switch(method)
         ns = randi(n);
         nt = randi(n);
         epsilon = 1e-6;
-        [~,idxs] = sort(source_fitness);
+        [~,idxs] = sort(source_obj);
         moment1_source = mean(source_population_normalized(idxs(1:ns),:));
-        [~,idxt] = sort(target_fitness);
+        [~,idxt] = sort(target_obj);
         moment1_target = mean(target_population_normalized(idxt(1:nt),:));
         mapping_multiplication = (moment1_target+epsilon)./(moment1_source+epsilon);
         solution_adapted_normalized = solution_unadapted.*(mapping_multiplication);
@@ -80,16 +59,16 @@ switch(method)
         bm_l = mu_t'-Am_l*mu_s';
         solution_adapted_normalized = transpose(Am_l*solution_unadapted'+bm_l);
     case 'OC-L'
-        [~,idxs] = sort(source_fitness);
+        [~,idxs] = sort(source_obj);
         source_population_normalized_sort = source_population_normalized(idxs,:);
-        [~,idxt] = sort(target_fitness);
+        [~,idxt] = sort(target_obj);
         target_population_normalized_sort = target_population_normalized(idxt,:);
         M = source_population_normalized_sort\target_population_normalized_sort;
         solution_adapted_normalized = solution_unadapted*M;
     case 'OC-A'
-        [~,idxs] = sort(source_fitness);
+        [~,idxs] = sort(source_obj);
         source_population_normalized_sort = source_population_normalized(idxs,:);
-        [~,idxt] = sort(target_fitness);
+        [~,idxt] = sort(target_obj);
         target_population_normalized_sort = target_population_normalized(idxt,:);
         source_population_normalized_sort_aug = [source_population_normalized_sort,...
             ones(popsize,1)];
@@ -97,9 +76,9 @@ switch(method)
         solution_unadapted_aug = [solution_unadapted 1];
         solution_adapted_normalized = solution_unadapted_aug*M;
     case 'OC-K'
-        [~,idxs] = sort(source_fitness);
+        [~,idxs] = sort(source_obj);
         source_population_normalized_sort = source_population_normalized(idxs,:);
-        [~,idxt] = sort(target_fitness);
+        [~,idxt] = sort(target_obj);
         target_population_normalized_sort = target_population_normalized(idxt,:);
         source_kernel = kernel_cal(source_population_normalized_sort,...
             source_population_normalized_sort);
@@ -107,9 +86,9 @@ switch(method)
         transfer_kernel = kernel_cal(solution_unadapted,source_population_normalized_sort);
         solution_adapted_normalized = transfer_kernel*Mk;
     case 'OC-N'
-        [~,idxs] = sort(source_fitness);
+        [~,idxs] = sort(source_obj);
         source_population_normalized_sort = source_population_normalized(idxs,:);
-        [~,idxt] = sort(target_fitness);
+        [~,idxt] = sort(target_obj);
         target_population_normalized_sort = target_population_normalized(idxt,:);
         f_activate=@(x)1./(1+exp(-x));
         num_hiddens = dim*2;
@@ -124,8 +103,8 @@ switch(method)
         num_ranklabels = 2;
         X_s = source_population_normalized;
         X_t = target_population_normalized;
-        y_s = fit_relax(source_fitness,num_ranklabels);
-        y_t = fit_relax(target_fitness,num_ranklabels);
+        y_s = fit_relax(source_obj,num_ranklabels);
+        y_t = fit_relax(target_obj,num_ranklabels);
         [X_sn,means,stds] = zscore(X_s);
         [X_tn,meant,stdt] = zscore(X_t);
         X_sa = X_sn';
