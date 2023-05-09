@@ -5,7 +5,7 @@
 % Description:
 % ------------
 % This file is the entry point of experimentally comparing transferability
-% measurements in when to transfer.
+% measurements in what to transfer.
 %
 % ------------
 % Reference:
