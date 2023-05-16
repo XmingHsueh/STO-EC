@@ -1,6 +1,6 @@
-# Does Optimized Solution Always Help? A Comprehensive Investigation of Transfer Evolutionary Algorithms
+# An Empirical Study on Knowledge Transfer in Evolutionary Sequential Transfer Optimization
 
-This repository provides the MATLAB implementations of a comprehensive empirical investigation of transfer evolutionary algorithms. Particularly, a wide variety of techniques surrounding the three central issues in knowledge transfer, i.e., what to transfer, when to transfer, and how to transfer, are separately studied in this work, which are summarized as follows:
+This repository provides the MATLAB implementations of an empirical investigation of transfer evolutionary algorithms. Particularly, a wide variety of techniques surrounding the three central issues in knowledge transfer, i.e., what to transfer, when to transfer, and how to transfer, are separately studied in this work, which are summarized as follows:
 
 |Central Issue|Description|Abbreviation|
 |:-|:-|:-|
