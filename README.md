@@ -63,7 +63,7 @@ This repository provides the MATLAB implementations of an empirical investigatio
 If you find this repo useful for your research, please consider to cite:
 ```latex
 @article{Xue2023,
-title = {Does Optimized Solution Always Help? A Comprehensive Investigation of Transfer Evolutionary Algorithms},
+title = {An Empirical Study on Knowledge Transfer in Evolutionary Sequential Transfer Optimization},
 author = {Xue, Xiaoming and Yang, Cuie and Feng, Liang and Zhang, Kai and Song, Linqi and Tan, Kay Chen}
 journal = {...},
 volume = {...},
