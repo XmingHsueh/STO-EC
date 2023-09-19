@@ -1,6 +1,6 @@
-# An Empirical Study on Knowledge Transfer in Evolutionary Sequential Transfer Optimization
+# Solution Transfer in Evolutionary Optimization: An Empirical Study on Sequential Transfer
 
-This repository provides the MATLAB implementations of an empirical investigation of transfer evolutionary algorithms. Particularly, a wide variety of techniques surrounding the three central issues in knowledge transfer, i.e., what to transfer, when to transfer, and how to transfer, are separately studied in this work, which are summarized as follows:
+This repository provides the MATLAB implementations of an empirical investigation of different solution transfer techniques in evolutionary sequential transfer optimizatiojn. Particularly, these technqiues are divided into three categories according to the three fundamental aspects of knowledge transfer, i.e., what to transfer, when to transfer, and how to transfer, which are separately studied in this work, as summarized as follows:
 
 |Central Issue|Description|Abbreviation|
 |:-|:-|:-|
@@ -63,7 +63,7 @@ This repository provides the MATLAB implementations of an empirical investigatio
 If you find this repo useful for your research, please consider to cite:
 ```latex
 @article{Xue2023,
-title = {An Empirical Study on Knowledge Transfer in Evolutionary Sequential Transfer Optimization},
+title = {Solution Transfer in Evolutionary Optimization: An Empirical Study on Sequential Transfer},
 author = {Xue, Xiaoming and Yang, Cuie and Feng, Liang and Zhang, Kai and Song, Linqi and Tan, Kay Chen}
 journal = {...},
 volume = {...},
