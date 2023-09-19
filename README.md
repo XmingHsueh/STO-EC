@@ -2,7 +2,7 @@
 
 This repository provides the MATLAB implementations of an empirical investigation of different solution transfer techniques in evolutionary sequential transfer optimization. Particularly, these techniques are divided into three categories according to the three fundamental issues of knowledge transfer, i.e., what, when, and how to transfer, which are summarized as follows:
 
-|Central Issue|Description|Abbreviation|
+|Issue|Description|Abbreviation|
 |:-|:-|:-|
 |What to Transfer|The hamming distance between intermediate solutions [1]<br>The Euclidean distance between the population means [2-4]<br>The KLD distance [5,6]<br>The WD distance [7,8]<br>The ordinal correlation [9-11]<br>The relaxed ordinal correlation [12,13]<br>The subspace alignment [14,15]|H<br>M1<br>KLD<br>WD<br>OC<br>ROC<br>SA|
 |When to Transfer| The fixed generation interval for knowledge transfer [16-19]<br>The estimated transfer intensity based on the mixture model [20]<br>The estimated transfer intensity based on the population distributions [21]<br>The estimated transfer intensity based on the representation models [22]|F-G_t<br>D-M<br>D-P<br>D-G|
