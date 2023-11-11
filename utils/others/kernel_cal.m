@@ -6,6 +6,6 @@ b = 0.1;
 d = 5;
 for i = 1:na
     for j = i:nb
-        K(i,j) = (populationa(i,:)*populationb(i,:)'+b)^d;
+        K(i,j) = (populationa(i,:)*populationb(j,:)'+b)^d;
     end
 end
