@@ -37,7 +37,6 @@ backbone_opt = 'ea'; % ea, de_b, de_r
 FEsMax = 5000; % the maximum function evaluations
 no_problems = size(specifications,1);
 
-%% Generation of the STOPs
 folder_problems = ['.\benchmarks-',backbone_opt,'-k',num2str(k)]; % the folder used for storing the generated STOPs
 if ~isfolder(folder_problems)
     mkdir(folder_problems);
