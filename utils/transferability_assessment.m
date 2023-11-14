@@ -1,5 +1,5 @@
 function [solution_eva,transfer_state] = ...
-    transferability_evaluation(target_population,target_obj,lb,ub,gen,knowledge_base,idx_source,method)
+    transferability_assessment(target_population,target_obj,lb,ub,gen,knowledge_base,idx_source,method)
 
     [popsize,dim] = size(target_population);
     target_population_normalized = (target_population-repmat(lb,popsize,1))./...
@@ -40,13 +40,18 @@ function [solution_eva,transfer_state] = ...
             target_probmatrix = ones(popsize,2);
             for k = 1:popsize
                 for l = 1:dim
-                    source_probmatrix(k,1) = source_probmatrix(k,1)*pdf('Normal',source_data(k,l),source_mean(l),source_stdev(l));
-                    source_probmatrix(k,2) = source_probmatrix(k,2)*pdf('Normal',source_data(k,l),target_mean(l),target_stdev(l));
-                    target_probmatrix(k,1) = target_probmatrix(k,1)*pdf('Normal',target_data(k,l),source_mean(l),source_stdev(l));
-                    target_probmatrix(k,2) = target_probmatrix(k,2)*pdf('Normal',target_data(k,l),target_mean(l),target_stdev(l));
+                    source_probmatrix(k,1) = source_probmatrix(k,1)*pdf('Normal',source_data(k,l),...
+                        source_mean(l),source_stdev(l));
+                    source_probmatrix(k,2) = source_probmatrix(k,2)*pdf('Normal',source_data(k,l),...
+                        target_mean(l),target_stdev(l));
+                    target_probmatrix(k,1) = target_probmatrix(k,1)*pdf('Normal',target_data(k,l),...
+                        source_mean(l),source_stdev(l));
+                    target_probmatrix(k,2) = target_probmatrix(k,2)*pdf('Normal',target_data(k,l),...
+                        target_mean(l),target_stdev(l));
                 end
             end
-            rmp = min(max([0,fminbnd(@(x)loglik(x,source_probmatrix,target_probmatrix,2),0,1)+normrnd(0,0.01)]),1);
+            rmp = min(max([0,fminbnd(@(x)loglik(x,source_probmatrix,target_probmatrix,2),0,1)...
+                +normrnd(0,0.01)]),1);
             if r < rmp
                 transfer_state = 1;
             end
@@ -57,7 +62,8 @@ function [solution_eva,transfer_state] = ...
             source_stdev = std(source_data);
             target_mean = mean(target_data);
             target_stdev = std(target_data);
-            f = (sum(abs(source_stdev))+sum(abs(target_stdev))-sum(abs(source_mean-target_mean)))/dim;
+            f = (sum(abs(source_stdev))+sum(abs(target_stdev))-sum(abs(source_mean-...
+                target_mean)))/dim;
             beta = 5;
             rmp  = 1/(1+exp(-beta*f));
             if r < rmp
@@ -74,8 +80,10 @@ function [solution_eva,transfer_state] = ...
             end
             [~,idx_best_s] = min(source_obj);
             [~,idx_best_t] = min(target_obj);
-            dis_ss = zeros(1,popsize);dis_st = zeros(1,popsize);dis_tt = zeros(1,popsize);dis_ts = zeros(1,popsize);
-            dis_rank_ss = zeros(1,popsize);dis_rank_st = zeros(1,popsize);dis_rank_tt = zeros(1,popsize);dis_rank_ts = zeros(1,popsize);
+            dis_ss = zeros(1,popsize);dis_st = zeros(1,popsize);
+            dis_tt = zeros(1,popsize);dis_ts = zeros(1,popsize);
+            dis_rank_ss = zeros(1,popsize);dis_rank_st = zeros(1,popsize);
+            dis_rank_tt = zeros(1,popsize);dis_rank_ts = zeros(1,popsize);
             for j = 1:popsize
                 dis_ss(j) = norm(source_population_normalized(j,:)-source_population_normalized(idx_best_s,:),2);
                 dis_st(j) = norm(source_population_normalized(j,:)-target_population_normalized(idx_best_t,:),2);
