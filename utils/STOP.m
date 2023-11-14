@@ -4,7 +4,7 @@
 % ------------
 % Description:
 % ------------
-% The class of black-box sequential transfer optimization problems (STOPs).
+% The class of black-box sequential transfer optimization problems (STOPs)
 % Configurable parameters include: 1. the target family;  2. the transfer scenario; 
 % 3. the similarity distribution; 4. the task dimension;  5. the number of
 % source tasks；6. the backbone optimizer
