@@ -1,8 +1,8 @@
 function [solution_sel,idx_source,candidates_transfer,simlarity_values] = ...
     transferability_prioritization(target_population,target_obj,lb,ub,gen,knowledge_base,method)
 
-num_sources = length(knowledge_base);
 [popsize,dim] = size(target_population);
+num_sources = length(knowledge_base);
 target_population_normalized = (target_population-repmat(lb,popsize,1))./...
     (repmat(ub,popsize,1)-repmat(lb,popsize,1));
 
