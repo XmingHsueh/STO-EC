@@ -2,8 +2,8 @@ function population_child = de_b_generator(population_parent,objs_parent,lb,ub)
 
 [popsize,dim] = size(population_parent);
 population = (population_parent-repmat(lb,popsize,1))./(repmat(ub,popsize,1)-repmat(lb,popsize,1));
-CR = 0.8;
 F = 0.5;
+CR = 0.8;
 population_child = zeros(popsize,dim);
 [~,idx] = min(objs_parent);
 individual_best = population(idx,:);
