@@ -1,5 +1,5 @@
 function [solution_sel,idx_source,candidates_transfer,simlarity_values] = ...
-    transferability_measurement(target_population,target_obj,lb,ub,gen,knowledge_base,method)
+    transferability_prioritization(target_population,target_obj,lb,ub,gen,knowledge_base,method)
 
 num_sources = length(knowledge_base);
 [popsize,dim] = size(target_population);
