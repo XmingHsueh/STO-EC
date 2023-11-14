@@ -60,6 +60,8 @@ This repository contains the MATLAB implementations of an empirical investigatio
 
 ## Citation
 
+If you found this code useful, please consider citing the following paper. Thanks!
+
 ```latex
 @article{Xue2023,
 title = {Solution Transfer in Evolutionary Optimization: An Empirical Study on Sequential Transfer},
