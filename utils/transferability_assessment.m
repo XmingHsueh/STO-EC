@@ -6,8 +6,8 @@ function [solution_eva,transfer_state] = ...
         (repmat(ub,popsize,1)-repmat(lb,popsize,1));
     solution_eva = lb+(ub-lb).*knowledge_base(idx_source).solutions{end}(randi(popsize),:);
     transfer_state= -1;
-
     r = rand;
+    
     switch(method)
         case 'N'
             transfer_state= -1;
