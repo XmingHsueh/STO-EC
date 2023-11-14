@@ -1,6 +1,6 @@
 # Solution Transfer in Evolutionary Optimization: An Empirical Study on Sequential Transfer
 
-This repository contains the MATLAB implementations of an empirical investigation of different solution transfer techniques in evolutionary sequential transfer optimization. Particularly, these techniques are divided into three categories according to the three fundamental issues of knowledge transfer, i.e., what, when, and how to transfer, which are summarized as follows:
+This repository contains the code of an empirical investigation of different solution transfer techniques in evolutionary sequential transfer optimization. Particularly, these techniques are divided into three categories according to the three fundamental issues of knowledge transfer, i.e., what, when, and how to transfer, which are summarized as follows:
 
 |Issue|Description|Abbreviation|
 |:-|:-|:-|
