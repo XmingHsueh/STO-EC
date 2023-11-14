@@ -18,7 +18,7 @@ warning off;
 task_families = {'Sphere','Ellipsoid','Schwefel','Quartic','Ackley','Rastrigin','Griewank','Levy'}; % eight task families
 transfer_scenarios = {'a','e'}; % intra-family and inter-family transfers
 similarity_distributions = {'h1','h2','m1','m2','m3','m4','l1','l2'}; % eight similarity distributions
-k = 100; % the number of previously-solved source tasks
+k = 100; % the number of source tasks
 folder_problems = '.\benchmarks-ea-k100'; % the folder that stores the test problems in scenario 1 (k=100)
 specifications = [1 1 1 50 k; % STOP 1
     2 2 2 25 k; % STOP 2
