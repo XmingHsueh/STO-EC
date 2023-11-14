@@ -111,7 +111,6 @@ switch(method)
         X_ta = X_tn';
         [ds,ns] = size(X_sa);
         [dt,nt] = size(X_ta);
-        
         alpha = 0.1;
         d_low = 3;
         T_max = 100;
