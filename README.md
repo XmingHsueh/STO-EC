@@ -63,7 +63,7 @@ This repository contains the code of an empirical investigation of different sol
 If you found this code useful, please consider citing the following paper. Thanks!
 
 ```latex
-@article{Xue2023,
+@article{Xue2023Solution,
 title = {Solution Transfer in Evolutionary Optimization: An Empirical Study on Sequential Transfer},
 author = {Xue, Xiaoming and Yang, Cuie and Feng, Liang and Zhang, Kai and Song, Linqi and Tan, Kay Chen}
 journal = {...},
